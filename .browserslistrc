@@ -1,0 +1,10 @@
+# For more visit https://github.com/browserslist/browserslist?tab=readme-ov-file#full-list
+# Optional for update this file requires Visual Studio Code extension "Browserslist": https://marketplace.visualstudio.com/items?itemName=webben.browserslist
+# For prevent auto formatting this file with other characers.
+
+# Browsers that we support
+
+> 1% # These browsers account for 81.4% of all users globally
+last 2 versions # the last 2 versions for each browser.
+not dead # no browsers without security updates
+not ie 11 # not IE 11

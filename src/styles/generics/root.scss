@@ -1,0 +1,43 @@
+@import '../settings/colors';
+
+:root {
+  --background-primary-color: #{$color-white-de};
+  --text-primary-color: #{$color-very-light-malachite-green};
+  --text-secondary-color: #{$color-raisin-black};
+  --primary-accent: #{$color-primary-accent};
+
+  // Buttons
+  --btn-primary-color: #{$color-raisin-black};
+  --btn-primary-bg: #{$color-very-light-malachite-green};
+  --btn-primary-hover: #{$color-primary-accent};
+
+  // Cards
+  // --surface-card:
+
+  // Links
+
+  // Icons
+  --oio-icon-filter-color: invert(5%) sepia(11%) saturate(231%)
+    hue-rotate(314deg) brightness(95%) contrast(79%);
+}
+
+:root.dark-theme {
+  --background-primary-color: #{$color-raisin-black};
+  --text-primary-color: #{$color-very-light-malachite-green};
+  --text-secondary-color: #{$color-white-de};
+  --primary-accent: #{$color-primary-accent};
+
+  // Buttons
+  --btn-primary-color: #{$color-raisin-black};
+  --btn-primary-bg: #{$color-very-light-malachite-green};
+  --btn-primary-hover: #{$color-primary-accent};
+
+  // Cards
+  // --surface-card:
+
+  // Links
+
+  // Icons
+  --oio-icon-filter-color: invert(93%) sepia(0%) saturate(7500%)
+    hue-rotate(56deg) brightness(109%) contrast(107%);
+}

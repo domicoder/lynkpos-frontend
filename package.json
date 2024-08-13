@@ -15,7 +15,9 @@
     "test-setup": "npx playwright install",
     "test": "npx playwright test && npx playwright show-report",
     "commitlint": "commitlint --edit",
-    "prepare": "npx husky init"
+    "prepare": "npx husky init",
+    "pre-commit": "npx lint-staged",
+    "pre-push": "npm run test && npm run build"
   },
   "dependencies": {
     "@types/js-cookie": "^3.0.6",

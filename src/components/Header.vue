@@ -1,5 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
+</script>
 
 <template>
   <header class="header">
@@ -13,9 +17,11 @@
       </p>
       <div class="flex flex-col w-full items-center justify-center">
         <h1 class="text-lg">
-          <p class="project-title italic -skew-y-6">vuetres-template</p>
+          <p class="project-title italic -skew-y-6">
+            {{ t('general.appName') }}
+          </p>
         </h1>
-        <p class="-skew-y-6 pb-4">Vue 3 Starter Template</p>
+        <p class="-skew-y-6 pb-4">{{ t('general.appDescription') }}</p>
       </div>
     </div>
   </header>

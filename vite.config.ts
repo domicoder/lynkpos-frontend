@@ -62,6 +62,18 @@ export default defineConfig(
         __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
       },
       cacheDir: process.env.VITE_CACHE_DIR || 'node_modules/.vite', // vite cache dir
+      test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: ['./src/test/setup.ts'],
+      },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            api: 'modern-compiler', // or "modern"
+          },
+        },
+      },
     };
   },
 );

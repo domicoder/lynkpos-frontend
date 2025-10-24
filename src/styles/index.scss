@@ -1,8 +1,8 @@
-@import 'components/all';
-@import 'elements/all';
-@import 'generics/all';
-@import 'settings/all';
-@import 'oio-icons/all';
+@use 'components/components';
+@use 'elements/elements';
+@use 'generics/generics';
+@use 'settings/settings';
+@use 'oio-icons/icons';
 
 #app {
   width: 100%;

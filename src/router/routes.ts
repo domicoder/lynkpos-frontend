@@ -1,7 +1,3 @@
-import HomeView from '@/views/home/HomeView.vue';
-import LoginView from '@/views/login/LoginView.vue';
-import AboutView from '@/views/about/AboutView.vue';
-import PageNotFound from '@/views/not-found/PageNotFound.vue';
 import {
   ABOUT_VIEW,
   HOME_VIEW,
@@ -10,6 +6,12 @@ import {
 } from '@/router/paths';
 import { Role } from '@/domains/Role';
 import { loginBeforeEnter, requireAuth } from '@/services/auth';
+
+// route lazy loading improvements
+const LoginView = () => import('@/views/login/LoginView.vue');
+const HomeView = () => import('@/views/home/HomeView.vue');
+const AboutView = () => import('@/views/about/AboutView.vue');
+const PageNotFound = () => import('@/views/not-found/PageNotFound.vue');
 
 const routes = [
   {

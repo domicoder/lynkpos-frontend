@@ -34,9 +34,6 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/settings/variables.scss';
-  @import '@/styles/tools/mixins.scss';
-
   .page-not-found {
     .not-found-card {
       &__title {

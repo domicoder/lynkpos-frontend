@@ -1,15 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useApi, useApiPost, useApiMutation } from '@/composables/useApi';
 
+const mockApiClient = {
+  get: vi.fn(),
+  post: vi.fn(),
+  put: vi.fn(),
+  patch: vi.fn(),
+  delete: vi.fn(),
+};
+
 vi.mock('@/services/api/EnhancedApiClient', () => ({
   default: {
-    getInstance: () => ({
-      get: vi.fn(),
-      post: vi.fn(),
-      put: vi.fn(),
-      patch: vi.fn(),
-      delete: vi.fn(),
-    }),
+    getInstance: vi.fn(() => mockApiClient),
   },
 }));
 
@@ -30,20 +32,12 @@ describe('useApi Composable', () => {
     });
 
     it('should execute immediately when immediate option is true', async () => {
-      const mockApiClient = {
-        get: vi.fn().mockResolvedValue({
-          data: { test: 'data' },
-          status: 200,
-          message: 'OK',
-          timestamp: new Date().toISOString(),
-        }),
-      };
-
-      vi.doMock('@/services/api/EnhancedApiClient', () => ({
-        default: {
-          getInstance: () => mockApiClient,
-        },
-      }));
+      mockApiClient.get.mockResolvedValue({
+        data: { test: 'data' },
+        status: 200,
+        message: 'OK',
+        timestamp: new Date().toISOString(),
+      });
 
       const { execute } = useApi('/test-endpoint', { immediate: true });
 
@@ -55,20 +49,12 @@ describe('useApi Composable', () => {
 
   describe('useApiPost', () => {
     it('should handle POST requests correctly', async () => {
-      const mockApiClient = {
-        post: vi.fn().mockResolvedValue({
-          data: { success: true },
-          status: 201,
-          message: 'Created',
-          timestamp: new Date().toISOString(),
-        }),
-      };
-
-      vi.doMock('@/services/api/EnhancedApiClient', () => ({
-        default: {
-          getInstance: () => mockApiClient,
-        },
-      }));
+      mockApiClient.post.mockResolvedValue({
+        data: { success: true },
+        status: 201,
+        message: 'Created',
+        timestamp: new Date().toISOString(),
+      });
 
       const { execute } = useApiPost('/test-endpoint');
 
@@ -86,18 +72,10 @@ describe('useApi Composable', () => {
 
   describe('useApiMutation', () => {
     it('should handle different HTTP methods', async () => {
-      const mockApiClient = {
-        post: vi.fn(),
-        put: vi.fn(),
-        patch: vi.fn(),
-        delete: vi.fn(),
-      };
-
-      vi.doMock('@/services/api/EnhancedApiClient', () => ({
-        default: {
-          getInstance: () => mockApiClient,
-        },
-      }));
+      mockApiClient.post.mockResolvedValue({ data: { success: true } });
+      mockApiClient.put.mockResolvedValue({ data: { success: true } });
+      mockApiClient.patch.mockResolvedValue({ data: { success: true } });
+      mockApiClient.delete.mockResolvedValue({ data: { success: true } });
 
       const { mutate } = useApiMutation();
 

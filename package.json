@@ -21,7 +21,7 @@
     "lint:fix": "eslint --fix . --ext .js,.ts,.vue --ignore-pattern '**/*.scss' --ignore-pattern '**/*.sass' --ignore-pattern '**/*.css'",
     "type-check": "vue-tsc --noEmit",
     "commitlint": "commitlint --edit",
-    "prepare": "npx husky init",
+    "prepare": "husky",
     "pre-commit": "npx lint-staged",
     "pre-push": "npm run test && npm run build"
   },

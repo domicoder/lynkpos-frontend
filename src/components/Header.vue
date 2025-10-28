@@ -10,7 +10,7 @@
     <div class="flex flex-col items-center justify-center">
       <p>
         <img
-          src="@/assets/images/vuetres-template-logo.svg"
+          src="@/assets/images/LynkPOS-logo.svg"
           alt="logo"
           width="50"
         />

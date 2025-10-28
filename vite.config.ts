@@ -29,11 +29,11 @@ export default defineConfig(
         // // Optional
         // [...(mode === 'development' ? [basicSsl({
         //   /** name of certification */
-        //   name: 'vuetres-template',
+        //   name: 'LynkPOS',
         //   /** custom trust domains */
         //   domains: ['*.custom.com'],
         //   /** path to certificate (custom certification directory) */
-        //   certPath: '.cert/cert/vuetres-template.crt',
+        //   certPath: '.cert/cert/LynkPOS.crt',
         // })] : [])],
       ],
       server: {

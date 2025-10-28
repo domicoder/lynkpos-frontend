@@ -1,8 +1,8 @@
 {
   "general": {
-    "appNameOnly": "Vuetres",
+    "appNameOnly": "LynkPOS",
     "owner": "domicoder",
-    "appName": "vuetres-template",
+    "appName": "LynkPOS",
     "appDescription": "Vue 3 Starter Template",
     "accept": "Accept",
     "cancel": "Cancel",

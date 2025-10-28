@@ -63,7 +63,7 @@ describe('AuthStore', () => {
   it.skip('should get token from localStorage when user is null', () => {
     // Mock localStorage with the structure that the getter expects
     localStorage.setItem(
-      'vuetres-template-YSxTEMPLATE',
+      'LynkPOS-YSxTEMPLATE',
       JSON.stringify({ token: 'stored-token' }),
     );
 

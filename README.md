@@ -51,8 +51,8 @@ This template should help get you started developing with Vue 3 and TypeScript i
 
 ## ⚙️ Environment Setup
 
-- `Node:` v20.11.0 (LTS/iron May 2024)
-- `NPM:` v10.5.2
+- `Node:` v20.19.5 (LTS/iron May 2024)
+- `pnpm:` v10.x (Package Manager)
 - `NVM:` v0.38.0
 
 ## 💅 Code Styling
@@ -76,7 +76,18 @@ We use 3 pre-commit hooks:
 
 <!-- ## 🏗 Project Structure -->
 
-## 🛠 NPM scripts for Development
+## 📦 Package Manager
+
+This project uses **pnpm** as the package manager for faster, more efficient dependency management. pnpm uses a content-addressable filesystem to store packages and creates hard links to avoid duplication.
+
+### Why pnpm?
+
+- **Faster installs**: Up to 2x faster than npm
+- **Disk space efficient**: Uses hard links to avoid duplicate packages
+- **Strict dependency resolution**: Prevents phantom dependencies
+- **Better monorepo support**: Built-in workspace support
+
+## 🛠 pnpm scripts for Development
 
 ### 🪄 Init
 
@@ -86,58 +97,59 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ```
 
 ```bash
-nvm use # If you have nvm installed with node version 20.11.0
-nvm install # Install node version 20.11.0 using nvm
+nvm use # If you have nvm installed with node version 20.19.5
+nvm install # Install node version 20.19.5 using nvm
 ```
 
 ### 📦 Installation
 
 ```bash
-npm install # Install all dependencies
+pnpm install # Install all dependencies
 ```
 
 ### 🔨 Compile and hot-reload for development
 
 ```bash
-npm run dev # Compile and hot-reload for development
+pnpm dev # Compile and hot-reload for development
 ```
 
 ### 📝 Lint and fix files
 
 ```bash
-npm run lint # run lint
-npm run lint:fix # run lint --fix
+pnpm lint # run lint
+pnpm lint:fix # run lint --fix
 ```
 
 ### 🚀 Build
 
 ```bash
-npm run build # Build the project for production
+pnpm build # Build the project for production
 ```
 
 ### 👁 Preview
 
 ```bash
-npm run preview # Preview of the locally packaged project
+pnpm preview # Preview of the locally packaged project
 ```
 
 ### 🔬 Test Setup
 
 ```bash
-npm run test-setup # Install playwright
+pnpm test-setup # Install playwright
 ```
 
-### 🧪 Run unit tests
+### 🧪 Run tests
 
 ```bash
-npx playwright test # Run playwright
-npx playwright show-report # Show playwright report
-npx playwright test --ui # Run playwright with UI
+# Unit tests
+pnpm test # Run vitest unit tests
 
-# or
-npm run test:unit
-npm run test:e2e
-npm run test # Runs both unit and e2e tests
+# E2E tests
+pnpm test:e2e # Run playwright e2e tests
+pnpm test:e2e:ui # Run playwright with UI
+
+# Test coverage
+pnpm test:coverage # Run tests with coverage report
 ```
 
 ## Commit Message Conventions

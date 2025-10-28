@@ -1,0 +1,43 @@
+@use '../settings/colors';
+
+:root {
+  --background-primary-color: #{colors.$color-white-de};
+  --text-primary-color: #{colors.$color-very-light-malachite-green};
+  --text-secondary-color: #{colors.$color-raisin-black};
+  --primary-accent: #{colors.$color-primary-accent};
+
+  // Buttons
+  --btn-primary-color: #{colors.$color-raisin-black};
+  --btn-primary-bg: #{colors.$color-very-light-malachite-green};
+  --btn-primary-hover: #{colors.$color-primary-accent};
+
+  // Cards
+  // --surface-card:
+
+  // Links
+
+  // Icons
+  --oio-icon-filter-color: invert(5%) sepia(11%) saturate(231%)
+    hue-rotate(314deg) brightness(95%) contrast(79%);
+}
+
+:root.dark-theme {
+  --background-primary-color: #{colors.$color-raisin-black};
+  --text-primary-color: #{colors.$color-very-light-malachite-green};
+  --text-secondary-color: #{colors.$color-white-de};
+  --primary-accent: #{colors.$color-primary-accent};
+
+  // Buttons
+  --btn-primary-color: #{colors.$color-raisin-black};
+  --btn-primary-bg: #{colors.$color-very-light-malachite-green};
+  --btn-primary-hover: #{colors.$color-primary-accent};
+
+  // Cards
+  // --surface-card:
+
+  // Links
+
+  // Icons
+  --oio-icon-filter-color: invert(93%) sepia(0%) saturate(7500%)
+    hue-rotate(56deg) brightness(109%) contrast(107%);
+}

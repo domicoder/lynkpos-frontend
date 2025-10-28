@@ -1,0 +1,94 @@
+{
+  "env": {
+    "es2022": true,
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@intlify/vue-i18n/recommended"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    // es2020 - adds all ECMAScript 2020 globals and automatically sets the ecmaVersion parser option to 11 | 2020.
+    // es2021 - adds all ECMAScript 2021 globals and automatically sets the ecmaVersion parser option to 12 | 2021.
+    // es2022 - adds all ECMAScript 2022 globals and automatically sets the ecmaVersion parser option to 13 | 2022.
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "settings": {
+    "vue-i18n": {
+      "localeDir": "./src/i18n/*.locale.json",
+      // According to the vue-i18n docs, the messageSyntaxVersion should be ^9.1.10 but it doesn't work
+      "messageSyntaxVersion": "^9.13.1"
+    }
+  },
+  "globals": {
+    "defineProps": "readonly",
+    "defineEmits": "readonly"
+  },
+  "rules": {
+    "no-console": "error",
+    "no-debugger": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      {
+        "blankLine": "always",
+        "prev": "import",
+        "next": ["const", "let", "var"]
+      },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+      {
+        "blankLine": "any",
+        "prev": ["const", "let", "var"],
+        "next": ["const", "let", "var"]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["interface", "type", "export"]
+      }
+    ],
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/html-self-closing": [
+      "warn",
+      {
+        "html": {
+          "void": "always",
+          "normal": "never",
+          "component": "always"
+        }
+      }
+    ],
+    "vue/multi-word-component-names": [
+      "error",
+      {
+        "ignores": []
+      }
+    ],
+    "vue/component-definition-name-casing": ["error", "kebab-case"],
+    "vue/padding-line-between-blocks": ["error", "always"]
+  },
+  "ignorePatterns": [
+    "./node_modules",
+    "**/dist/**",
+    "**/vendor/*.js",
+    "/src/presets/*",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.css"
+  ]
+}

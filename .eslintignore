@@ -1,0 +1,12 @@
+node_modules
+public
+.build/*
+.nuxt
+.history
+jsconfig.json
+package.json
+package-lock.json
+yarn.lock
+types/generated/*
+.browserslistrc
+**/*.min.js

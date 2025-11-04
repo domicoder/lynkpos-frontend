@@ -12,14 +12,16 @@ export interface Permission {
   created_at: string;
 }
 
-export interface User {
-  id: string;
-  email: string;
-  username: string;
-  roles: Role[];
-  permissions: Permission[];
-  created_at: string;
-  updated_at: string;
+export interface LoginToken {
+  token: string;
 }
 
-export type UserLogin = User & { token: string };
+export interface User {
+  id: string;
+  nombre: string;
+  usuarioNombre: string;
+  rol: {
+    id: number;
+    nombre: string;
+  };
+}

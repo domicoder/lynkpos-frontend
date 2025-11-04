@@ -3,13 +3,15 @@
   import useAuthStore from '@/stores/user/AuthStore';
   import { useI18n } from 'vue-i18n';
   import { useRouter } from 'vue-router';
+  import type { User, LoginToken } from '@/domains/User';
 
   const authStore = useAuthStore();
   const router = useRouter();
   const { t } = useI18n();
 
   const onLogout = () => {
-    authStore.setUser(null);
+    authStore.setUserInfo({} as User);
+    authStore.setToken({} as LoginToken);
 
     router.push({ name: LOGIN_VIEW.name });
   };

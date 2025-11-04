@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import type { UserLogin } from '@/domains/User';
+  import type { LoginToken, User } from '@/domains/User';
   import { HOME_VIEW } from '@/router/paths';
-  import { loginAuth } from '@/services/user';
+  import { loginAuth, getUserInfo } from '@/services/user';
   import useAuthStore from '@/stores/user/AuthStore';
   import { useI18n } from 'vue-i18n';
   import { useRouter } from 'vue-router';
@@ -21,71 +21,58 @@
 
   const handleLogin = async () => {
     try {
-      await loginAuth({
-        email: 'LynkPOS@example.com',
-        password: '123456A.',
+      const response = await loginAuth({
+        usuarioNombre: username.value,
+        password: password.value,
       });
+
+      // check if the response is not ok (status !== 200)
+      if (response.status !== 200) {
+        alert('Error al iniciar sesión');
+
+        // TODO: handle error modal
+        return;
+      }
+
       // TODO: handle success flow
+      // i need to send the token in the headers of the request to the backend
+      const headers = {
+        Authorization: `Bearer ${response.data.token}`,
+      };
+
+      const userInfoResponse = await getUserInfo({ headers });
+
+      authStore.setToken(response.data as LoginToken);
+      authStore.setUserInfo(userInfoResponse.data as User);
+
+      router.push({ name: HOME_VIEW.name });
     } catch (error) {
+      // TODO: handle error modal
+      // eslint-disable-next-line no-console
+      console.log('error', error);
+      // eslint-disable-next-line no-alert
+      alert('Error al iniciar sesión');
       // eslint-disable-next-line no-console
       // TODO: handle error modal
     }
-
-    // API Auth response
-    const userLogin: UserLogin = {
-      id: '1',
-      email: 'LynkPOS@example.com',
-      username: '123456A.',
-      token: 'token-A4X3-A4X3-A4X3',
-      roles: [
-        {
-          id: '1',
-          // role_name: 'no-auth-1',
-          role_name: 'Admin',
-          description: 'Administrator role with full access',
-          created_at: '2023-01-01T12:00:00Z',
-        },
-        {
-          id: '2',
-          // role_name: 'no-auth-2',
-          role_name: 'Editor',
-          description: 'Editor role with limited access',
-          created_at: '2023-01-02T12:00:00Z',
-        },
-      ],
-      permissions: [
-        {
-          id: '1',
-          permission_name: 'read',
-          description: 'Permission to read content',
-          created_at: '2023-01-01T12:00:00Z',
-        },
-        {
-          id: '2',
-          permission_name: 'write',
-          description: 'Permission to write content',
-          created_at: '2023-01-02T12:00:00Z',
-        },
-      ],
-      created_at: '2023-01-01T12:00:00Z',
-      updated_at: '2023-07-01T12:00:00Z',
-    };
-
-    authStore.setUser(userLogin);
-
-    router.push({ name: HOME_VIEW.name });
   };
 </script>
 
 <template>
   <main class="login">
     <div class="login-card">
-      <div class="flex flex-row w-full justify-center">
-        <div class="flex flex-row gap-6 items-center justify-center w-[50%]">
+      <div class="flex md:flex-row flex-col w-full justify-center">
+        <div
+          class="flex flex-row gap-6 items-center justify-center md:w-[50%] w-full"
+        >
           <v-col cols="10">
             <div class="mb-11">
-              <h2 class="text-[40px] font-bold">{{ t('general.welcome') }}</h2>
-              <p class="text-[16px] font-normal text-gray-secondary">
+              <h2 class="md:text-[40px] text-[24px] font-bold">
+                {{ t('general.welcome') }}
+              </h2>
+              <p
+                class="md:text-[16px] text-[10px] font-normal text-gray-secondary"
+              >
                 {{ t('general.appDescription') }}
               </p>
             </div>
@@ -131,16 +118,17 @@
           </v-col>
         </div>
         <div
-          class="flex flex-col gap-0 items-center justify-center w-[50%] h-dvh bg-blue-dark/[37%] rounded-tl-[412px]"
+          class="flex flex-col gap-0 items-center justify-center md:w-[50%] w-full h-dvh bg-blue-dark/[37%] rounded-tl-[412px]"
         >
           <div>
             <img
               src="@/assets/images/LynkPOS-logo.png"
               alt="logo"
               width="319"
+              class="md:block hidden"
             />
           </div>
-          <h2 class="text-[80px] font-bold text-blue-dark">
+          <h2 class="md:text-[80px] text-[40px] font-bold text-blue-dark">
             {{ t('general.appName') }}
           </h2>
           <div>
@@ -158,7 +146,6 @@
 
 <style scoped>
   .login {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

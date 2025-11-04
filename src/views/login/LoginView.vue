@@ -90,7 +90,7 @@
                 />
                 <v-text-field
                   v-model="password"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   :rules="[rules.required]"
                   :type="showPassword ? 'text' : 'password'"
                   placeholder="********"

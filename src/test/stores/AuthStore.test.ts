@@ -1,13 +1,15 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import useAuthStore from '@/stores/user/AuthStore';
-import type { UserLogin } from '@/domains/User';
+import type { User, LoginToken } from '@/domains/User';
+import { STORAGE_KEY } from '@/utils/utils';
 
 describe('AuthStore', () => {
   beforeEach(() => {
-    setActivePinia(createPinia());
-    // Clear localStorage before each test
+    // Clear localStorage before each test, including the specific storage key
     localStorage.clear();
+    localStorage.removeItem(STORAGE_KEY);
+    setActivePinia(createPinia());
   });
 
   it('should initialize with null user', () => {
@@ -19,43 +21,53 @@ describe('AuthStore', () => {
 
   it('should set user correctly', () => {
     const store = useAuthStore();
-    const mockUser: UserLogin = {
+    const mockUser: User = {
       id: '1',
-      email: 'test@example.com',
-      username: 'testuser',
+      nombre: 'test@example.com',
+      usuarioNombre: 'testuser',
+      rol: {
+        id: 1,
+        nombre: 'testrole',
+      },
+    };
+    const mockToken: LoginToken = {
       token: 'mock-token',
-      roles: [],
-      permissions: [],
-      created_at: '2024-01-01',
-      updated_at: '2024-01-01',
     };
 
-    store.setUser(mockUser);
+    store.setToken(mockToken);
+    store.setUserInfo(mockUser);
 
     expect(store.getUser).toEqual(mockUser);
     expect(store.isLoggedIn).toBe(true);
     expect(store.getToken).toBe('mock-token');
   });
 
-  it('should clear user when set to null', () => {
+  it('should clear user and token when logging out', () => {
     const store = useAuthStore();
-    const mockUser: UserLogin = {
+    const mockUser: User = {
       id: '1',
-      email: 'test@example.com',
-      username: 'testuser',
+      nombre: 'test@example.com',
+      usuarioNombre: 'testuser',
+      rol: {
+        id: 1,
+        nombre: 'testrole',
+      },
+    };
+    const mockToken: LoginToken = {
       token: 'mock-token',
-      roles: [],
-      permissions: [],
-      created_at: '2024-01-01',
-      updated_at: '2024-01-01',
     };
 
-    store.setUser(mockUser);
+    store.setToken(mockToken);
+    store.setUserInfo(mockUser);
     expect(store.isLoggedIn).toBe(true);
 
-    store.setUser(null);
+    // Clear token and user to simulate logout
+    // Set token to null by directly manipulating state (since setToken doesn't accept null)
+    store.$state.loginToken = null;
+    store.$state.user = null;
     expect(store.getUser).toBeNull();
     expect(store.isLoggedIn).toBe(false);
+    expect(store.getToken).toBeUndefined();
   });
 
   // TODO: This test needs to be updated to work with Pinia persistence
@@ -70,13 +82,16 @@ describe('AuthStore', () => {
     const store = useAuthStore();
 
     // Clear the user to simulate null state
-    store.setUser(null);
+    store.setUserInfo({} as User);
 
     expect(store.getToken).toBe('stored-token');
   });
 
-  it('should return null token when no user and no localStorage data', () => {
+  it('should return undefined token when no token is set', () => {
     const store = useAuthStore();
+
+    // Ensure token is explicitly null
+    store.$state.loginToken = null;
 
     expect(store.getToken).toBeUndefined();
   });

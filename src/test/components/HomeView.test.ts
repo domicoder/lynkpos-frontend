@@ -82,13 +82,15 @@ describe('HomeView', () => {
     });
 
     const authStore = useAuthStore();
-    const setUserSpy = vi.spyOn(authStore, 'setUser');
+    const setUserInfoSpy = vi.spyOn(authStore, 'setUserInfo');
+    const setTokenSpy = vi.spyOn(authStore, 'setToken');
 
     const logoutButton = wrapper.find('button');
 
     await logoutButton.trigger('click');
 
-    expect(setUserSpy).toHaveBeenCalledWith(null);
+    expect(setUserInfoSpy).toHaveBeenCalledWith({});
+    expect(setTokenSpy).toHaveBeenCalledWith({});
     expect(mockPush).toHaveBeenCalledWith({ name: 'Login' });
   });
 });

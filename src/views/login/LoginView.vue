@@ -15,7 +15,7 @@
     required: (value: string) => !!value || 'Campo requerido.',
   };
 
-  const show1 = ref(false);
+  const showPassword = ref(false);
   const password = ref('');
   const username = ref('');
 
@@ -82,52 +82,74 @@
     <div class="login-card">
       <div class="flex flex-row w-full justify-center">
         <div class="flex flex-row gap-6 items-center justify-center w-[50%]">
-          <v-col
-            cols="6"
-            md="6"
-            sm="6"
-          >
-            <v-text-field
-              v-model="username"
-              label="Usuario"
-              type="input"
-              placeholder="example@example.com"
-              :rules="[rules.required]"
-              variant="outlined"
-            />
-            <v-text-field
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required]"
-              :type="show1 ? 'text' : 'password'"
-              placeholder="********"
-              label="Contraseña"
-              name="input-10-1"
-              variant="outlined"
-              @click:append="show1 = !show1"
-            />
+          <v-col cols="10">
+            <div class="mb-11">
+              <h2 class="text-[40px] font-bold">{{ t('general.welcome') }}</h2>
+              <p class="text-[16px] font-normal text-gray-secondary">
+                {{ t('general.appDescription') }}
+              </p>
+            </div>
 
-            <v-btn
-              rounded="xl"
-              size="x-large"
-              block
-              @click="handleLogin"
-            >
-              {{ t('general.login') }}
-            </v-btn>
+            <form @submit.prevent="handleLogin">
+              <div class="flex flex-col gap-2">
+                <v-text-field
+                  v-model="username"
+                  :label="t('login.username')"
+                  type="input"
+                  placeholder="example@example.com"
+                  :rules="[rules.required]"
+                  variant="outlined"
+                  class="w-full"
+                />
+                <v-text-field
+                  v-model="password"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required]"
+                  :type="showPassword ? 'text' : 'password'"
+                  placeholder="********"
+                  :label="t('login.password')"
+                  name="input-10-1"
+                  variant="outlined"
+                  class="w-full"
+                  autocomplete="new-password"
+                  @click:append="showPassword = !showPassword"
+                />
+              </div>
+
+              <v-btn
+                rounded="xl"
+                size="x-large"
+                block
+                type="submit"
+                color="blue-dark"
+                class="mt-8 text-none"
+                elevation="0"
+              >
+                {{ t('general.login') }}
+              </v-btn>
+            </form>
           </v-col>
         </div>
-        <div class="flex flex-row gap-0 items-center justify-center w-[50%]">
-          <p>
+        <div
+          class="flex flex-col gap-0 items-center justify-center w-[50%] h-dvh bg-blue-dark/[37%] rounded-tl-[412px]"
+        >
+          <div>
             <img
               src="@/assets/images/LynkPOS-logo.png"
               alt="logo"
-              width="50"
+              width="319"
             />
-          </p>
-          <h2 class="text-2xl font-bold">
+          </div>
+          <h2 class="text-[80px] font-bold text-blue-dark">
             {{ t('general.appName') }}
           </h2>
+          <div>
+            <img
+              src="@/assets/images/login-ecommerce.png"
+              alt="LynkPOS login image"
+              width="319"
+            />
+          </div>
         </div>
       </div>
     </div>

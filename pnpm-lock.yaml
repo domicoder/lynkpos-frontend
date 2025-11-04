@@ -48,6 +48,9 @@ importers:
       '@intlify/eslint-plugin-vue-i18n':
         specifier: ^2.0.0
         version: 2.0.0(eslint@8.57.1)
+      '@mdi/font':
+        specifier: ^7.4.47
+        version: 7.4.47
       '@playwright/test':
         specifier: ^1.44.1
         version: 1.54.1
@@ -498,6 +501,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.29':
     resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
+
+  '@mdi/font@7.4.47':
+    resolution: {integrity: sha512-43MtGpd585SNzHZPcYowu/84Vz2a2g31TvPMTm9uTiCSWzaheQySUcSyUH/46fPnuPQWof2yd0pGBtzee/IQWw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3465,6 +3471,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
+
+  '@mdi/font@7.4.47': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

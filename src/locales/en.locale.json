@@ -3,12 +3,13 @@
     "appNameOnly": "LynkPOS",
     "owner": "domicoder",
     "appName": "LynkPOS",
-    "appDescription": "Vue 3 Starter Template",
+    "welcome": "Welcome to LynkPOS",
+    "appDescription": "The modern POS system, fast and secure for your business.",
     "accept": "Accept",
     "cancel": "Cancel",
     "Close": "Close",
-    "login": "Login",
-    "logout": "Logout",
+    "login": "Log In",
+    "logout": "Log Out",
     "backHome": "Back Home"
   },
   "error": {
@@ -19,7 +20,9 @@
     }
   },
   "login": {
-    "title": "[Login View]"
+    "title": "[Login View]",
+    "username": "Username",
+    "password": "Password"
   },
   "home": {
     "title": "[Home View]"

@@ -10,6 +10,8 @@ export default {
         'btn-primary-color': 'var(--btn-primary-color)',
         'btn-primary-bg': 'var(--btn-primary-bg)',
         'btn-primary-hover': 'var(--btn-primary-hover)',
+        'blue-dark': '#254567',
+        'gray-secondary': '#49475A',
       },
       fontFamily: {
         'open-sans': ['Open Sans', 'sans-serif'],

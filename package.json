@@ -45,6 +45,7 @@
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
+    "@mdi/font": "^7.4.47",
     "@playwright/test": "^1.44.1",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.14.5",

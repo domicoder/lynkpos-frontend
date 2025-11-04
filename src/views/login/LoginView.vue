@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { ref } from 'vue';
   import type { UserLogin } from '@/domains/User';
   import { HOME_VIEW } from '@/router/paths';
   import { loginAuth } from '@/services/user';
@@ -9,6 +10,14 @@
   const authStore = useAuthStore();
   const router = useRouter();
   const { t } = useI18n();
+
+  const rules = {
+    required: (value: string) => !!value || 'Campo requerido.',
+  };
+
+  const show1 = ref(false);
+  const password = ref('');
+  const username = ref('');
 
   const handleLogin = async () => {
     try {
@@ -71,32 +80,54 @@
 <template>
   <main class="login">
     <div class="login-card">
-      <div class="flex flex-col gap-6">
-        <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-row w-full justify-center">
+        <div class="flex flex-row gap-6 items-center justify-center w-[50%]">
+          <v-col
+            cols="6"
+            md="6"
+            sm="6"
+          >
+            <v-text-field
+              v-model="username"
+              label="Usuario"
+              type="input"
+              placeholder="example@example.com"
+              :rules="[rules.required]"
+              variant="outlined"
+            />
+            <v-text-field
+              v-model="password"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules.required]"
+              :type="show1 ? 'text' : 'password'"
+              placeholder="********"
+              label="Contraseña"
+              name="input-10-1"
+              variant="outlined"
+              @click:append="show1 = !show1"
+            />
+
+            <v-btn
+              rounded="xl"
+              size="x-large"
+              block
+              @click="handleLogin"
+            >
+              {{ t('general.login') }}
+            </v-btn>
+          </v-col>
+        </div>
+        <div class="flex flex-row gap-0 items-center justify-center w-[50%]">
           <p>
             <img
-              src="@/assets/images/vuetres-template-logo.svg"
+              src="@/assets/images/LynkPOS-logo.png"
               alt="logo"
               width="50"
             />
           </p>
-          <div class="flex flex-col w-full items-center justify-center">
-            <h1 class="text-lg">
-              <p class="project-title italic -skew-y-6">
-                {{ t('general.appName') }}
-              </p>
-            </h1>
-            <p class="-skew-y-6 pb-4">{{ t('general.appDescription') }}</p>
-          </div>
-        </div>
-        <div class="flex flex-col gap-6 items-center justify-center">
-          <p>{{ t('login.title') }}</p>
-          <button
-            class="btn btn-ghost w-[108px] font-open-sans text-xs !py-2"
-            @click="handleLogin"
-          >
-            {{ t('general.login') }}
-          </button>
+          <h2 class="text-2xl font-bold">
+            {{ t('general.appName') }}
+          </h2>
         </div>
       </div>
     </div>
@@ -104,6 +135,13 @@
 </template>
 
 <style scoped>
+  .login {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .login-card {
     display: flex;
     flex-direction: column;

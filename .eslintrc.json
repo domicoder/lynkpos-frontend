@@ -13,16 +13,12 @@
   "parser": "vue-eslint-parser",
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
-    // es2020 - adds all ECMAScript 2020 globals and automatically sets the ecmaVersion parser option to 11 | 2020.
-    // es2021 - adds all ECMAScript 2021 globals and automatically sets the ecmaVersion parser option to 12 | 2021.
-    // es2022 - adds all ECMAScript 2022 globals and automatically sets the ecmaVersion parser option to 13 | 2022.
     "ecmaVersion": 13,
     "sourceType": "module"
   },
   "settings": {
     "vue-i18n": {
       "localeDir": "./src/i18n/*.locale.json",
-      // According to the vue-i18n docs, the messageSyntaxVersion should be ^9.1.10 but it doesn't work
       "messageSyntaxVersion": "^9.13.1"
     }
   },

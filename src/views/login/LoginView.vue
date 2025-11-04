@@ -66,7 +66,7 @@
           class="flex flex-row gap-6 items-center justify-center md:w-[50%] w-full"
         >
           <v-col cols="10">
-            <div class="mb-11">
+            <div class="md:mb-5 mb-[100px] md:mt-0 mt-10">
               <h2 class="md:text-[40px] text-[24px] font-bold">
                 {{ t('general.welcome') }}
               </h2>
@@ -109,7 +109,7 @@
                 block
                 type="submit"
                 color="blue-dark"
-                class="mt-8 text-none"
+                class="text-none md:mt-8 mt-14"
                 elevation="0"
               >
                 {{ t('general.login') }}

@@ -109,7 +109,7 @@
                 block
                 type="submit"
                 color="blue-dark"
-                class="text-none md:mt-8 mt-14"
+                class="text-none md:mt-8 mt-[110px]"
                 elevation="0"
               >
                 {{ t('general.login') }}

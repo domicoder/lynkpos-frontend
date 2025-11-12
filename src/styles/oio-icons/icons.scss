@@ -1,3 +1,8 @@
+:root {
+  --oio-icon-hover-color: invert(43%) sepia(77%) saturate(2468%)
+    hue-rotate(207deg) brightness(100%) contrast(103%);
+}
+
 .oio-icon {
   display: inline-block;
   width: 24px;
@@ -12,8 +17,7 @@
 }
 .oio-home:hover,
 .oio-home:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
   opacity: 0.85;
 }
 /* oio-home */
@@ -25,8 +29,7 @@
 }
 .oio-notebook:hover,
 .oio-notebook:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
 }
 /* oio-notebook */
 
@@ -36,8 +39,7 @@
 }
 .oio-moon:hover,
 .oio-moon:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
 }
 /* oio-moon */
 
@@ -47,8 +49,7 @@
 }
 .oio-sun:hover,
 .oio-sun:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
 }
 /* oio-sun */
 
@@ -59,8 +60,7 @@
 }
 .oio-question:hover,
 .oio-question:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
 }
 
 /* oio-language.svg */
@@ -71,7 +71,6 @@
 }
 .oio-language:hover,
 .oio-language:focus {
-  filter: invert(79%) sepia(23%) saturate(857%) hue-rotate(83deg)
-    brightness(92%) contrast(91%);
+  filter: var(--oio-icon-hover-color);
 }
 /* oio-language */

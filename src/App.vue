@@ -1,17 +1,20 @@
 <script setup lang="ts">
-  import { computed, onMounted } from 'vue';
+  import { computed, onMounted, watch } from 'vue';
   import { useRouter } from 'vue-router';
   import BlankLayout from '@/layouts/BlankLayout.vue';
   import MainLayout from '@/layouts/MainLayout.vue';
   import useGlobalStore from '@/stores/GlobalStore';
   import { useI18n } from 'vue-i18n';
-  import type { I18nLanguage } from '@/constants/theme';
+  import { lightTheme, type I18nLanguage } from '@/constants/theme';
+  import { useTheme } from 'vuetify';
 
+  const vuetifyTheme = useTheme();
   const router = useRouter();
   const globalStore = useGlobalStore();
   const i18n = useI18n();
 
   const currentLanguage = computed(() => globalStore.getDocumentLanguage);
+  const currentTheme = computed(() => globalStore.getDocumentTheme);
 
   const initDocumentTheme = () => {
     globalStore.initDocumentTheme();
@@ -24,9 +27,18 @@
     return router?.currentRoute.value?.meta?.requiresAuth;
   });
 
+  const syncVuetifyTheme = () => {
+    vuetifyTheme.change(currentTheme.value === lightTheme ? 'light' : 'dark');
+  };
+
+  watch(currentTheme, () => {
+    syncVuetifyTheme();
+  });
+
   onMounted(() => {
     initDocumentTheme();
     initDocumentLanguage();
+    syncVuetifyTheme();
   });
 </script>
 

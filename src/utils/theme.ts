@@ -42,7 +42,7 @@ export function setLocalLanguage(lang: I18nLanguage) {
 
 export function getInitialLanguage() {
   const storedLanguage = getLocalLanguage();
-  const language = storedLanguage || 'en';
+  const language = storedLanguage || 'es';
 
   return language;
 }

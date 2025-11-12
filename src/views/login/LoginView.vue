@@ -71,7 +71,7 @@
                 {{ t('general.welcome') }}
               </h2>
               <p
-                class="md:text-[16px] text-[10px] font-normal text-gray-secondary"
+                class="md:text-[16px] text-[10px] font-normal text-primary-white"
               >
                 {{ t('general.appDescription') }}
               </p>
@@ -99,7 +99,7 @@
                   variant="outlined"
                   class="w-full"
                   autocomplete="new-password"
-                  @click:append="showPassword = !showPassword"
+                  @click:append-inner="showPassword = !showPassword"
                 />
               </div>
 

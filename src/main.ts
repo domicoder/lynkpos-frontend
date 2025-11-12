@@ -16,8 +16,13 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
 import { validateEnvironmentVariables } from '../scripts/env';
+import { getInitialTheme } from '@/utils/theme';
+import { lightTheme } from '@/constants/theme';
 
 const app = createApp(App);
+
+const initialTheme = getInitialTheme();
+const defaultTheme = initialTheme === lightTheme ? 'light' : 'dark';
 
 const vuetify = createVuetify({
   components,
@@ -30,9 +35,17 @@ const vuetify = createVuetify({
     },
   },
   theme: {
+    defaultTheme,
     themes: {
       light: {
         dark: false,
+        colors: {
+          'blue-dark': '#254567',
+          'gray-secondary': '49475A',
+        },
+      },
+      dark: {
+        dark: true,
         colors: {
           'blue-dark': '#254567',
           'gray-secondary': '49475A',

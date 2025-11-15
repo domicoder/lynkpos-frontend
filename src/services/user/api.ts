@@ -3,6 +3,8 @@ import type {
   LoginAuthInputShape,
   LoginAuthOutputShape,
   GetUserInfoOutputShape,
+  CreateUserInputShape,
+  CreateUserOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -22,4 +24,15 @@ async function getUserInfo(
   return ApiClient.get<GetUserInfoOutputShape>(url, config);
 }
 
-export { loginAuth, getUserInfo };
+async function createUser(
+  input: CreateUserInputShape,
+): Promise<CreateUserOutputShape> {
+  const url = '/Usuario/CreateOne/';
+
+  return ApiClient.post<CreateUserInputShape, CreateUserOutputShape>(
+    url,
+    input,
+  );
+}
+
+export { loginAuth, getUserInfo, createUser };

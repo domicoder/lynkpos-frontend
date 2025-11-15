@@ -19,3 +19,14 @@ export type GetUserInfoOutputShape = {
     nombre: string;
   };
 };
+
+export type CreateUserInputShape = {
+  nombre: string;
+  usuarioNombre: string;
+  password: string;
+  activo: boolean;
+};
+
+export type CreateUserOutputShape = {
+  id: string;
+};

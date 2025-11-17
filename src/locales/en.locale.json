@@ -27,8 +27,20 @@
   "home": {
     "title": "[Home View]"
   },
+  "drawer": {
+    "options": {
+      "users": "Users",
+      "cashRegisters": "Cash Registers",
+      "logout": "Logout"
+    }
+  },
   "about": {
     "title": "[About View]",
     "description": "{appName} is an opinionated Vue 3 starter template made by {owner} for mocking apps quickly. It uses Vue 3 with Vite, Pinia, Typescript, file-based routing, i18n, webfont self-hosting, TailwindCSS for styling, custom icons."
+  },
+  "theme": {
+    "light": "Light mode (current)",
+    "dark": "Dark mode (current)",
+    "changeTheme": "Change theme"
   }
 }

@@ -60,7 +60,7 @@ npm install zod
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { setupApiClient } from '@/services/api';
-import GlobalLoading from '@/components/common/GlobalLoading.vue';
+import GlobalLoading from '@/components/shared/global-loading/GlobalLoading.vue';
 import App from './App.vue';
 
 const app = createApp(App);

@@ -1,67 +1,83 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-  import { enLang, esLang, lightTheme } from '@/constants/theme';
+  import { lightTheme } from '@/constants/theme';
   import useGlobalStore from '@/stores/GlobalStore';
-  import { computed } from 'vue';
-  import { useI18n } from 'vue-i18n';
+  import { computed, onMounted } from 'vue';
+  import { useResponsiveness } from '@/composables/useResponsiveness';
+  import SelectLanguage from '@/components/profile/select-language/SelectLanguage.vue';
+  import MobileAppBar from '@/components/profile/mobile-app-bar/MobileAppBar.vue';
+  import SearchBar from '@/components/search-bar/SearchBar.vue';
+  import UserAvatar from '@/components/profile/user-avatar/UserAvatar.vue';
 
-  const i18n = useI18n();
   const globalStore = useGlobalStore();
-  const isLightTheme = computed(
-    () => globalStore.getDocumentTheme === lightTheme,
-  );
+  const { isMobile } = useResponsiveness();
 
-  const currentLanguage = computed(() => globalStore.currentLanguage);
+  const drawer = defineModel<boolean>('drawer');
+
+  const currentTheme = computed(() => globalStore.getDocumentTheme);
+  const isLightTheme = computed(() => currentTheme.value === lightTheme);
 
   const toggleTheme = () => {
     globalStore.toggleTheme(true);
   };
 
-  const toggleLanguage = () => {
-    if (currentLanguage.value === 'es') {
-      globalStore.setLanguage(enLang);
-    } else {
-      globalStore.setLanguage(esLang);
+  const showInitialDrawerDesktop = () => {
+    if (!isMobile.value) {
+      drawer.value = true;
     }
-
-    i18n.locale.value = currentLanguage.value;
   };
+
+  onMounted(() => {
+    showInitialDrawerDesktop();
+  });
 </script>
 
 <template>
-  <nav class="navbar flex flex-row items-center justify-center gap-6 p-3">
-    <a
-      href="/"
-      class="h-max"
-    >
-      <i class="oio-icon oio-home"></i>
-    </a>
-    <a href="/not-found-404">
-      <i class="oio-icon oio-question"></i>
-    </a>
-    <a href="/about">
-      <i class="oio-icon oio-notebook"></i>
-    </a>
-    <button
-      class="btn btn-plain"
-      @click="toggleTheme"
-    >
-      <i
-        id="theme-toggle__icon"
-        class="oio-icon"
-        :class="isLightTheme ? 'oio-sun' : 'oio-moon'"
-      ></i>
-    </button>
-    <button
-      class="btn btn-plain"
-      @click="toggleLanguage"
-    >
-      <i
-        id="language-toggle__icon"
-        class="oio-icon oio-language"
-      ></i>
-    </button>
-  </nav>
+  <v-app-bar
+    elevation="0"
+    class="border border-b-[1px]"
+  >
+    <div class="flex items-center justify-between w-full">
+      <v-btn
+        icon="mdi-menu"
+        class="ml-4"
+        @click="drawer = !drawer"
+      />
+      <div
+        v-show="isMobile"
+        class="mr-4"
+      >
+        <MobileAppBar />
+      </div>
+      <div
+        v-show="!isMobile"
+        class="flex items-center justify-center gap-2"
+      >
+        <SearchBar />
+      </div>
+      <div
+        v-show="!isMobile"
+        class="flex items-center justify-center pr-8 gap-3"
+      >
+        <div class="flex items-center justify-center gap-3">
+          <SelectLanguage :is-mobile="isMobile" />
+          <UserAvatar />
+        </div>
+        <div>
+          <button
+            class="btn btn-plain"
+            @click="toggleTheme"
+          >
+            <i
+              id="theme-toggle__icon"
+              class="oio-icon"
+              :class="isLightTheme ? 'oio-sun' : 'oio-moon'"
+            ></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </v-app-bar>
 </template>
 
 <style scoped></style>

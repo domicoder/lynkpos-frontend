@@ -27,8 +27,20 @@
   "home": {
     "title": "[Vista de Inicio]"
   },
+  "drawer": {
+    "options": {
+      "users": "Usuarios",
+      "cashRegisters": "Cajas",
+      "logout": "Cerrar sesión"
+    }
+  },
   "about": {
     "title": "[Vista de Acerca de]",
     "description": "{appName} es una plantilla inicial para Vue 3 creada por {owner} para crer aplicaciones rápidamente. Utiliza Vue 3 con Vite, Pinia, Typescript, enrutamiento basado en archivos, i18n, autohospedaje de fuentes web, TailwindCSS, iconos personalizados."
+  },
+  "theme": {
+    "light": "Modo Claro (actual)",
+    "dark": "Modo Oscuro (actual)",
+    "changeTheme": "Cambiar tema"
   }
 }

@@ -34,7 +34,7 @@
 ```typescript
 // main.ts
 import { setupApiClient } from '@/services/api';
-import GlobalLoading from '@/components/common/GlobalLoading.vue';
+import GlobalLoading from '@/components/shared/global-loading/GlobalLoading.vue';
 
 const app = createApp(App);
 app.component('GlobalLoading', GlobalLoading);

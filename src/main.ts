@@ -24,6 +24,7 @@ const app = createApp(App);
 const initialTheme = getInitialTheme();
 const defaultTheme = initialTheme === lightTheme ? 'light' : 'dark';
 
+// TODO: move to a separate file
 const vuetify = createVuetify({
   components,
   directives,
@@ -41,14 +42,20 @@ const vuetify = createVuetify({
         dark: false,
         colors: {
           'blue-dark': '#254567',
-          'gray-secondary': '49475A',
+          'gray-secondary': '#49475A',
+          'bg-secondary': '#1A264A',
+          'bg-secondary-dark': '#121212',
+          'border-secondary': 'rgba(207, 207, 207, 0.1142)',
         },
       },
       dark: {
         dark: true,
         colors: {
           'blue-dark': '#254567',
-          'gray-secondary': '49475A',
+          'gray-secondary': '#49475A',
+          'bg-secondary': '#1A264A',
+          'bg-secondary-dark': '#121212',
+          'border-secondary': 'rgba(207, 207, 207, 0.1142)',
         },
       },
     },

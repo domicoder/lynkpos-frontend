@@ -14,6 +14,8 @@ export default {
 
         'blue-dark': '#254567',
         'gray-secondary': '#49475A',
+        'bg-secondary': '#1A264A',
+        'border-secondary': 'rgba(207, 207, 207, 0.1142)',
       },
       fontFamily: {
         'open-sans': ['Open Sans', 'sans-serif'],

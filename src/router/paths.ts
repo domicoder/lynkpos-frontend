@@ -13,6 +13,16 @@ export const ABOUT_VIEW = {
   path: '/about',
 };
 
+export const USERS_VIEW = {
+  name: 'Users',
+  path: '/users',
+};
+
+export const CASH_REGISTERS_VIEW = {
+  name: 'CashRegisters',
+  path: '/cash-registers',
+};
+
 export const PAGE_NOT_FOUND = {
   name: 'PageNotFound',
   path: '/:pathMatch(.*)*',

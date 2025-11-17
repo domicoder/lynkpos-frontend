@@ -1,8 +1,10 @@
 import {
   ABOUT_VIEW,
+  CASH_REGISTERS_VIEW,
   HOME_VIEW,
   LOGIN_VIEW,
   PAGE_NOT_FOUND,
+  USERS_VIEW,
 } from '@/router/paths';
 import { Role } from '@/domains/Role';
 import { loginBeforeEnter, requireAuth } from '@/services/auth';
@@ -11,6 +13,9 @@ import { loginBeforeEnter, requireAuth } from '@/services/auth';
 const LoginView = () => import('@/views/login/LoginView.vue');
 const HomeView = () => import('@/views/home/HomeView.vue');
 const AboutView = () => import('@/views/about/AboutView.vue');
+const UsersView = () => import('@/views/users/UsersView.vue');
+const CashRegistersView = () =>
+  import('@/views/cash-registers/CashRegisters.vue');
 const PageNotFound = () => import('@/views/not-found/PageNotFound.vue');
 
 const routes = [
@@ -35,6 +40,24 @@ const routes = [
   {
     ...ABOUT_VIEW,
     component: AboutView,
+    beforeEnter: requireAuth,
+    meta: {
+      requiresAuth: true,
+      rolesRequired: [Role.Admin, Role.User],
+    },
+  },
+  {
+    ...USERS_VIEW,
+    component: UsersView,
+    beforeEnter: requireAuth,
+    meta: {
+      requiresAuth: true,
+      rolesRequired: [Role.Admin, Role.User],
+    },
+  },
+  {
+    ...CASH_REGISTERS_VIEW,
+    component: CashRegistersView,
     beforeEnter: requireAuth,
     meta: {
       requiresAuth: true,

@@ -93,8 +93,15 @@
       "logout": "Logout"
     }
   },
+  "users": {
+    "title": "[Users View]"
+  },
+  "cashRegisters": {
+    "title": "[Cash Registers View]"
+  },
   "drawer": {
     "options": {
+      "home": "Home",
       "users": "Users",
       "cashRegisters": "Cash Registers",
       "logout": "Logout"

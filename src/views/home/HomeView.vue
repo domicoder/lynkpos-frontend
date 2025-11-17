@@ -1,34 +1,44 @@
 <script setup lang="ts">
-  import { LOGIN_VIEW } from '@/router/paths';
-  import useAuthStore from '@/stores/user/AuthStore';
-  import { useI18n } from 'vue-i18n';
-  import { useRouter } from 'vue-router';
-  import type { User, LoginToken } from '@/domains/User';
-
-  const authStore = useAuthStore();
-  const router = useRouter();
-  const { t } = useI18n();
-
-  const onLogout = () => {
-    authStore.setUserInfo({} as User);
-    authStore.setToken({} as LoginToken);
-
-    router.push({ name: LOGIN_VIEW.name });
-  };
+  import salesYearLogo from '@/assets/images/temp/resource-sample1.png';
+  import purchasesYearLogo from '@/assets/images/temp/resource-sample2.png';
+  import salesAndPurchasesYearLogo from '@/assets/images/temp/resource-sample3.png';
 </script>
 
 <template>
   <main class="home">
     <div>
-      <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-6 items-center justify-center">
-          <p>{{ t('home.title') }}</p>
-          <button
-            class="btn btn-ghost w-[108px] font-open-sans text-xs !py-2"
-            @click="onLogout"
-          >
-            {{ t('general.logout') }}
-          </button>
+      <div class="flex flex-col">
+        <div class="flex flex-col gap-6 h-full">
+          <div class="flex flex-col gap-6 justify-center font-semibold">
+            {{ $t('home.products') }}
+          </div>
+          <div class="flex flex-row gap-6">
+            <img
+              :src="salesYearLogo"
+              alt="sales year logo"
+              class="h-96 w-full object-cover md:h-full md:w-96"
+            />
+            <img
+              :src="purchasesYearLogo"
+              alt="purchases year logo"
+              class="h-96 w-full object-cover md:h-full md:w-96"
+            />
+          </div>
+          <div class="flex flex-col gap-6">
+            <img
+              :src="salesAndPurchasesYearLogo"
+              alt="sales and purchases year logo"
+              class="h-[790px] w-full object-cover md:h-full md:w-[790px]"
+            />
+          </div>
+          <div class="flex flex-col gap-6 items-end justify-center">
+            <span>{{
+              $t('general.copyright', {
+                year: new Date().getFullYear(),
+                appName: $t('general.appNameOnly'),
+              })
+            }}</span>
+          </div>
         </div>
       </div>
     </div>

@@ -10,7 +10,8 @@
     "Close": "Cerrar",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
-    "backHome": "Ir a Inicio"
+    "backHome": "Ir a Inicio",
+    "copyright": "© {year} {appName} - Sistema de Punto de Venta e Inventario. Todos los derechos reservados."
   },
   "error": {
     "pageNotFound": {
@@ -25,10 +26,18 @@
     "password": "Contraseña"
   },
   "home": {
-    "title": "[Vista de Inicio]"
+    "title": "[Vista de Inicio]",
+    "products": "ULTIMOS PRODUCTOS"
+  },
+  "users": {
+    "title": "[Vista de Usuarios]"
+  },
+  "cashRegisters": {
+    "title": "[Vista de Cajas]"
   },
   "drawer": {
     "options": {
+      "home": "Inicio",
       "users": "Usuarios",
       "cashRegisters": "Cajas",
       "logout": "Cerrar sesión"

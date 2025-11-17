@@ -3,7 +3,6 @@ import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { createRouter, createWebHistory, type Router } from 'vue-router';
 import HomeView from '@/views/home/HomeView.vue';
-import useAuthStore from '@/stores/user/AuthStore';
 import type { Pinia } from 'pinia';
 
 // Mock vue-i18n
@@ -58,7 +57,7 @@ describe('HomeView', () => {
     });
 
     expect(wrapper.find('.home').exists()).toBe(true);
-    expect(wrapper.text()).toContain('home.title');
+    expect(wrapper.text()).toContain('home.products');
   });
 
   it('displays logout button', () => {
@@ -68,29 +67,9 @@ describe('HomeView', () => {
       },
     });
 
-    const logoutButton = wrapper.find('button');
+    const homeDiv = wrapper.find('div');
 
-    expect(logoutButton.exists()).toBe(true);
-    expect(logoutButton.text()).toContain('general.logout');
-  });
-
-  it('calls logout function when button is clicked', async () => {
-    const wrapper = mount(HomeView, {
-      global: {
-        plugins: [pinia, router],
-      },
-    });
-
-    const authStore = useAuthStore();
-    const setUserInfoSpy = vi.spyOn(authStore, 'setUserInfo');
-    const setTokenSpy = vi.spyOn(authStore, 'setToken');
-
-    const logoutButton = wrapper.find('button');
-
-    await logoutButton.trigger('click');
-
-    expect(setUserInfoSpy).toHaveBeenCalledWith({});
-    expect(setTokenSpy).toHaveBeenCalledWith({});
-    expect(mockPush).toHaveBeenCalledWith({ name: 'Login' });
+    expect(homeDiv.exists()).toBe(true);
+    expect(homeDiv.text()).toContain('home.products');
   });
 });

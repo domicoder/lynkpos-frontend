@@ -2,16 +2,44 @@
   import sidebarMenu from '@/components/shared/sidebar-menu/sidebarMenu';
   import drawerLogoBlack from '@/assets/images/lynkpos-drawer-logo-black.png';
   import drawerLogoWhite from '@/assets/images/lynkpos-drawer-logo-white.png';
+  import type { LoginToken, User } from '@/domains/User';
+  import useAuthStore from '@/stores/user/AuthStore';
+  import {
+    CASH_REGISTERS_VIEW,
+    HOME_VIEW,
+    LOGIN_VIEW,
+    USERS_VIEW,
+  } from '@/router/paths';
+  import { useRouter } from 'vue-router';
+  import { computed } from 'vue';
 
   type Props = {
     isLightTheme: boolean;
   };
+
+  const authStore = useAuthStore();
+  const router = useRouter();
 
   const props = defineProps<Props>();
 
   const toggleSidebar = defineModel<boolean>('toggleSidebar');
 
   const { drawerLogoAlt } = sidebarMenu(props);
+
+  const onLogout = () => {
+    authStore.setUserInfo({} as User);
+    authStore.setToken({} as LoginToken);
+
+    router.push({ name: LOGIN_VIEW.name });
+  };
+
+  const currentRoute = computed(() => router.currentRoute.value.name);
+
+  const isHomeRoute = computed(() => currentRoute.value === HOME_VIEW.name);
+  const isUsersRoute = computed(() => currentRoute.value === USERS_VIEW.name);
+  const isCashRegistersRoute = computed(
+    () => currentRoute.value === CASH_REGISTERS_VIEW.name,
+  );
 </script>
 
 <template>
@@ -43,15 +71,41 @@
       nav
     >
       <v-list-item
+        :active="isHomeRoute"
+        active-class="active-link"
+        prepend-icon="mdi-home"
+        :title="$t('drawer.options.home')"
+        value="home"
+        @click="router.push({ name: HOME_VIEW.name })"
+      />
+      <v-list-item
+        :active="isUsersRoute"
+        active-class="active-link"
         prepend-icon="mdi-account-group-outline"
         :title="$t('drawer.options.users')"
         value="users"
+        @click="router.push({ name: USERS_VIEW.name })"
       />
       <v-list-item
+        :active="isCashRegistersRoute"
+        active-class="active-link"
         prepend-icon="mdi-cash-lock"
         :title="$t('drawer.options.cashRegisters')"
         value="cashRegisters"
+        @click="router.push({ name: CASH_REGISTERS_VIEW.name })"
+      />
+      <v-list-item
+        prepend-icon="mdi-logout"
+        :title="$t('drawer.options.logout')"
+        value="logout"
+        @click="onLogout"
       />
     </v-list>
   </v-navigation-drawer>
 </template>
+
+<style scoped>
+  .active-link {
+    background-color: var(--active-link);
+  }
+</style>

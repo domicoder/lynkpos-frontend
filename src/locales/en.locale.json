@@ -10,7 +10,8 @@
     "Close": "Close",
     "login": "Log In",
     "logout": "Log Out",
-    "backHome": "Back Home"
+    "backHome": "Back Home",
+    "copyright": "© {year} {appName} - Point of Sale and Inventory System. All rights reserved."
   },
   "error": {
     "pageNotFound": {
@@ -27,8 +28,15 @@
   "home": {
     "title": "[Home View]"
   },
+  "users": {
+    "title": "[Users View]"
+  },
+  "cashRegisters": {
+    "title": "[Cash Registers View]"
+  },
   "drawer": {
     "options": {
+      "home": "Home",
       "users": "Users",
       "cashRegisters": "Cash Registers",
       "logout": "Logout"

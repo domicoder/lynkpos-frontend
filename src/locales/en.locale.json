@@ -26,7 +26,8 @@
     "password": "Password"
   },
   "home": {
-    "title": "[Home View]"
+    "title": "[Home View]",
+    "products": "LAST PRODUCTS"
   },
   "users": {
     "title": "[Users View]"

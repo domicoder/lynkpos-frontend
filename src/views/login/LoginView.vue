@@ -22,6 +22,28 @@
 
   const handleLogin = async () => {
     try {
+      const token = {
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRjMjI1MThjLTAwMDktNDA1MC1lMmM5LTA4ZGUxZTMyYThmMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE3NjM5OTI1NjQsImlzcyI6InB1bnRvX3ZlbnRhIiwiYXVkIjoidXNlciJ9.A7nrbaLWE64n3cYr2IhEUCjMTaFVTP0A4oI6_mZNd5E',
+      };
+      const userInfo = {
+        id: '4c22518c-0009-4050-e2c9-08de1e32a8f1',
+        nombre: 'Pipo Dinatale',
+        usuarioNombre: 'pipo',
+        rol: {
+          id: 1,
+          nombre: 'ADMIN',
+        },
+      };
+
+      authStore.setToken(token as LoginToken);
+      authStore.setUserInfo(userInfo as User);
+
+      router.push({ name: HOME_VIEW.name });
+
+      return;
+
+      // TODO: hardcode until the backend is ready (API LiveDemo)
       const response = await loginAuth({
         usuarioNombre: username.value,
         password: password.value,

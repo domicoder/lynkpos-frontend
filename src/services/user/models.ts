@@ -28,5 +28,8 @@ export type CreateUserInputShape = {
 };
 
 export type CreateUserOutputShape = {
-  id: string;
+  status: number;
+  data: {
+    id: string;
+  };
 };

@@ -1,19 +1,20 @@
 <script setup lang="ts">
   import { lightTheme } from '@/constants/theme';
   import useGlobalStore from '@/stores/GlobalStore';
+  import useSnackbarStore from '@/stores/SnackbarStore';
   import { computed, ref, onMounted, onUnmounted } from 'vue';
   import { useResponsiveness } from '@/composables/useResponsiveness';
   import SidebarMenu from '@/components/shared/sidebar-menu/SidebarMenu.vue';
   import Navbar from '@/components/Navbar.vue';
 
   const globalStore = useGlobalStore();
+  const snackbarStore = useSnackbarStore();
   const { handleMountedResize, handleUnmountedResize } = useResponsiveness();
 
-  const currentTheme = computed(() => globalStore.getDocumentTheme);
-
-  const isLightTheme = computed(() => currentTheme.value === lightTheme);
-
   const drawer = ref(false);
+
+  const currentTheme = computed(() => globalStore.getDocumentTheme);
+  const isLightTheme = computed(() => currentTheme.value === lightTheme);
 
   onMounted(() => {
     handleMountedResize();
@@ -43,7 +44,25 @@
       </v-main>
     </v-app>
   </v-responsive>
-  <!-- ToastGroup -->
+
+  <!-- Global Snackbar -->
+  <v-snackbar
+    v-model="snackbarStore.show"
+    :color="snackbarStore.color"
+    :timeout="snackbarStore.timeout"
+    location="top"
+  >
+    {{ snackbarStore.message }}
+    <template #actions>
+      <v-btn
+        variant="text"
+        @click="snackbarStore.hide()"
+      >
+        {{ $t('general.close') }}
+      </v-btn>
+    </template>
+  </v-snackbar>
+
   <!-- ConfirmDialog -->
 </template>
 

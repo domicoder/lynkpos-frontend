@@ -1,3 +1,5 @@
+import type { UserTable } from '@/domains/User';
+
 export type LoginAuthInputShape = {
   usuarioNombre: string;
   password: string;
@@ -32,4 +34,18 @@ export type CreateUserOutputShape = {
   data: {
     id: string;
   };
+};
+
+export type PaginationShape = {
+  pages: number;
+  records: number;
+  currentPage: number;
+  prevPage: number;
+  nextPage: number;
+};
+
+export type GetUsersListOutputShape = {
+  pagination: PaginationShape;
+  data: UserTable[];
+  ok: boolean;
 };

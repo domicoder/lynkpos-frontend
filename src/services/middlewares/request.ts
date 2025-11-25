@@ -8,7 +8,7 @@ export const onRequest = (
   const token = authStore.getToken;
 
   if (authStore.isLoggedIn && token) {
-    config.headers!.Authorization = `Token ${token}`;
+    config.headers!.Authorization = `Bearer ${token}`;
   }
 
   return config;

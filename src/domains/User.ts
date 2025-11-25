@@ -25,3 +25,10 @@ export interface User {
     nombre: string;
   };
 }
+
+export interface UserTable {
+  id: string;
+  nombre: string;
+  usuarioNombre: string;
+  activo: boolean;
+}

@@ -50,9 +50,24 @@
     v-model="snackbarStore.show"
     :color="snackbarStore.color"
     :timeout="snackbarStore.timeout"
-    location="top"
+    location="bottom right"
   >
-    {{ snackbarStore.message }}
+    <div class="d-flex align-center gap-2">
+      <div
+        v-if="snackbarStore.isLoader"
+        class="loader"
+      >
+        <v-progress-circular
+          color="amber"
+          indeterminate="disable-shrink"
+          size="16"
+          width="2"
+        />
+      </div>
+      <div class="text-body-1">
+        {{ snackbarStore.message }}
+      </div>
+    </div>
     <template #actions>
       <v-btn
         variant="text"

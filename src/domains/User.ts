@@ -32,3 +32,17 @@ export interface UserTable {
   usuarioNombre: string;
   activo: boolean;
 }
+
+export interface NewUserForm {
+  usuarioNombre: string;
+  nombre: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface NewUserPayload {
+  usuarioNombre: string;
+  nombre: string;
+  password: string;
+  activo: boolean;
+}

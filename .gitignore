@@ -18,6 +18,9 @@ pids
 
 # dotenv environment variables file
 .env
+.env.production
+.env.test
+.env.development
 
 # Output of 'npm pack'
 *.tgz

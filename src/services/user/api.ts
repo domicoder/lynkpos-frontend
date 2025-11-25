@@ -6,6 +6,8 @@ import type {
   CreateUserInputShape,
   CreateUserOutputShape,
   GetUsersListOutputShape,
+  CreateCashRegisterInputShape,
+  CreateCashRegisterOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -44,4 +46,15 @@ async function getUsersList(
   return ApiClient.get<GetUsersListOutputShape>(url, config);
 }
 
-export { loginAuth, getUserInfo, getUsersList, createUser };
+async function createCashRegister(
+  input: CreateCashRegisterInputShape,
+): Promise<CreateCashRegisterOutputShape> {
+  const url = '/Caja/CreateOne/';
+
+  return ApiClient.post<
+    CreateCashRegisterInputShape,
+    CreateCashRegisterOutputShape
+  >(url, input);
+}
+
+export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister };

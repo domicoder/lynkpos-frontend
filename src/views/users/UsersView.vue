@@ -1,17 +1,20 @@
 <script setup lang="ts">
-  import { computed, onMounted, shallowRef } from 'vue';
+  import { computed, onMounted, ref, shallowRef } from 'vue';
   import type { DataTableHeader } from 'vuetify';
   import type { GetUsersListOutputShape } from '@/services/user';
-  import { getUsersList } from '@/services/user';
+  import { getUsersList, createUser } from '@/services/user';
   import { useSnackbar } from '@/composables/useSnackbar';
   import { useI18n } from 'vue-i18n';
+  import type { NewUserPayload } from '@/domains/User';
+  import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
 
   const { t } = useI18n();
-  const { error, showSnackbar, hasError } = useSnackbar();
+  const { error, showSnackbar, hasError, showGlobalLoading } = useSnackbar();
 
   const loading = shallowRef(false);
   const usersData = shallowRef<GetUsersListOutputShape>();
   const users = computed(() => usersData.value?.data ?? []);
+  const isAddUserModalOpen = ref(false);
 
   const headers = computed<Readonly<DataTableHeader[]>>(() => [
     { title: t('users.table.name'), key: 'nombre', align: 'start' },
@@ -51,9 +54,32 @@
     }
   };
 
-  const addUser = () => {
-    // TODO: Implement add user dialog/navigation
-    showSnackbar('Función en desarrollo', 'success');
+  const showAddUserModal = () => {
+    isAddUserModalOpen.value = true;
+  };
+
+  const handleCreateUser = async (user: NewUserPayload) => {
+    try {
+      showGlobalLoading(t('users.addUserModal.creatingUser'), true);
+
+      const response = await createUser(user);
+
+      if (response.status === 200) {
+        showSnackbar(t('users.userCreatedSuccessfully'), 'success');
+        isAddUserModalOpen.value = false;
+        fetchUsers();
+      } else {
+        throw new Error('Error al crear nuevo usuario');
+      }
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Error al crear nuevo usuario';
+
+      error.value = errorMessage;
+      showSnackbar(errorMessage, 'error');
+      // eslint-disable-next-line no-console
+      console.error('Error creating new user:', err);
+    }
   };
 
   onMounted(() => {
@@ -83,7 +109,7 @@
         :text="t('users.addUser')"
         variant="text"
         border
-        @click="addUser"
+        @click="showAddUserModal"
       />
     </div>
 
@@ -138,9 +164,10 @@
         </template>
       </v-data-table>
     </v-sheet>
+
+    <AddUserModal
+      v-model="isAddUserModalOpen"
+      @submit="handleCreateUser"
+    />
   </div>
 </template>
-
-<style scoped>
-  /* Component-specific styles can be added here */
-</style>

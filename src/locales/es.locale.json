@@ -29,6 +29,10 @@
     "title": "[Vista de Inicio]",
     "products": "ULTIMOS PRODUCTOS"
   },
+  "loading": {
+    "loading": "Cargando...",
+    "generalMessageLoading": "Solicitud en proceso... Espere por favor."
+  },
   "users": {
     "title": "[Vista de Usuarios]",
     "noUsersAvailable": "No hay usuarios disponibles",
@@ -41,7 +45,18 @@
     },
     "addUser": "Agregar Usuario",
     "refreshUsers": "Actualizar Usuarios",
-    "usersUpdatedSuccessfully": "Usuarios actualizados correctamente"
+    "usersUpdatedSuccessfully": "Usuarios actualizados correctamente",
+    "userCreatedSuccessfully": "Usuario creado correctamente",
+    "addUserModal": {
+      "title": "Crear usuario",
+      "username": "Usuario",
+      "name": "Nombre",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "create": "Crear usuario",
+      "cancel": "Cancelar",
+      "creatingUser": "Creando usuario... Espere por favor."
+    }
   },
   "cashRegisters": {
     "title": "[Vista de Cajas]"

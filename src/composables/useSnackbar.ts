@@ -1,6 +1,7 @@
 import { computed, ref } from 'vue';
 import { useSnackbarStore } from '@/stores/SnackbarStore';
 import type { SnackbarColor } from '@/stores/SnackbarStore';
+import { useI18n } from 'vue-i18n';
 
 /**
  * Composable for using the global snackbar
@@ -8,6 +9,7 @@ import type { SnackbarColor } from '@/stores/SnackbarStore';
  */
 export function useSnackbar() {
   const snackbarStore = useSnackbarStore();
+  const { t } = useI18n();
   const error = ref<string | null>(null);
 
   const showSnackbar = (
@@ -39,6 +41,13 @@ export function useSnackbar() {
     snackbarStore.hide();
   };
 
+  const showGlobalLoading = (
+    message: string = t('loading.generalMessageLoading'),
+    isLoader = false,
+  ) => {
+    snackbarStore.showSnackbar(message, 'primary-accent', -1, isLoader);
+  };
+
   const clearError = () => {
     error.value = null;
   };
@@ -52,6 +61,7 @@ export function useSnackbar() {
     showInfo,
     hideSnackbar,
     clearError,
+    showGlobalLoading,
 
     // State
     error,

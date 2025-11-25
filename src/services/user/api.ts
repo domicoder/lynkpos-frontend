@@ -5,6 +5,7 @@ import type {
   GetUserInfoOutputShape,
   CreateUserInputShape,
   CreateUserOutputShape,
+  GetUsersListOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -35,4 +36,12 @@ async function createUser(
   );
 }
 
-export { loginAuth, getUserInfo, createUser };
+async function getUsersList(
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<GetUsersListOutputShape>> {
+  const url = '/Usuario/GetList';
+
+  return ApiClient.get<GetUsersListOutputShape>(url, config);
+}
+
+export { loginAuth, getUserInfo, getUsersList, createUser };

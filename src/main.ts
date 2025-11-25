@@ -42,6 +42,7 @@ const vuetify = createVuetify({
         dark: false,
         colors: {
           'blue-dark': '#254567',
+          'primary-accent': '#4880ff',
           'gray-secondary': '#49475A',
           'bg-secondary': '#1A264A',
           'bg-secondary-dark': '#121212',
@@ -52,6 +53,7 @@ const vuetify = createVuetify({
         dark: true,
         colors: {
           'blue-dark': '#254567',
+          'primary-accent': '#4880ff',
           'gray-secondary': '#49475A',
           'bg-secondary': '#1A264A',
           'bg-secondary-dark': '#121212',

@@ -1,12 +1,18 @@
 import { defineStore } from 'pinia';
 
-export type SnackbarColor = 'success' | 'error' | 'warning' | 'info';
+export type SnackbarColor =
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'info'
+  | 'primary-accent';
 
 export interface SnackbarState {
   show: boolean;
   message: string;
   color: SnackbarColor;
   timeout: number;
+  isLoader?: boolean;
 }
 
 export const useSnackbarStore = defineStore('SnackbarStore', {
@@ -15,18 +21,25 @@ export const useSnackbarStore = defineStore('SnackbarStore', {
     message: '',
     color: 'success',
     timeout: 3000,
+    isLoader: false,
   }),
 
   actions: {
+    setIsLoader(isLoader: boolean) {
+      this.isLoader = isLoader;
+    },
+
     showSnackbar(
       message: string,
       color: SnackbarColor = 'success',
       timeout = 3000,
+      isLoader = false,
     ) {
       this.message = message;
       this.color = color;
       this.timeout = timeout;
       this.show = true;
+      this.isLoader = isLoader;
     },
 
     showSuccess(message: string, timeout = 3000) {
@@ -62,6 +75,7 @@ export const useSnackbarStore = defineStore('SnackbarStore', {
     getMessage: (state) => state.message,
     getColor: (state) => state.color,
     getTimeout: (state) => state.timeout,
+    getIsLoader: (state) => state.isLoader,
   },
 });
 

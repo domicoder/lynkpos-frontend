@@ -7,7 +7,7 @@
     "appDescription": "El sistema POS moderno, rápido y seguro para tu empresa.",
     "accept": "Aceptar",
     "cancel": "Cancelar",
-    "Close": "Cerrar",
+    "close": "Cerrar",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "backHome": "Ir a Inicio",
@@ -30,7 +30,18 @@
     "products": "ULTIMOS PRODUCTOS"
   },
   "users": {
-    "title": "[Vista de Usuarios]"
+    "title": "[Vista de Usuarios]",
+    "noUsersAvailable": "No hay usuarios disponibles",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "table": {
+      "name": "Nombre",
+      "username": "Usuario",
+      "active": "Activo"
+    },
+    "addUser": "Agregar Usuario",
+    "refreshUsers": "Actualizar Usuarios",
+    "usersUpdatedSuccessfully": "Usuarios actualizados correctamente"
   },
   "cashRegisters": {
     "title": "[Vista de Cajas]"

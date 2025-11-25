@@ -7,7 +7,7 @@
     "appDescription": "The modern POS system, fast and secure for your business.",
     "accept": "Accept",
     "cancel": "Cancel",
-    "Close": "Close",
+    "close": "Close",
     "login": "Log In",
     "logout": "Log Out",
     "backHome": "Back Home",
@@ -30,7 +30,18 @@
     "products": "LAST PRODUCTS"
   },
   "users": {
-    "title": "[Users View]"
+    "title": "[Users View]",
+    "noUsersAvailable": "No users available",
+    "active": "Active",
+    "inactive": "Inactive",
+    "table": {
+      "name": "Name",
+      "username": "Username",
+      "active": "Active"
+    },
+    "addUser": "Add User",
+    "refreshUsers": "Refresh Users",
+    "usersUpdatedSuccessfully": "Users updated successfully"
   },
   "cashRegisters": {
     "title": "[Cash Registers View]"

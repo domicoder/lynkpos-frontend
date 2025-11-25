@@ -49,3 +49,16 @@ export type GetUsersListOutputShape = {
   data: UserTable[];
   ok: boolean;
 };
+
+export type CreateCashRegisterInputShape = {
+  codigo: string;
+  nombre: string;
+  activo: boolean;
+};
+
+export type CreateCashRegisterOutputShape = {
+  status: number;
+  data: {
+    id: string;
+  };
+};

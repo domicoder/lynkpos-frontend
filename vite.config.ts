@@ -42,12 +42,9 @@ export default defineConfig(
         host: true,
         proxy: {
           '/api': {
-            // .NET API runs on localhost:5138 (http) or localhost:7192 (https)
-            // In Docker, use 'http://api:8080' (service name from docker-compose)
-            target: env.VITE_DEV_BACKEND_URL || 'http://localhost:5138',
+            target: (env.VITE_DEV_BACKEND_URL || 'http://server:8000') + '/api',
             changeOrigin: true,
-            // No rewrite needed - .NET API routes already include /api prefix
-            // Frontend: /api/Auth/GenerateToken -> Backend: /api/Auth/GenerateToken ✓
+            rewrite: (path: string) => path.replace(/^\/api/, ''),
           },
         },
       },

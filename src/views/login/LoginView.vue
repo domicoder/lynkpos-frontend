@@ -56,15 +56,13 @@
         return;
       }
 
-      // TODO: handle success flow
-      // i need to send the token in the headers of the request to the backend
-      const headers = {
-        Authorization: `Bearer ${response.data.token}`,
-      };
-
-      const userInfoResponse = await getUserInfo({ headers });
-
+      // Set token in store first - the Axios interceptor will automatically
+      // add the Authorization header to all subsequent requests
       authStore.setToken(response.data as LoginToken);
+
+      // Now getUserInfo will automatically have the Authorization header via interceptor
+      const userInfoResponse = await getUserInfo();
+
       authStore.setUserInfo(userInfoResponse.data as User);
 
       router.push({ name: HOME_VIEW.name });
@@ -74,7 +72,6 @@
       console.log('error', error);
       // eslint-disable-next-line no-alert
       alert('Error al iniciar sesión');
-      // eslint-disable-next-line no-console
       // TODO: handle error modal
     }
   };

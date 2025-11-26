@@ -25,3 +25,24 @@ export interface User {
     nombre: string;
   };
 }
+
+export interface UserTable {
+  id: string;
+  nombre: string;
+  usuarioNombre: string;
+  activo: boolean;
+}
+
+export interface NewUserForm {
+  usuarioNombre: string;
+  nombre: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface NewUserPayload {
+  usuarioNombre: string;
+  nombre: string;
+  password: string;
+  activo: boolean;
+}

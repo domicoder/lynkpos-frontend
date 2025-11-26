@@ -1,3 +1,5 @@
+import type { UserTable } from '@/domains/User';
+
 export type LoginAuthInputShape = {
   usuarioNombre: string;
   password: string;
@@ -28,6 +30,33 @@ export type CreateUserInputShape = {
 };
 
 export type CreateUserOutputShape = {
+  status: number;
+  data: {
+    id: string;
+  };
+};
+
+export type PaginationShape = {
+  pages: number;
+  records: number;
+  currentPage: number;
+  prevPage: number;
+  nextPage: number;
+};
+
+export type GetUsersListOutputShape = {
+  pagination: PaginationShape;
+  data: UserTable[];
+  ok: boolean;
+};
+
+export type CreateCashRegisterInputShape = {
+  codigo: string;
+  nombre: string;
+  activo: boolean;
+};
+
+export type CreateCashRegisterOutputShape = {
   status: number;
   data: {
     id: string;

@@ -196,6 +196,7 @@ The commitlint configuration file is located at `.commitlintrc.json`. It specifi
 'chore:    change settings (ex. deps)'
 'style:    update style without logic change'
 'revert:   revert commit'
+'hotfix:   revert commit'
 ```
 
 #### Examples

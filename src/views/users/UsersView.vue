@@ -113,18 +113,6 @@
       />
     </div>
 
-    <!-- Error Alert -->
-    <v-alert
-      v-if="hasError"
-      type="error"
-      variant="tonal"
-      closable
-      class="mb-4"
-      @click:close="error = null"
-    >
-      {{ error }}
-    </v-alert>
-
     <!-- Users Table -->
     <v-sheet
       border

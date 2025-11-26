@@ -21,6 +21,7 @@ export default {
         'add',
         'minus',
         'del',
+        'hotfix',
       ],
     ],
   },

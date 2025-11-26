@@ -14,6 +14,8 @@ import type {
   UpdateUserOutputShape,
   DeactivateUserByIdInputShape,
   DeactivateUserByIdOutputShape,
+  DeactiveCashRegisterInputShape,
+  DeactiveCashRegisterOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -100,6 +102,17 @@ async function deactivateUserById(
   >(url);
 }
 
+async function deactiveCashRegister(
+  input: DeactiveCashRegisterInputShape,
+): Promise<DeactiveCashRegisterOutputShape> {
+  const url = 'Caja/DeactiveById';
+
+  return ApiClient.post<
+    DeactiveCashRegisterInputShape,
+    DeactiveCashRegisterOutputShape
+  >(url, input);
+}
+
 export {
   loginAuth,
   getUserInfo,
@@ -109,4 +122,5 @@ export {
   deleteUser,
   updateUser,
   deactivateUserById,
+  deactiveCashRegister,
 };

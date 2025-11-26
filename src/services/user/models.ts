@@ -62,3 +62,12 @@ export type CreateCashRegisterOutputShape = {
     id: string;
   };
 };
+
+export type DeactiveCashRegisterInputShape = {
+  id: string;
+};
+
+export type DeactiveCashRegisterOutputShape = {
+  status: number;
+  ok: boolean;
+};

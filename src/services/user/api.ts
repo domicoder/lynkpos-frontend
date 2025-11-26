@@ -8,6 +8,8 @@ import type {
   GetUsersListOutputShape,
   CreateCashRegisterInputShape,
   CreateCashRegisterOutputShape,
+  DeactiveCashRegisterInputShape,
+  DeactiveCashRegisterOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -57,4 +59,22 @@ async function createCashRegister(
   >(url, input);
 }
 
-export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister };
+async function deactiveCashRegister(
+  input: DeactiveCashRegisterInputShape,
+): Promise<DeactiveCashRegisterOutputShape> {
+  const url = 'Caja/DeactiveById';
+
+  return ApiClient.post<
+    DeactiveCashRegisterInputShape,
+    DeactiveCashRegisterOutputShape
+  >(url, input);
+}
+
+export {
+  loginAuth,
+  getUserInfo,
+  getUsersList,
+  createUser,
+  createCashRegister,
+  deactiveCashRegister,
+};

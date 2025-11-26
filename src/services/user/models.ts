@@ -103,3 +103,12 @@ export type DeactivateUserByIdOutputShape = {
     badMessage?: string;
   };
 };
+
+export type DeactiveCashRegisterInputShape = {
+  id: string;
+};
+
+export type DeactiveCashRegisterOutputShape = {
+  status: number;
+  ok: boolean;
+};

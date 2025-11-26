@@ -10,7 +10,9 @@ class ApiService {
   private static init: boolean;
 
   private constructor() {
-    const baseURL = `${window.location.protocol}//${window.location.host}/api`;
+    const baseURL =
+      (`${import.meta.env.VITE_DEV_BACKEND_URL}` ||
+        `${window.location.protocol}//${window.location.host}`) + '/api';
 
     ApiService.session = axios.create({
       baseURL,

@@ -33,7 +33,8 @@
     "loading": "Cargando...",
     "generalMessageLoading": "Solicitud en proceso... Espere por favor."
   },
-  "users": {
+
+"users": {
     "title": "[Vista de Usuarios]",
     "noUsersAvailable": "No hay usuarios disponibles",
     "active": "Activo",
@@ -47,6 +48,10 @@
     "refreshUsers": "Actualizar Usuarios",
     "usersUpdatedSuccessfully": "Usuarios actualizados correctamente",
     "userCreatedSuccessfully": "Usuario creado correctamente",
+    "userUpdatedSuccessfully": "Usuario actualizado correctamente",
+    "confirmDelete": "¿Está seguro de eliminar este usuario?",
+    "deletingUser": "Eliminando usuario... Espere por favor.",
+    "userDeletedSuccessfully": "Usuario eliminado correctamente",
     "addUserModal": {
       "title": "Crear usuario",
       "username": "Usuario",
@@ -56,8 +61,20 @@
       "create": "Crear usuario",
       "cancel": "Cancelar",
       "creatingUser": "Creando usuario... Espere por favor."
+    },
+    "editUserModal": {
+      "title": "Editar usuario",
+      "username": "Usuario",
+      "name": "Nombre",
+      "newPassword": "Nueva contraseña (opcional)",
+      "confirmPassword": "Confirmar contraseña",
+      "passwordHint": "Dejar en blanco para mantener la contraseña actual",
+      "update": "Actualizar usuario",
+      "cancel": "Cancelar",
+      "updatingUser": "Actualizando usuario... Espere por favor."
     }
   },
+
   "cashRegisters": {
     "title": "[Vista de Cajas]"
   },

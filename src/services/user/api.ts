@@ -8,6 +8,8 @@ import type {
   GetUsersListOutputShape,
   CreateCashRegisterInputShape,
   CreateCashRegisterOutputShape,
+  DeleteUserInputShape,
+  DeleteUserOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -57,4 +59,15 @@ async function createCashRegister(
   >(url, input);
 }
 
-export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister };
+async function deleteUser(
+  input: DeleteUserInputShape,
+): Promise<AxiosResponse<DeleteUserOutputShape>> {
+  const url = `/Usuario/DeleteById?id=${input.id}`;
+
+  return ApiClient.post<DeleteUserOutputShape>(url);
+}
+
+
+export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister,deleteUser };
+
+

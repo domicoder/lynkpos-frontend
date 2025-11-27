@@ -10,6 +10,8 @@ import type {
   CreateCashRegisterOutputShape,
   DeleteUserInputShape,
   DeleteUserOutputShape,
+  UpdateUserInputShape,
+  UpdateUserOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
@@ -67,7 +69,21 @@ async function deleteUser(
   return ApiClient.post<DeleteUserOutputShape>(url);
 }
 
+async function updateUser(
+  input: UpdateUserInputShape,
+): Promise<AxiosResponse<UpdateUserOutputShape>> {
+  const url = `/Usuario/EditOne?id=${input.id}`;
+  const { id, ...dataToUpdate } = input;
+  
+  return ApiClient.post<UpdateUserOutputShape>(url, dataToUpdate);
+}
 
-export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister,deleteUser };
-
-
+export { 
+  loginAuth, 
+  getUserInfo, 
+  getUsersList, 
+  createUser, 
+  createCashRegister, 
+  deleteUser, 
+  updateUser 
+};

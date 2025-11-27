@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, shallowRef } from 'vue';
 import type { DataTableHeader } from 'vuetify';
-import type { GetUsersListOutputShape } from '@/services/user';
-import { getUsersList, createUser, deleteUser } from '@/services/user';
+import type { GetUsersListOutputShape, UpdateUserInputShape } from '@/services/user';
+import { getUsersList, createUser, deleteUser, updateUser } from '@/services/user';
 import { useSnackbar } from '@/composables/useSnackbar';
 import { useI18n } from 'vue-i18n';
-import type { NewUserPayload } from '@/domains/User';
+import type { NewUserPayload, UserTable } from '@/domains/User';
 import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
+import EditUserModal from '@/components/shared/modals/EditUserModal.vue';
 
 const { t } = useI18n();
 const { error, showSnackbar, hasError, showGlobalLoading, hideSnackbar } =
@@ -17,12 +18,14 @@ const usersData = shallowRef<GetUsersListOutputShape>();
 const users = computed(() => usersData.value?.data ?? []);
 
 const isAddUserModalOpen = ref(false);
+const isEditUserModalOpen = ref(false);
+const selectedUser = ref<UserTable | null>(null);
 
 const headers = computed<Readonly<DataTableHeader[]>>(() => [
   { title: t('users.table.name'), key: 'nombre', align: 'start' },
   { title: t('users.table.username'), key: 'usuarioNombre', align: 'start' },
   { title: t('users.table.active'), key: 'activo', align: 'center' },
-  { title: t('users.table.actions'), key: 'actions', align: 'center' },
+  { title: t('users.table.actions'), key: 'actions', align: 'center', sortable: false },
 ]);
 
 const fetchUsers = async () => {
@@ -60,20 +63,28 @@ const showAddUserModal = () => {
   isAddUserModalOpen.value = true;
 };
 
+const showEditUserModal = (user: UserTable) => {
+  selectedUser.value = user;
+  isEditUserModalOpen.value = true;
+};
+
 const handleCreateUser = async (user: NewUserPayload) => {
   try {
     showGlobalLoading(t('users.addUserModal.creatingUser'), true);
 
     const response = await createUser(user);
 
+    hideSnackbar();
+
     if (response.status === 200) {
       showSnackbar(t('users.userCreatedSuccessfully'), 'success');
       isAddUserModalOpen.value = false;
-      fetchUsers();
+      await fetchUsers();
     } else {
       throw new Error('Error al crear nuevo usuario');
     }
   } catch (err) {
+    hideSnackbar();
     const errorMessage =
       err instanceof Error ? err.message : 'Error al crear nuevo usuario';
 
@@ -83,11 +94,38 @@ const handleCreateUser = async (user: NewUserPayload) => {
   }
 };
 
-onMounted(() => {
-  fetchUsers();
-});
+const handleUpdateUser = async (user: UpdateUserInputShape) => {
+  try {
+    showGlobalLoading(t('users.editUserModal.updatingUser'), true);
 
-// Función de eliminar usuario
+    const response = await updateUser(user);
+
+    hideSnackbar();
+
+    // Verificar la estructura de la respuesta
+    console.log('Update Response:', response);
+    console.log('Response data:', response.data);
+
+    // Verificar si la actualización fue exitosa (status 200)
+    if (response.status === 200) {
+      showSnackbar(t('users.userUpdatedSuccessfully'), 'success');
+      isEditUserModalOpen.value = false;
+      selectedUser.value = null;
+      await fetchUsers();
+    } else {
+      throw new Error('Error al actualizar usuario');
+    }
+  } catch (err) {
+    hideSnackbar();
+    const errorMessage =
+      err instanceof Error ? err.message : 'Error al actualizar usuario';
+
+    error.value = errorMessage;
+    showSnackbar(errorMessage, 'error');
+    console.error('Error updating user:', err);
+  }
+};
+
 const handleDeleteUser = async (userId: string) => {
   if (!confirm(t('users.confirmDelete'))) return;
 
@@ -98,11 +136,16 @@ const handleDeleteUser = async (userId: string) => {
 
     hideSnackbar();
 
-    if (response.status === 200 && response.data.deleted) {
+    // Verificar la estructura de la respuesta
+    console.log('Delete Response:', response);
+    console.log('Response data:', response.data);
+
+    // Verificar si la eliminación fue exitosa (status 200)
+    if (response.status === 200) {
       showSnackbar(t('users.userDeletedSuccessfully'), 'success');
       await fetchUsers();
     } else {
-      throw new Error(response.data.message || 'Error al eliminar usuario');
+      throw new Error('Error al eliminar usuario');
     }
   } catch (err) {
     hideSnackbar();
@@ -113,6 +156,15 @@ const handleDeleteUser = async (userId: string) => {
     console.error('Error deleting user:', err);
   }
 };
+
+const handleCancelEdit = () => {
+  selectedUser.value = null;
+  isEditUserModalOpen.value = false;
+};
+
+onMounted(() => {
+  fetchUsers();
+});
 </script>
 
 <template>
@@ -164,29 +216,50 @@ const handleDeleteUser = async (userId: string) => {
           </v-chip>
         </template>
 
-        <!--  botón de eliminar) -->
+        <!-- Acciones: Editar y Eliminar -->
         <template #item.actions="{ item }">
-          <v-btn
-            icon="mdi-delete"
-            color="red"
-            variant="text"
-            @click="handleDeleteUser(item.id)"
-          />
+          <div class="d-flex gap-2 justify-center">
+            <v-btn
+              icon="mdi-pencil"
+              color="primary"
+              variant="text"
+              size="small"
+              @click="showEditUserModal(item)"
+            />
+            <v-btn
+              icon="mdi-delete"
+              color="error"
+              variant="text"
+              size="small"
+              @click="handleDeleteUser(item.id)"
+            />
+          </div>
         </template>
 
         <template #no-data>
           <div class="text-center py-8">
-            <v-icon size="64" color="grey-lighten-1" icon="mdi-account-off-outline" />
+            <v-icon
+              size="64"
+              color="grey-lighten-1"
+              icon="mdi-account-off-outline"
+            />
             <p class="text-h6 text-grey mt-4">
               {{ $t('users.noUsersAvailable') }}
             </p>
           </div>
         </template>
-
       </v-data-table>
     </v-sheet>
 
     <!-- Modal Crear Usuario -->
     <AddUserModal v-model="isAddUserModalOpen" @submit="handleCreateUser" />
+
+    <!-- Modal Editar Usuario -->
+    <EditUserModal
+      v-model="isEditUserModalOpen"
+      :user="selectedUser"
+      @submit="handleUpdateUser"
+      @cancel="handleCancelEdit"
+    />
   </div>
 </template>

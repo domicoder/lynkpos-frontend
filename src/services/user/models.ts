@@ -62,3 +62,16 @@ export type CreateCashRegisterOutputShape = {
     id: string;
   };
 };
+// Input: Lo que envías al backend
+export type DeleteUserInputShape = {
+  id: string; // El ID del usuario a eliminar
+};
+
+// Output: Lo que el backend te devuelve
+export type DeleteUserOutputShape = {
+  status: number;        // Código HTTP (200, 404, etc.)
+  data: {
+    deleted: boolean;    // true si se eliminó correctamente
+    message?: string;    // Mensaje opcional del servidor
+  };
+};

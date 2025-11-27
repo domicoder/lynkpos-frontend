@@ -1,95 +1,123 @@
 <script setup lang="ts">
-  import { computed, onMounted, ref, shallowRef } from 'vue';
-  import type { DataTableHeader } from 'vuetify';
-  import type { GetUsersListOutputShape } from '@/services/user';
-  import { getUsersList, createUser } from '@/services/user';
-  import { useSnackbar } from '@/composables/useSnackbar';
-  import { useI18n } from 'vue-i18n';
-  import type { NewUserPayload } from '@/domains/User';
-  import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
+import { computed, onMounted, ref, shallowRef } from 'vue';
+import type { DataTableHeader } from 'vuetify';
+import type { GetUsersListOutputShape } from '@/services/user';
+import { getUsersList, createUser, deleteUser } from '@/services/user';
+import { useSnackbar } from '@/composables/useSnackbar';
+import { useI18n } from 'vue-i18n';
+import type { NewUserPayload } from '@/domains/User';
+import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
 
-  const { t } = useI18n();
-  const { error, showSnackbar, hasError, showGlobalLoading } = useSnackbar();
+const { t } = useI18n();
+const { error, showSnackbar, hasError, showGlobalLoading, hideSnackbar } =
+  useSnackbar();
 
-  const loading = shallowRef(false);
-  const usersData = shallowRef<GetUsersListOutputShape>();
-  const users = computed(() => usersData.value?.data ?? []);
-  const isAddUserModalOpen = ref(false);
+const loading = shallowRef(false);
+const usersData = shallowRef<GetUsersListOutputShape>();
+const users = computed(() => usersData.value?.data ?? []);
 
-  const headers = computed<Readonly<DataTableHeader[]>>(() => [
-    { title: t('users.table.name'), key: 'nombre', align: 'start' },
-    { title: t('users.table.username'), key: 'usuarioNombre', align: 'start' },
-    { title: t('users.table.active'), key: 'activo', align: 'center' },
-  ]);
+const isAddUserModalOpen = ref(false);
 
-  const fetchUsers = async () => {
-    loading.value = true;
-    error.value = null;
+const headers = computed<Readonly<DataTableHeader[]>>(() => [
+  { title: t('users.table.name'), key: 'nombre', align: 'start' },
+  { title: t('users.table.username'), key: 'usuarioNombre', align: 'start' },
+  { title: t('users.table.active'), key: 'activo', align: 'center' },
+  { title: t('users.table.actions'), key: 'actions', align: 'center' },
+]);
 
-    try {
-      const response = await getUsersList();
+const fetchUsers = async () => {
+  loading.value = true;
+  error.value = null;
 
-      if (response.data.ok) {
-        usersData.value = response.data;
-      } else {
-        throw new Error('Failed to fetch users');
-      }
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al cargar usuarios';
+  try {
+    const response = await getUsersList();
 
-      error.value = errorMessage;
-      showSnackbar(errorMessage, 'error');
-      // eslint-disable-next-line no-console
-      console.error('Error fetching users:', err);
-    } finally {
-      loading.value = false;
+    if (response.data.ok) {
+      usersData.value = response.data;
+    } else {
+      throw new Error('Failed to fetch users');
     }
-  };
+  } catch (err) {
+    const errorMessage =
+      err instanceof Error ? err.message : 'Error al cargar usuarios';
 
-  const refreshUsers = async () => {
-    await fetchUsers();
-    if (!hasError.value) {
-      showSnackbar(t('users.usersUpdatedSuccessfully'), 'success');
+    error.value = errorMessage;
+    showSnackbar(errorMessage, 'error');
+    console.error('Error fetching users:', err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const refreshUsers = async () => {
+  await fetchUsers();
+  if (!hasError.value) {
+    showSnackbar(t('users.usersUpdatedSuccessfully'), 'success');
+  }
+};
+
+const showAddUserModal = () => {
+  isAddUserModalOpen.value = true;
+};
+
+const handleCreateUser = async (user: NewUserPayload) => {
+  try {
+    showGlobalLoading(t('users.addUserModal.creatingUser'), true);
+
+    const response = await createUser(user);
+
+    if (response.status === 200) {
+      showSnackbar(t('users.userCreatedSuccessfully'), 'success');
+      isAddUserModalOpen.value = false;
+      fetchUsers();
+    } else {
+      throw new Error('Error al crear nuevo usuario');
     }
-  };
+  } catch (err) {
+    const errorMessage =
+      err instanceof Error ? err.message : 'Error al crear nuevo usuario';
 
-  const showAddUserModal = () => {
-    isAddUserModalOpen.value = true;
-  };
+    error.value = errorMessage;
+    showSnackbar(errorMessage, 'error');
+    console.error('Error creating new user:', err);
+  }
+};
 
-  const handleCreateUser = async (user: NewUserPayload) => {
-    try {
-      showGlobalLoading(t('users.addUserModal.creatingUser'), true);
+onMounted(() => {
+  fetchUsers();
+});
 
-      const response = await createUser(user);
+// Función de eliminar usuario
+const handleDeleteUser = async (userId: string) => {
+  if (!confirm(t('users.confirmDelete'))) return;
 
-      if (response.status === 200) {
-        showSnackbar(t('users.userCreatedSuccessfully'), 'success');
-        isAddUserModalOpen.value = false;
-        fetchUsers();
-      } else {
-        throw new Error('Error al crear nuevo usuario');
-      }
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al crear nuevo usuario';
+  try {
+    showGlobalLoading(t('users.deletingUser'), true);
 
-      error.value = errorMessage;
-      showSnackbar(errorMessage, 'error');
-      // eslint-disable-next-line no-console
-      console.error('Error creating new user:', err);
+    const response = await deleteUser({ id: userId });
+
+    hideSnackbar();
+
+    if (response.status === 200 && response.data.deleted) {
+      showSnackbar(t('users.userDeletedSuccessfully'), 'success');
+      await fetchUsers();
+    } else {
+      throw new Error(response.data.message || 'Error al eliminar usuario');
     }
-  };
+  } catch (err) {
+    hideSnackbar();
+    const errorMessage =
+      err instanceof Error ? err.message : 'Error al eliminar usuario';
 
-  onMounted(() => {
-    fetchUsers();
-  });
+    showSnackbar(errorMessage, 'error');
+    console.error('Error deleting user:', err);
+  }
+};
 </script>
 
 <template>
   <div>
-    <!-- Actions Bar -->
+    <!-- Actions -->
     <div class="mt-2 mb-4 d-flex gap-2">
       <v-btn
         :disabled="loading"
@@ -114,10 +142,7 @@
     </div>
 
     <!-- Users Table -->
-    <v-sheet
-      border
-      rounded
-    >
+    <v-sheet border rounded>
       <v-data-table
         :headers="headers"
         :items="users"
@@ -128,6 +153,7 @@
           <v-skeleton-loader type="table-row@10" />
         </template>
 
+        <!-- Estado Activo -->
         <template #item.activo="{ item }">
           <v-chip
             :color="item.activo ? 'success' : 'error'"
@@ -138,24 +164,29 @@
           </v-chip>
         </template>
 
+        <!--  botón de eliminar) -->
+        <template #item.actions="{ item }">
+          <v-btn
+            icon="mdi-delete"
+            color="red"
+            variant="text"
+            @click="handleDeleteUser(item.id)"
+          />
+        </template>
+
         <template #no-data>
           <div class="text-center py-8">
-            <v-icon
-              size="64"
-              color="grey-lighten-1"
-              icon="mdi-account-off-outline"
-            />
+            <v-icon size="64" color="grey-lighten-1" icon="mdi-account-off-outline" />
             <p class="text-h6 text-grey mt-4">
               {{ $t('users.noUsersAvailable') }}
             </p>
           </div>
         </template>
+
       </v-data-table>
     </v-sheet>
 
-    <AddUserModal
-      v-model="isAddUserModalOpen"
-      @submit="handleCreateUser"
-    />
+    <!-- Modal Crear Usuario -->
+    <AddUserModal v-model="isAddUserModalOpen" @submit="handleCreateUser" />
   </div>
 </template>

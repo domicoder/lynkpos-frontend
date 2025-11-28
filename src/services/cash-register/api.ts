@@ -4,7 +4,7 @@ import type {
   CreateCashRegisterOutputShape,
   DeactiveCashRegisterInputShape,
   DeactiveCashRegisterOutputShape,
-} from '@/services/user/models';
+} from '@/services/cash-register/models';
 
 async function createCashRegister(
   input: CreateCashRegisterInputShape,

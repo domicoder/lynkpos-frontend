@@ -46,3 +46,10 @@ export interface NewUserPayload {
   password: string;
   activo: boolean;
 }
+
+export interface UserResponse {
+  id: string;
+  nombre: string;
+  usuarioNombre: string;
+  activo: boolean;
+}

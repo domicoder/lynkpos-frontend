@@ -6,6 +6,7 @@
   import { useResponsiveness } from '@/composables/useResponsiveness';
   import SidebarMenu from '@/components/shared/sidebar-menu/SidebarMenu.vue';
   import Navbar from '@/components/Navbar.vue';
+  import ConfirmModal from '@/components/shared/modals/ConfirmModal.vue';
 
   const globalStore = useGlobalStore();
   const snackbarStore = useSnackbarStore();
@@ -15,6 +16,16 @@
 
   const currentTheme = computed(() => globalStore.getDocumentTheme);
   const isLightTheme = computed(() => currentTheme.value === lightTheme);
+
+  const isConfirmModalOpen = computed({
+    get: () => globalStore.getIsConfirmModalOpen,
+    set: (value: boolean) => globalStore.setIsConfirmModalOpen(value),
+  });
+
+  const confirmModalTitle = computed(() => globalStore.getConfirmModalTitle);
+  const confirmModalMessage = computed(
+    () => globalStore.getConfirmModalMessage,
+  );
 
   onMounted(() => {
     handleMountedResize();
@@ -78,7 +89,15 @@
     </template>
   </v-snackbar>
 
-  <!-- ConfirmDialog -->
+  <!-- ConfirmModal -->
+  <ConfirmModal
+    v-if="isConfirmModalOpen"
+    v-model="isConfirmModalOpen"
+    :title="confirmModalTitle"
+    :message="confirmModalMessage"
+    @success="globalStore.getHandleConfirm && globalStore.getHandleConfirm()"
+    @cancel="globalStore.getHandleCancel && globalStore.getHandleCancel()"
+  />
 </template>
 
 <style lang="scss" scoped></style>

@@ -22,27 +22,6 @@
 
   const handleLogin = async () => {
     try {
-      const token = {
-        token: 'fake_token',
-      };
-      const userInfo = {
-        id: '4c22518c-0009-4050-e2c9-08de1e32a8f1',
-        nombre: 'Pipo Dinatale',
-        usuarioNombre: 'pipo',
-        rol: {
-          id: 1,
-          nombre: 'ADMIN',
-        },
-      };
-
-      authStore.setToken(token as LoginToken);
-      authStore.setUserInfo(userInfo as User);
-
-      router.push({ name: HOME_VIEW.name });
-
-      return;
-
-      // TODO: hardcode until the backend is ready (API LiveDemo)
       const response = await loginAuth({
         usuarioNombre: username.value,
         password: password.value,
@@ -58,7 +37,7 @@
 
       // Set token in store first - the Axios interceptor will automatically
       // add the Authorization header to all subsequent requests
-      authStore.setToken(response.data.data as LoginToken);
+      authStore.setToken(response.data as LoginToken);
 
       // Now getUserInfo will automatically have the Authorization header via interceptor
       const userInfoResponse = await getUserInfo();

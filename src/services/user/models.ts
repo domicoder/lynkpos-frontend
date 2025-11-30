@@ -6,10 +6,7 @@ export type LoginAuthInputShape = {
 };
 
 export type LoginAuthOutputShape = {
-  status: number;
-  data: {
-    token: string;
-  };
+  token: string;
 };
 
 export type GetUserInfoOutputShape = {
@@ -30,10 +27,7 @@ export type CreateUserInputShape = {
 };
 
 export type CreateUserOutputShape = {
-  status: number;
-  data: {
-    id: string;
-  };
+  id: string;
 };
 
 export type PaginationShape = {
@@ -57,10 +51,7 @@ export type CreateCashRegisterInputShape = {
 };
 
 export type CreateCashRegisterOutputShape = {
-  status: number;
-  data: {
-    id: string;
-  };
+  id: string;
 };
 
 // Delete User Types
@@ -69,11 +60,8 @@ export type DeleteUserInputShape = {
 };
 
 export type DeleteUserOutputShape = {
-  status: number;
-  data: {
-    ok: boolean;
-    badMessage?: string;
-  };
+  ok: boolean;
+  badMessage?: string;
 };
 
 export type UpdateUserInputShape = {
@@ -85,11 +73,8 @@ export type UpdateUserInputShape = {
 };
 
 export type UpdateUserOutputShape = {
-  status: number;
-  data: {
-    ok: boolean;
-    badMessage?: string;
-  };
+  ok: boolean;
+  badMessage?: string;
 };
 
 export type DeactivateUserByIdInputShape = {
@@ -97,11 +82,8 @@ export type DeactivateUserByIdInputShape = {
 };
 
 export type DeactivateUserByIdOutputShape = {
-  status: number;
-  data: {
-    ok: boolean;
-    badMessage?: string;
-  };
+  ok: boolean;
+  badMessage?: string;
 };
 
 export type DeactiveCashRegisterInputShape = {

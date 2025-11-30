@@ -6,6 +6,7 @@ import type {
   CreateUserInputShape,
   CreateUserOutputShape,
   GetUsersListOutputShape,
+  GetUsersListInputShape,
   CreateCashRegisterInputShape,
   CreateCashRegisterOutputShape,
   DeleteUserInputShape,
@@ -30,7 +31,23 @@ async function getUserInfo(
 
   return ApiClient.get<GetUserInfoOutputShape>(url, config);
 }
+async function getUserList(
+  input: GetUsersListInputShape,
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<GetUsersListOutputShape>> {
+  const url = '/Usuario/GetList';
 
+  return ApiClient.get<GetUsersListOutputShape>(url, {
+    params: {
+      // OJO: mismos nombres que Swagger
+      UsuarioNombre: input.usuarioNombre || undefined,
+      Activo: input.activo ?? undefined,
+      Page: input.page,
+      PageSize: input.pageSize,
+    },
+    ...config,
+  });
+}
 async function createUser(
   input: CreateUserInputShape,
 ): Promise<CreateUserOutputShape> {
@@ -43,13 +60,24 @@ async function createUser(
 }
 
 async function getUsersList(
+  input: GetUsersListInputShape = {},
   config?: AxiosRequestConfig,
 ): Promise<AxiosResponse<GetUsersListOutputShape>> {
   const url = '/Usuario/GetList';
 
-  return ApiClient.get<GetUsersListOutputShape>(url, config);
-}
+  const page = input.page ?? 1;
+  const pageSize = input.pageSize ?? 10;
 
+  return ApiClient.get<GetUsersListOutputShape>(url, {
+    params: {
+      UsuarioNombre: input.usuarioNombre || undefined,
+      Activo: input.activo ?? undefined,
+      Page: page,
+      PageSize: pageSize,
+    },
+    ...config,
+  });
+}
 async function createCashRegister(
   input: CreateCashRegisterInputShape,
 ): Promise<CreateCashRegisterOutputShape> {
@@ -69,21 +97,22 @@ async function deleteUser(
   return ApiClient.post<DeleteUserOutputShape>(url);
 }
 
-async function updateUser(
-  input: UpdateUserInputShape,
-): Promise<AxiosResponse<UpdateUserOutputShape>> {
-  const url = `/Usuario/EditOne?id=${input.id}`;
-  const { id, ...dataToUpdate } = input;
-  
+async function updateUser({
+  id,
+  ...dataToUpdate
+}: UpdateUserInputShape): Promise<AxiosResponse<UpdateUserOutputShape>> {
+  const url = `/Usuario/EditOne?id=${id}`;
+
   return ApiClient.post<UpdateUserOutputShape>(url, dataToUpdate);
 }
 
-export { 
-  loginAuth, 
-  getUserInfo, 
-  getUsersList, 
-  createUser, 
-  createCashRegister, 
-  deleteUser, 
-  updateUser 
+export {
+  loginAuth,
+  getUserInfo,
+  getUsersList,
+  createUser,
+  createCashRegister,
+  deleteUser,
+  updateUser,
+  getUserList,
 };

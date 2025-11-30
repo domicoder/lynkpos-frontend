@@ -50,6 +50,13 @@ export type GetUsersListOutputShape = {
   ok: boolean;
 };
 
+export type GetUsersListInputShape = {
+  usuarioNombre?: string;
+  activo?: boolean;
+  page?: number;
+  pageSize?: number;
+};
+
 export type CreateCashRegisterInputShape = {
   codigo: string;
   nombre: string;

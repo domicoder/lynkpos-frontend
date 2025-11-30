@@ -104,12 +104,12 @@ async function deactivateUserById(
 
 async function deactiveCashRegister(
   input: DeactiveCashRegisterInputShape,
-): Promise<DeactiveCashRegisterOutputShape> {
+): Promise<AxiosResponse<DeactiveCashRegisterOutputShape>> {
   const url = 'Caja/DeactiveById';
 
   return ApiClient.post<
     DeactiveCashRegisterInputShape,
-    DeactiveCashRegisterOutputShape
+    AxiosResponse<DeactiveCashRegisterOutputShape>
   >(url, input);
 }
 

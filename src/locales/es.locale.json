@@ -5,6 +5,7 @@
     "appName": "LynkPOS",
     "welcome": "Bienvenido a LynkPOS",
     "appDescription": "El sistema POS moderno, rápido y seguro para tu empresa.",
+    "confirm": "Confirmar",
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "close": "Cerrar",
@@ -34,7 +35,7 @@
     "generalMessageLoading": "Solicitud en proceso... Espere por favor."
   },
 
-"users": {
+  "users": {
     "title": "[Vista de Usuarios]",
     "noUsersAvailable": "No hay usuarios disponibles",
     "active": "Activo",
@@ -42,16 +43,22 @@
     "table": {
       "name": "Nombre",
       "username": "Usuario",
-      "active": "Activo"
+      "active": "Activo",
+      "actions": "Acciones"
     },
     "addUser": "Agregar Usuario",
     "refreshUsers": "Actualizar Usuarios",
     "usersUpdatedSuccessfully": "Usuarios actualizados correctamente",
     "userCreatedSuccessfully": "Usuario creado correctamente",
     "userUpdatedSuccessfully": "Usuario actualizado correctamente",
-    "confirmDelete": "¿Está seguro de eliminar este usuario?",
-    "deletingUser": "Eliminando usuario... Espere por favor.",
-    "userDeletedSuccessfully": "Usuario eliminado correctamente",
+    "deleteUserModal": {
+      "title": "Eliminar usuario",
+      "message": "Este usuario se eliminará permanentemente. ¿Está seguro de querer continuar?",
+      "confirm": "Si, eliminar",
+      "cancel": "Cancelar",
+      "deletingUser": "Eliminando usuario... Espere por favor.",
+      "userDeletedSuccessfully": "Usuario eliminado correctamente"
+    },
     "addUserModal": {
       "title": "Crear usuario",
       "username": "Usuario",
@@ -71,7 +78,9 @@
       "passwordHint": "Dejar en blanco para mantener la contraseña actual",
       "update": "Actualizar usuario",
       "cancel": "Cancelar",
-      "updatingUser": "Actualizando usuario... Espere por favor."
+      "updatingUser": "Actualizando usuario... Espere por favor.",
+      "userStatusUpdatedSuccessfully": "Estado del usuario actualizado correctamente",
+      "updatingUserStatus": "Actualizando estado del usuario... Espere por favor."
     }
   },
 

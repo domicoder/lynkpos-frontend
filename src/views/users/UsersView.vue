@@ -1,86 +1,29 @@
 <script setup lang="ts">
-  import { computed, onMounted, ref, shallowRef } from 'vue';
-  import type { DataTableHeader } from 'vuetify';
-  import type { GetUsersListOutputShape } from '@/services/user';
-  import { getUsersList, createUser } from '@/services/user';
-  import { useSnackbar } from '@/composables/useSnackbar';
-  import { useI18n } from 'vue-i18n';
-  import type { NewUserPayload } from '@/domains/User';
+  import { onMounted } from 'vue';
   import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
+  import EditUserModal from '@/components/shared/modals/EditUserModal.vue';
+  import useUsers from '@/views/users/users';
+  import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
-  const { error, showSnackbar, hasError, showGlobalLoading } = useSnackbar();
 
-  const loading = shallowRef(false);
-  const usersData = shallowRef<GetUsersListOutputShape>();
-  const users = computed(() => usersData.value?.data ?? []);
-  const isAddUserModalOpen = ref(false);
-
-  const headers = computed<Readonly<DataTableHeader[]>>(() => [
-    { title: t('users.table.name'), key: 'nombre', align: 'start' },
-    { title: t('users.table.username'), key: 'usuarioNombre', align: 'start' },
-    { title: t('users.table.active'), key: 'activo', align: 'center' },
-  ]);
-
-  const fetchUsers = async () => {
-    loading.value = true;
-    error.value = null;
-
-    try {
-      const response = await getUsersList();
-
-      if (response.data.ok) {
-        usersData.value = response.data;
-      } else {
-        throw new Error('Failed to fetch users');
-      }
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al cargar usuarios';
-
-      error.value = errorMessage;
-      showSnackbar(errorMessage, 'error');
-      // eslint-disable-next-line no-console
-      console.error('Error fetching users:', err);
-    } finally {
-      loading.value = false;
-    }
-  };
-
-  const refreshUsers = async () => {
-    await fetchUsers();
-    if (!hasError.value) {
-      showSnackbar(t('users.usersUpdatedSuccessfully'), 'success');
-    }
-  };
-
-  const showAddUserModal = () => {
-    isAddUserModalOpen.value = true;
-  };
-
-  const handleCreateUser = async (user: NewUserPayload) => {
-    try {
-      showGlobalLoading(t('users.addUserModal.creatingUser'), true);
-
-      const response = await createUser(user);
-
-      if (response.status === 200) {
-        showSnackbar(t('users.userCreatedSuccessfully'), 'success');
-        isAddUserModalOpen.value = false;
-        fetchUsers();
-      } else {
-        throw new Error('Error al crear nuevo usuario');
-      }
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al crear nuevo usuario';
-
-      error.value = errorMessage;
-      showSnackbar(errorMessage, 'error');
-      // eslint-disable-next-line no-console
-      console.error('Error creating new user:', err);
-    }
-  };
+  const {
+    users,
+    loading,
+    headers,
+    fetchUsers,
+    refreshUsers,
+    selectedUser,
+    showAddUserModal,
+    showEditUserModal,
+    handleCreateUser,
+    handleUpdateUser,
+    showConfirmModal,
+    handleCancelEdit,
+    isAddUserModalOpen,
+    isEditUserModalOpen,
+    updateUserStatus,
+  } = useUsers();
 
   onMounted(() => {
     fetchUsers();
@@ -89,7 +32,6 @@
 
 <template>
   <div>
-    <!-- Actions Bar -->
     <div class="mt-2 mb-4 d-flex gap-2">
       <v-btn
         :disabled="loading"
@@ -113,7 +55,6 @@
       />
     </div>
 
-    <!-- Users Table -->
     <v-sheet
       border
       rounded
@@ -138,6 +79,31 @@
           </v-chip>
         </template>
 
+        <template #item.actions="{ item }">
+          <div class="d-flex gap-2 justify-center">
+            <v-btn
+              icon="mdi-pencil"
+              color="primary"
+              variant="text"
+              size="small"
+              @click="showEditUserModal(item)"
+            />
+            <v-btn
+              icon="mdi-delete"
+              color="error"
+              variant="text"
+              size="small"
+              @click="
+                showConfirmModal(
+                  t('users.deleteUserModal.title'),
+                  t('users.deleteUserModal.message'),
+                  item.id,
+                )
+              "
+            />
+          </div>
+        </template>
+
         <template #no-data>
           <div class="text-center py-8">
             <v-icon
@@ -156,6 +122,14 @@
     <AddUserModal
       v-model="isAddUserModalOpen"
       @submit="handleCreateUser"
+    />
+
+    <EditUserModal
+      v-model="isEditUserModalOpen"
+      :user="selectedUser"
+      @submit="handleUpdateUser"
+      @cancel="handleCancelEdit"
+      @update-user-status="updateUserStatus"
     />
   </div>
 </template>

@@ -24,7 +24,7 @@
     :max-width="maxWidth"
     :persistent="persistent"
   >
-    <v-card>
+    <v-card class="pa-2">
       <!-- title -->
       <v-card-title class="text-h6">
         <slot name="title">

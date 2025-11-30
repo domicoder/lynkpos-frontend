@@ -8,15 +8,26 @@ import type {
   GetUsersListOutputShape,
   CreateCashRegisterInputShape,
   CreateCashRegisterOutputShape,
+  DeleteUserInputShape,
+  DeleteUserOutputShape,
+  UpdateUserInputShape,
+  UpdateUserOutputShape,
+  DeactivateUserByIdInputShape,
+  DeactivateUserByIdOutputShape,
+  DeactiveCashRegisterInputShape,
+  DeactiveCashRegisterOutputShape,
 } from '@/services/user/models';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 async function loginAuth(
   input: LoginAuthInputShape,
-): Promise<LoginAuthOutputShape> {
+): Promise<AxiosResponse<LoginAuthOutputShape>> {
   const url = '/Auth/GenerateToken/';
 
-  return ApiClient.post<LoginAuthInputShape, LoginAuthOutputShape>(url, input);
+  return ApiClient.post<
+    LoginAuthInputShape,
+    AxiosResponse<LoginAuthOutputShape>
+  >(url, input);
 }
 
 async function getUserInfo(
@@ -29,13 +40,13 @@ async function getUserInfo(
 
 async function createUser(
   input: CreateUserInputShape,
-): Promise<CreateUserOutputShape> {
+): Promise<AxiosResponse<CreateUserOutputShape>> {
   const url = '/Usuario/CreateOne/';
 
-  return ApiClient.post<CreateUserInputShape, CreateUserOutputShape>(
-    url,
-    input,
-  );
+  return ApiClient.post<
+    CreateUserInputShape,
+    AxiosResponse<CreateUserOutputShape>
+  >(url, input);
 }
 
 async function getUsersList(
@@ -48,13 +59,68 @@ async function getUsersList(
 
 async function createCashRegister(
   input: CreateCashRegisterInputShape,
-): Promise<CreateCashRegisterOutputShape> {
+): Promise<AxiosResponse<CreateCashRegisterOutputShape>> {
   const url = '/Caja/CreateOne/';
 
   return ApiClient.post<
     CreateCashRegisterInputShape,
-    CreateCashRegisterOutputShape
+    AxiosResponse<CreateCashRegisterOutputShape>
   >(url, input);
 }
 
-export { loginAuth, getUserInfo, getUsersList, createUser, createCashRegister };
+async function deleteUser(
+  input: DeleteUserInputShape,
+): Promise<AxiosResponse<DeleteUserOutputShape>> {
+  const url = `/Usuario/DeleteById?id=${input.id}`;
+
+  return ApiClient.post<
+    DeleteUserInputShape,
+    AxiosResponse<DeleteUserOutputShape>
+  >(url);
+}
+
+async function updateUser(
+  input: UpdateUserInputShape,
+): Promise<AxiosResponse<UpdateUserOutputShape>> {
+  const url = `/Usuario/EditOne?id=${input.id}`;
+  const { ...dataToUpdate } = input;
+
+  return ApiClient.post<
+    UpdateUserInputShape,
+    AxiosResponse<UpdateUserOutputShape>
+  >(url, dataToUpdate);
+}
+
+async function deactivateUserById(
+  input: DeactivateUserByIdInputShape,
+): Promise<AxiosResponse<DeactivateUserByIdOutputShape>> {
+  const url = `/Usuario/DeactiveById?id=${input.id}`;
+
+  return ApiClient.post<
+    DeactivateUserByIdInputShape,
+    AxiosResponse<DeactivateUserByIdOutputShape>
+  >(url);
+}
+
+async function deactiveCashRegister(
+  input: DeactiveCashRegisterInputShape,
+): Promise<AxiosResponse<DeactiveCashRegisterOutputShape>> {
+  const url = 'Caja/DeactiveById';
+
+  return ApiClient.post<
+    DeactiveCashRegisterInputShape,
+    AxiosResponse<DeactiveCashRegisterOutputShape>
+  >(url, input);
+}
+
+export {
+  loginAuth,
+  getUserInfo,
+  getUsersList,
+  createUser,
+  createCashRegister,
+  deleteUser,
+  updateUser,
+  deactivateUserById,
+  deactiveCashRegister,
+};

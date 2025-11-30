@@ -6,10 +6,7 @@ export type LoginAuthInputShape = {
 };
 
 export type LoginAuthOutputShape = {
-  status: number;
-  data: {
-    token: string;
-  };
+  token: string;
 };
 
 export type GetUserInfoOutputShape = {
@@ -30,10 +27,7 @@ export type CreateUserInputShape = {
 };
 
 export type CreateUserOutputShape = {
-  status: number;
-  data: {
-    id: string;
-  };
+  id: string;
 };
 
 export type PaginationShape = {
@@ -57,8 +51,46 @@ export type CreateCashRegisterInputShape = {
 };
 
 export type CreateCashRegisterOutputShape = {
+  id: string;
+};
+
+// Delete User Types
+export type DeleteUserInputShape = {
+  id: string;
+};
+
+export type DeleteUserOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};
+
+export type UpdateUserInputShape = {
+  id: string;
+  nombre?: string;
+  usuarioNombre?: string;
+  password?: string;
+  activo?: boolean;
+};
+
+export type UpdateUserOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};
+
+export type DeactivateUserByIdInputShape = {
+  id: string;
+};
+
+export type DeactivateUserByIdOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};
+
+export type DeactiveCashRegisterInputShape = {
+  id: string;
+};
+
+export type DeactiveCashRegisterOutputShape = {
   status: number;
-  data: {
-    id: string;
-  };
+  ok: boolean;
 };

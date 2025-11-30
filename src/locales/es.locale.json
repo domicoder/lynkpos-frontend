@@ -5,6 +5,7 @@
     "appName": "LynkPOS",
     "welcome": "Bienvenido a LynkPOS",
     "appDescription": "El sistema POS moderno, rápido y seguro para tu empresa.",
+    "confirm": "Confirmar",
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "close": "Cerrar",
@@ -23,7 +24,11 @@
   "login": {
     "title": "[Vista de inicio de sesión]",
     "username": "Usuario",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "modal": {
+      "titleError": "Error",
+      "messageError": "Ha ocurrido un error al iniciar sesión"
+    }
   },
   "home": {
     "title": "[Vista de Inicio]",
@@ -33,6 +38,7 @@
     "loading": "Cargando...",
     "generalMessageLoading": "Solicitud en proceso... Espere por favor."
   },
+
   "users": {
     "title": "[Vista de Usuarios]",
     "noUsersAvailable": "No hay usuarios disponibles",
@@ -41,12 +47,22 @@
     "table": {
       "name": "Nombre",
       "username": "Usuario",
-      "active": "Activo"
+      "active": "Activo",
+      "actions": "Acciones"
     },
     "addUser": "Agregar Usuario",
     "refreshUsers": "Actualizar Usuarios",
     "usersUpdatedSuccessfully": "Usuarios actualizados correctamente",
     "userCreatedSuccessfully": "Usuario creado correctamente",
+    "userUpdatedSuccessfully": "Usuario actualizado correctamente",
+    "deleteUserModal": {
+      "title": "Eliminar usuario",
+      "message": "Este usuario se eliminará permanentemente. ¿Está seguro de querer continuar?",
+      "confirm": "Si, eliminar",
+      "cancel": "Cancelar",
+      "deletingUser": "Eliminando usuario... Espere por favor.",
+      "userDeletedSuccessfully": "Usuario eliminado correctamente"
+    },
     "addUserModal": {
       "title": "Crear usuario",
       "username": "Usuario",
@@ -56,8 +72,22 @@
       "create": "Crear usuario",
       "cancel": "Cancelar",
       "creatingUser": "Creando usuario... Espere por favor."
+    },
+    "editUserModal": {
+      "title": "Editar usuario",
+      "username": "Usuario",
+      "name": "Nombre",
+      "newPassword": "Nueva contraseña (opcional)",
+      "confirmPassword": "Confirmar contraseña",
+      "passwordHint": "Dejar en blanco para mantener la contraseña actual",
+      "update": "Actualizar usuario",
+      "cancel": "Cancelar",
+      "updatingUser": "Actualizando usuario... Espere por favor.",
+      "userStatusUpdatedSuccessfully": "Estado del usuario actualizado correctamente",
+      "updatingUserStatus": "Actualizando estado del usuario... Espere por favor."
     }
   },
+
   "cashRegisters": {
     "title": "[Vista de Cajas]"
   },

@@ -1,20 +1,31 @@
 <!-- eslint-disable no-unreachable -->
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import type { LoginToken, User } from '@/domains/User';
   import { HOME_VIEW } from '@/router/paths';
   import { loginAuth, getUserInfo } from '@/services/user';
   import useAuthStore from '@/stores/user/AuthStore';
   import { useI18n } from 'vue-i18n';
   import { useRouter } from 'vue-router';
+  import useGlobalStore from '@/stores/GlobalStore';
+  import type { ModalAction } from '@/domains/modal/Actions';
+  import { Action } from '@/domains/modal/Actions';
 
   const authStore = useAuthStore();
   const router = useRouter();
   const { t } = useI18n();
+  const globalStore = useGlobalStore();
 
   const rules = {
     required: (value: string) => !!value || 'Campo requerido.',
   };
+
+  const confirmModalActions = computed<ModalAction[]>(() => [
+    {
+      label: t('general.accept'),
+      value: Action.Success,
+    },
+  ]);
 
   const showPassword = ref(false);
   const password = ref('');
@@ -45,14 +56,24 @@
       authStore.setUserInfo(userInfoResponse.data as User);
 
       router.push({ name: HOME_VIEW.name });
-    } catch (error) {
-      // TODO: handle error modal
-      // eslint-disable-next-line no-console
-      console.log('error', error);
-      // eslint-disable-next-line no-alert
-      alert('Error al iniciar sesión');
-      // TODO: handle error modal
+    } catch (err) {
+      // TODO: backend needs to handle a general error response
+      showLoginErrorModal(
+        t('login.modal.titleError'),
+        t('login.modal.messageError'),
+      );
     }
+  };
+
+  const showLoginErrorModal = (title: string, message: string) => {
+    globalStore.showConfirmModal(
+      true,
+      title,
+      message,
+      () => {},
+      () => {},
+      confirmModalActions.value,
+    );
   };
 </script>
 
@@ -93,7 +114,7 @@
                   :type="showPassword ? 'text' : 'password'"
                   placeholder="********"
                   :label="t('login.password')"
-                  name="input-10-1"
+                  name="password"
                   variant="outlined"
                   class="w-full"
                   autocomplete="new-password"

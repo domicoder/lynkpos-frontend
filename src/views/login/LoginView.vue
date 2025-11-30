@@ -37,7 +37,7 @@
 
       // Set token in store first - the Axios interceptor will automatically
       // add the Authorization header to all subsequent requests
-      authStore.setToken(response.data as LoginToken);
+      authStore.setToken(response.data.data as LoginToken);
 
       // Now getUserInfo will automatically have the Authorization header via interceptor
       const userInfoResponse = await getUserInfo();

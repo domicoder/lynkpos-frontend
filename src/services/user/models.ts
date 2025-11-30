@@ -69,12 +69,13 @@ export type DeleteUserInputShape = {
 };
 
 export type DeleteUserOutputShape = {
-  deleted?: boolean;
-  message?: string;
-  ok?: boolean;
+  status: number;
+  data: {
+    ok: boolean;
+    badMessage?: string;
+  };
 };
 
-// Update User Types
 export type UpdateUserInputShape = {
   id: string;
   nombre?: string;
@@ -84,7 +85,21 @@ export type UpdateUserInputShape = {
 };
 
 export type UpdateUserOutputShape = {
-  updated?: boolean;
-  message?: string;
-  ok?: boolean;
+  status: number;
+  data: {
+    ok: boolean;
+    badMessage?: string;
+  };
+};
+
+export type DeactivateUserByIdInputShape = {
+  id: string;
+};
+
+export type DeactivateUserByIdOutputShape = {
+  status: number;
+  data: {
+    ok: boolean;
+    badMessage?: string;
+  };
 };

@@ -1,175 +1,37 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, shallowRef } from 'vue';
-import type { DataTableHeader } from 'vuetify';
-import type { GetUsersListOutputShape, UpdateUserInputShape } from '@/services/user';
-import { getUsersList, createUser, deleteUser, updateUser } from '@/services/user';
-import { useSnackbar } from '@/composables/useSnackbar';
-import { useI18n } from 'vue-i18n';
-import type { NewUserPayload, UserTable } from '@/domains/User';
-import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
-import EditUserModal from '@/components/shared/modals/EditUserModal.vue';
+  import { onMounted } from 'vue';
+  import AddUserModal from '@/components/shared/modals/AddUserModal.vue';
+  import EditUserModal from '@/components/shared/modals/EditUserModal.vue';
+  import useUsers from '@/views/users/users';
+  import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n();
-const { error, showSnackbar, hasError, showGlobalLoading, hideSnackbar } =
-  useSnackbar();
+  const { t } = useI18n();
 
-const loading = shallowRef(false);
-const usersData = shallowRef<GetUsersListOutputShape>();
-const users = computed(() => usersData.value?.data ?? []);
+  const {
+    users,
+    loading,
+    headers,
+    fetchUsers,
+    refreshUsers,
+    selectedUser,
+    showAddUserModal,
+    showEditUserModal,
+    handleCreateUser,
+    handleUpdateUser,
+    showConfirmModal,
+    handleCancelEdit,
+    isAddUserModalOpen,
+    isEditUserModalOpen,
+    updateUserStatus,
+  } = useUsers();
 
-const isAddUserModalOpen = ref(false);
-const isEditUserModalOpen = ref(false);
-const selectedUser = ref<UserTable | null>(null);
-
-const headers = computed<Readonly<DataTableHeader[]>>(() => [
-  { title: t('users.table.name'), key: 'nombre', align: 'start' },
-  { title: t('users.table.username'), key: 'usuarioNombre', align: 'start' },
-  { title: t('users.table.active'), key: 'activo', align: 'center' },
-  { title: t('users.table.actions'), key: 'actions', align: 'center', sortable: false },
-]);
-
-const fetchUsers = async () => {
-  loading.value = true;
-  error.value = null;
-
-  try {
-    const response = await getUsersList();
-
-    if (response.data.ok) {
-      usersData.value = response.data;
-    } else {
-      throw new Error('Failed to fetch users');
-    }
-  } catch (err) {
-    const errorMessage =
-      err instanceof Error ? err.message : 'Error al cargar usuarios';
-
-    error.value = errorMessage;
-    showSnackbar(errorMessage, 'error');
-    console.error('Error fetching users:', err);
-  } finally {
-    loading.value = false;
-  }
-};
-
-const refreshUsers = async () => {
-  await fetchUsers();
-  if (!hasError.value) {
-    showSnackbar(t('users.usersUpdatedSuccessfully'), 'success');
-  }
-};
-
-const showAddUserModal = () => {
-  isAddUserModalOpen.value = true;
-};
-
-const showEditUserModal = (user: UserTable) => {
-  selectedUser.value = user;
-  isEditUserModalOpen.value = true;
-};
-
-const handleCreateUser = async (user: NewUserPayload) => {
-  try {
-    showGlobalLoading(t('users.addUserModal.creatingUser'), true);
-
-    const response = await createUser(user);
-
-    hideSnackbar();
-
-    if (response.status === 200) {
-      showSnackbar(t('users.userCreatedSuccessfully'), 'success');
-      isAddUserModalOpen.value = false;
-      await fetchUsers();
-    } else {
-      throw new Error('Error al crear nuevo usuario');
-    }
-  } catch (err) {
-    hideSnackbar();
-    const errorMessage =
-      err instanceof Error ? err.message : 'Error al crear nuevo usuario';
-
-    error.value = errorMessage;
-    showSnackbar(errorMessage, 'error');
-    console.error('Error creating new user:', err);
-  }
-};
-
-const handleUpdateUser = async (user: UpdateUserInputShape) => {
-  try {
-    showGlobalLoading(t('users.editUserModal.updatingUser'), true);
-
-    const response = await updateUser(user);
-
-    hideSnackbar();
-
-    // Verificar la estructura de la respuesta
-    console.log('Update Response:', response);
-    console.log('Response data:', response.data);
-
-    // Verificar si la actualización fue exitosa (status 200)
-    if (response.status === 200) {
-      showSnackbar(t('users.userUpdatedSuccessfully'), 'success');
-      isEditUserModalOpen.value = false;
-      selectedUser.value = null;
-      await fetchUsers();
-    } else {
-      throw new Error('Error al actualizar usuario');
-    }
-  } catch (err) {
-    hideSnackbar();
-    const errorMessage =
-      err instanceof Error ? err.message : 'Error al actualizar usuario';
-
-    error.value = errorMessage;
-    showSnackbar(errorMessage, 'error');
-    console.error('Error updating user:', err);
-  }
-};
-
-const handleDeleteUser = async (userId: string) => {
-  if (!confirm(t('users.confirmDelete'))) return;
-
-  try {
-    showGlobalLoading(t('users.deletingUser'), true);
-
-    const response = await deleteUser({ id: userId });
-
-    hideSnackbar();
-
-    // Verificar la estructura de la respuesta
-    console.log('Delete Response:', response);
-    console.log('Response data:', response.data);
-
-    // Verificar si la eliminación fue exitosa (status 200)
-    if (response.status === 200) {
-      showSnackbar(t('users.userDeletedSuccessfully'), 'success');
-      await fetchUsers();
-    } else {
-      throw new Error('Error al eliminar usuario');
-    }
-  } catch (err) {
-    hideSnackbar();
-    const errorMessage =
-      err instanceof Error ? err.message : 'Error al eliminar usuario';
-
-    showSnackbar(errorMessage, 'error');
-    console.error('Error deleting user:', err);
-  }
-};
-
-const handleCancelEdit = () => {
-  selectedUser.value = null;
-  isEditUserModalOpen.value = false;
-};
-
-onMounted(() => {
-  fetchUsers();
-});
+  onMounted(() => {
+    fetchUsers();
+  });
 </script>
 
 <template>
   <div>
-    <!-- Actions -->
     <div class="mt-2 mb-4 d-flex gap-2">
       <v-btn
         :disabled="loading"
@@ -193,8 +55,10 @@ onMounted(() => {
       />
     </div>
 
-    <!-- Users Table -->
-    <v-sheet border rounded>
+    <v-sheet
+      border
+      rounded
+    >
       <v-data-table
         :headers="headers"
         :items="users"
@@ -205,7 +69,6 @@ onMounted(() => {
           <v-skeleton-loader type="table-row@10" />
         </template>
 
-        <!-- Estado Activo -->
         <template #item.activo="{ item }">
           <v-chip
             :color="item.activo ? 'success' : 'error'"
@@ -216,7 +79,6 @@ onMounted(() => {
           </v-chip>
         </template>
 
-        <!-- Acciones: Editar y Eliminar -->
         <template #item.actions="{ item }">
           <div class="d-flex gap-2 justify-center">
             <v-btn
@@ -231,7 +93,13 @@ onMounted(() => {
               color="error"
               variant="text"
               size="small"
-              @click="handleDeleteUser(item.id)"
+              @click="
+                showConfirmModal(
+                  t('users.deleteUserModal.title'),
+                  t('users.deleteUserModal.message'),
+                  item.id,
+                )
+              "
             />
           </div>
         </template>
@@ -251,15 +119,17 @@ onMounted(() => {
       </v-data-table>
     </v-sheet>
 
-    <!-- Modal Crear Usuario -->
-    <AddUserModal v-model="isAddUserModalOpen" @submit="handleCreateUser" />
+    <AddUserModal
+      v-model="isAddUserModalOpen"
+      @submit="handleCreateUser"
+    />
 
-    <!-- Modal Editar Usuario -->
     <EditUserModal
       v-model="isEditUserModalOpen"
       :user="selectedUser"
       @submit="handleUpdateUser"
       @cancel="handleCancelEdit"
+      @update-user-status="updateUserStatus"
     />
   </div>
 </template>

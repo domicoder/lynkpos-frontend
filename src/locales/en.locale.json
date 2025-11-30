@@ -24,7 +24,11 @@
   "login": {
     "title": "[Login View]",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "modal": {
+      "titleError": "Error",
+      "messageError": "An error occurred while logging in"
+    }
   },
   "home": {
     "title": "[Home View]",

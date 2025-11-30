@@ -1,10 +1,16 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import BaseModal from '@/components/shared/modals/BaseModal.vue';
+  import type { ModalAction } from '@/domains/modal/Actions';
+  import { Action } from '@/domains/modal/Actions';
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
 
   interface Props {
     title: string;
     message: string;
+    actions?: ModalAction[];
   }
 
   const props = defineProps<Props>();
@@ -17,6 +23,23 @@
   }>();
 
   const isSubmitting = ref(false);
+
+  const defaultActions: ModalAction[] = [
+    {
+      label: t('general.accept'),
+      value: Action.Success,
+    },
+    {
+      label: t('general.cancel'),
+      value: Action.Cancel,
+    },
+  ];
+
+  const actions = computed(() => {
+    return props.actions && props.actions.length > 0
+      ? props.actions
+      : defaultActions;
+  });
 
   const onSubmit = async () => {
     if (isSubmitting.value) return;
@@ -53,21 +76,23 @@
 
     <template #actions>
       <v-btn
+        v-if="actions.some((action) => action.value === Action.Cancel)"
         variant="text"
         :disabled="isSubmitting"
         @click="handleCancel"
       >
-        {{ $t('general.cancel') }}
+        {{ actions.find((action) => action.value === Action.Cancel)?.label }}
       </v-btn>
 
       <v-btn
+        v-if="actions.some((action) => action.value === Action.Success)"
         color="primary"
         type="submit"
         :loading="isSubmitting"
         :disabled="isSubmitting"
         @click="onSubmit"
       >
-        {{ $t('general.confirm') }}
+        {{ actions.find((action) => action.value === Action.Success)?.label }}
       </v-btn>
     </template>
   </BaseModal>

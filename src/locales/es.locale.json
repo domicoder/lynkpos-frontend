@@ -24,7 +24,11 @@
   "login": {
     "title": "[Vista de inicio de sesión]",
     "username": "Usuario",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "modal": {
+      "titleError": "Error",
+      "messageError": "Ha ocurrido un error al iniciar sesión"
+    }
   },
   "home": {
     "title": "[Vista de Inicio]",

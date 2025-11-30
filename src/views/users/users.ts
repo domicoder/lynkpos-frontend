@@ -121,12 +121,14 @@ const useUsers = () => {
   };
 
   const showConfirmModal = (title: string, message: string, userId: string) => {
-    globalStore.setIsConfirmModalOpen(true);
-    globalStore.setConfirmModalTitle(title);
-    globalStore.setConfirmModalMessage(message);
+    globalStore.showConfirmModal(
+      true,
+      title,
+      message,
+      handleDeleteUser,
+      handleCancelDelete,
+    );
     userIdToDelete.value = userId;
-    globalStore.setHandleConfirm(handleDeleteUser);
-    globalStore.setHandleCancel(handleCancelDelete);
   };
 
   const handleDeleteUser = async () => {

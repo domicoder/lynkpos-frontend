@@ -26,6 +26,9 @@
   const confirmModalMessage = computed(
     () => globalStore.getConfirmModalMessage,
   );
+  const confirmModalActions = computed(
+    () => globalStore.getConfirmModalActions,
+  );
 
   onMounted(() => {
     handleMountedResize();
@@ -95,6 +98,7 @@
     v-model="isConfirmModalOpen"
     :title="confirmModalTitle"
     :message="confirmModalMessage"
+    :actions="confirmModalActions"
     @success="globalStore.getHandleConfirm && globalStore.getHandleConfirm()"
     @cancel="globalStore.getHandleCancel && globalStore.getHandleCancel()"
   />

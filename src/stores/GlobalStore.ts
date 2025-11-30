@@ -1,5 +1,6 @@
 import type { I18nLanguage, Theme } from '@/constants/theme';
 import { darkTheme, lightTheme } from '@/constants/theme';
+import type { ModalAction } from '@/domains/modal/Actions';
 import {
   changeDocumentTheme,
   getInitialLanguage,
@@ -19,6 +20,7 @@ const useGlobalStore = defineStore('GlobalStore', {
     confirmModalMessage: '',
     handleConfirm: () => {},
     handleCancel: () => {},
+    confirmModalActions: [] as ModalAction[],
   }),
 
   actions: {
@@ -59,12 +61,28 @@ const useGlobalStore = defineStore('GlobalStore', {
     setHandleCancel(handleCancel: () => void) {
       this.$state.handleCancel = handleCancel;
     },
+    showConfirmModal(
+      isConfirmModalOpen: boolean = true,
+      title: string,
+      message: string,
+      handleConfirm: () => void = () => {},
+      handleCancel: () => void = () => {},
+      actions?: ModalAction[],
+    ) {
+      this.$state.isConfirmModalOpen = isConfirmModalOpen;
+      this.$state.confirmModalTitle = title;
+      this.$state.confirmModalMessage = message;
+      this.$state.handleConfirm = handleConfirm;
+      this.$state.handleCancel = handleCancel;
+      this.$state.confirmModalActions = actions ?? [];
+    },
     clearConfirmModal() {
       this.$state.isConfirmModalOpen = false;
       this.$state.confirmModalTitle = '';
       this.$state.confirmModalMessage = '';
       this.$state.handleConfirm = () => {};
       this.$state.handleCancel = () => {};
+      this.$state.confirmModalActions = [];
     },
   },
   getters: {
@@ -75,6 +93,7 @@ const useGlobalStore = defineStore('GlobalStore', {
     getConfirmModalMessage: (state) => state.confirmModalMessage,
     getHandleConfirm: (state) => state.handleConfirm,
     getHandleCancel: (state) => state.handleCancel,
+    getConfirmModalActions: (state) => state.confirmModalActions,
   },
 });
 

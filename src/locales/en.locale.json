@@ -5,6 +5,7 @@
     "appName": "LynkPOS",
     "welcome": "Welcome to LynkPOS",
     "appDescription": "The modern POS system, fast and secure for your business.",
+    "confirm": "Confirm",
     "accept": "Accept",
     "cancel": "Cancel",
     "close": "Close",
@@ -41,16 +42,22 @@
     "table": {
       "name": "Name",
       "username": "Username",
-      "active": "Active"
+      "active": "Active",
+      "actions": "Actions"
     },
     "addUser": "Add User",
     "refreshUsers": "Refresh Users",
     "usersUpdatedSuccessfully": "Users updated successfully",
     "userCreatedSuccessfully": "User created successfully",
     "userUpdatedSuccessfully": "User updated successfully",
-    "confirmDelete": "Are you sure you want to delete this user?",
-    "deletingUser": "Deleting user... Please wait.",
-    "userDeletedSuccessfully": "User deleted successfully",
+    "deleteUserModal": {
+      "title": "Delete user",
+      "message": "This user will be deleted permanently. Are you sure you want to continue?",
+      "confirm": "Yes, delete",
+      "cancel": "Cancel",
+      "deletingUser": "Deleting user... Please wait.",
+      "userDeletedSuccessfully": "User deleted successfully"
+    },
     "addUserModal": {
       "title": "Create user",
       "username": "Username",
@@ -70,7 +77,9 @@
       "passwordHint": "Leave blank to keep current password",
       "update": "Update user",
       "cancel": "Cancel",
-      "updatingUser": "Updating user... Please wait."
+      "updatingUser": "Updating user... Please wait.",
+      "userStatusUpdatedSuccessfully": "User status updated successfully",
+      "updatingUserStatus": "Updating user status... Please wait."
     }
   },
   "cashRegisters": {

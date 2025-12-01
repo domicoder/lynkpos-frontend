@@ -4,7 +4,10 @@ import type {
   CreateCashRegisterOutputShape,
   DeactiveCashRegisterInputShape,
   DeactiveCashRegisterOutputShape,
+  OpenCashRegisterInputShape,
+  OpenCashRegisterOutputShape,
 } from '@/services/cash-register/models';
+import type { AxiosResponse } from 'axios';
 
 async function createCashRegister(
   input: CreateCashRegisterInputShape,
@@ -28,4 +31,15 @@ async function deactiveCashRegister(
   >(url, input);
 }
 
-export { createCashRegister, deactiveCashRegister };
+async function openCashRegister(
+  input: OpenCashRegisterInputShape,
+): Promise<AxiosResponse<OpenCashRegisterOutputShape>> {
+  const url = `/Caja/Open?id=${encodeURIComponent(input.id)}`;
+
+  return ApiClient.post<
+    { usuarioId: string },
+    AxiosResponse<OpenCashRegisterOutputShape>
+  >(url, { usuarioId: input.usuarioId });
+}
+
+export { createCashRegister, deactiveCashRegister, openCashRegister };

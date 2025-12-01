@@ -389,7 +389,7 @@
         usuarioId: userId.value,
       });
 
-      if (response.data.ok) {
+      if (response.ok) {
         openMessage.value = 'Cajero abierto correctamente';
         currentCash.value = {
           id: cashId.value,

@@ -21,3 +21,13 @@ export type DeactiveCashRegisterOutputShape = {
     ok: boolean;
   };
 };
+
+export interface OpenCashRegisterInputShape {
+  id: string;
+
+  usuarioId: string;
+}
+
+export interface OpenCashRegisterOutputShape {
+  ok: boolean;
+}

@@ -4,9 +4,14 @@ import type {
   CreateCashRegisterOutputShape,
   DeactiveCashRegisterInputShape,
   DeactiveCashRegisterOutputShape,
+  OpenCashRegisterInputShape,
+  OpenCashRegisterOutputShape,
 } from '@/services/cash-register/models';
 
-async function createCashRegister(
+/**
+ * Crear cajero
+ */
+export async function createCashRegister(
   input: CreateCashRegisterInputShape,
 ): Promise<CreateCashRegisterOutputShape> {
   const url = '/Caja/CreateOne/';
@@ -17,7 +22,27 @@ async function createCashRegister(
   >(url, input);
 }
 
-async function deactiveCashRegister(
+/**
+ * Abrir cajero
+ */
+export async function openCashRegister(
+  input: OpenCashRegisterInputShape,
+): Promise<OpenCashRegisterOutputShape> {
+  const url = `/Caja/Open?id=${encodeURIComponent(input.id)}`;
+
+  return ApiClient.post<
+    OpenCashRegisterInputShape,
+    OpenCashRegisterOutputShape
+  >(url, {
+    id: input.id,
+    usuarioId: input.usuarioId,
+  });
+}
+
+/**
+ * Cerrar / desactivar cajero
+ */
+export async function deactiveCashRegister(
   input: DeactiveCashRegisterInputShape,
 ): Promise<DeactiveCashRegisterOutputShape> {
   const url = '/Caja/DeactiveById';
@@ -27,5 +52,3 @@ async function deactiveCashRegister(
     DeactiveCashRegisterOutputShape
   >(url, input);
 }
-
-export { createCashRegister, deactiveCashRegister };

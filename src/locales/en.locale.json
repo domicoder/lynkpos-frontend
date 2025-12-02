@@ -15,6 +15,7 @@
     "backHome": "Back Home",
     "copyright": "© {year} {appName} - Point of Sale and Inventory System. All rights reserved."
   },
+
   "error": {
     "pageNotFound": {
       "header": "404 - ERROR",
@@ -22,6 +23,7 @@
       "description": "Maybe this page used to exist or you just misspelled\n something."
     }
   },
+
   "login": {
     "title": "[Login View]",
     "username": "Username",
@@ -35,6 +37,7 @@
     "loading": "Loading...",
     "generalMessageLoading": "Request in process... Please wait."
   },
+
   "users": {
     "title": "[Users View]",
     "noUsersAvailable": "No users available",
@@ -51,6 +54,7 @@
     "usersUpdatedSuccessfully": "Users updated successfully",
     "userCreatedSuccessfully": "User created successfully",
     "userUpdatedSuccessfully": "User updated successfully",
+
     "deleteUserModal": {
       "title": "Delete user",
       "message": "This user will be deleted permanently. Are you sure you want to continue?",
@@ -59,6 +63,7 @@
       "deletingUser": "Deleting user... Please wait.",
       "userDeletedSuccessfully": "User deleted successfully"
     },
+
     "addUserModal": {
       "title": "Create user",
       "username": "Username",
@@ -69,6 +74,7 @@
       "cancel": "Cancel",
       "creatingUser": "Creating user... Please wait."
     },
+
     "editUserModal": {
       "title": "Edit user",
       "username": "Username",
@@ -83,6 +89,7 @@
       "updatingUserStatus": "Updating user status... Please wait."
     }
   },
+
   "cashRegisters": {
     "title": "Cash Registers",
     "errorLoadingCashRegisters": "Error loading cash registers"
@@ -173,6 +180,59 @@
       "deletingProduct": "Error deleting product"
     }
   },
+
+  "cashiers": {
+    "title": "[Cashiers View]",
+
+    "table": {
+      "code": "Code",
+      "name": "Name",
+      "active": "Active",
+      "actions": "Actions"
+    },
+
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+
+    "addCashier": "Add Cashier",
+    "refreshCashiers": "Refresh Cashiers",
+
+    "cashierCreatedSuccessfully": "Cashier created successfully",
+    "cashierUpdatedSuccessfully": "Cashier updated successfully",
+    "cashierStatusUpdatedSuccessfully": "Cashier status updated successfully",
+    "cashierDeletedSuccessfully": "Cashier deleted successfully",
+
+    "editCashierModal": {
+      "title": "Edit cashier",
+      "code": "Code",
+      "name": "Name",
+      "active": "Active",
+      "update": "Update cashier",
+      "cancel": "Cancel",
+      "updatingCashier": "Updating cashier... Please wait."
+    },
+
+    "addCashierModal": {
+      "title": "Create cashier",
+      "code": "Code",
+      "name": "Name",
+      "active": "Active",
+      "create": "Create cashier",
+      "cancel": "Cancel",
+      "creatingCashier": "Creating cashier... Please wait."
+    },
+
+    "deleteCashierModal": {
+      "title": "Delete cashier",
+      "message": "This cashier will be permanently deleted. Are you sure you want to continue?",
+      "confirm": "Yes, delete",
+      "cancel": "Cancel",
+      "deletingCashier": "Deleting cashier... Please wait."
+    }
+  },
+
   "drawer": {
     "options": {
       "home": "Home",

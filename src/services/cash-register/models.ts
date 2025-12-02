@@ -1,3 +1,6 @@
+import type { CashierTable } from '@/domains/Cashier';
+
+// Crear cajero
 export type CreateCashRegisterInputShape = {
   codigo: string;
   nombre: string;
@@ -11,6 +14,20 @@ export type CreateCashRegisterOutputShape = {
   };
 };
 
+// Obtener lista de cajeros
+export type GetCashiersListOutputShape = {
+  pagination: {
+    pages: number;
+    records: number;
+    currentPage: number;
+    prevPage: number;
+    nextPage: number;
+  };
+  data: CashierTable[];
+  ok: boolean;
+};
+
+// Desactivar cajero
 export type DeactiveCashRegisterInputShape = {
   id: string;
 };
@@ -43,4 +60,27 @@ export type GetCashierListOutputShape = {
   pagination: PaginationShape;
   data: CashRegisterTable[];
   ok: boolean;
+};
+
+// Actualizar cajero
+export type UpdateCashierInputShape = {
+  id: string;
+  codigo?: string;
+  nombre?: string;
+  activo?: boolean;
+};
+
+export type UpdateCashierOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};
+
+// Eliminar cajero
+export type DeleteCashierInputShape = {
+  id: string;
+};
+
+export type DeleteCashierOutputShape = {
+  ok: boolean;
+  badMessage?: string;
 };

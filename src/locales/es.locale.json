@@ -15,6 +15,7 @@
     "backHome": "Ir a Inicio",
     "copyright": "© {year} {appName} - Sistema de Punto de Venta e Inventario. Todos los derechos reservados."
   },
+
   "error": {
     "pageNotFound": {
       "header": "404 - ERROR",
@@ -22,6 +23,7 @@
       "description": "Tal vez esta página solía existir o simplemente\n escribiste algo mal."
     }
   },
+
   "login": {
     "title": "[Vista de inicio de sesión]",
     "username": "Usuario",
@@ -83,6 +85,51 @@
       "updatingUserStatus": "Actualizando estado del usuario... Espere por favor."
     }
   },
+  "cashiers": {
+    "title": "Gestión de Cajeros",
+    "noCashiersAvailable": "No hay cajeros disponibles",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "status": "Estado",
+    "table": {
+      "code": "Código",
+      "name": "Nombre",
+      "active": "Estado",
+      "actions": "Acciones"
+    },
+    "addCashier": "Agregar Cajero",
+    "refreshCashiers": "Actualizar Cajeros",
+    "cashiersUpdatedSuccessfully": "Cajeros actualizados correctamente",
+    "cashierCreatedSuccessfully": "Cajero creado correctamente",
+    "cashierUpdatedSuccessfully": "Cajero actualizado correctamente",
+    "deleteCashierModal": {
+      "title": "Eliminar cajero",
+      "message": "Este cajero se eliminará permanentemente. ¿Está seguro de querer continuar?",
+      "confirm": "Sí, eliminar",
+      "cancel": "Cancelar",
+      "deletingCashier": "Eliminando cajero... Espere por favor.",
+      "cashierDeletedSuccessfully": "Cajero eliminado correctamente"
+    },
+    "addCashierModal": {
+      "title": "Crear cajero",
+      "code": "Código",
+      "name": "Nombre",
+      "create": "Crear cajero",
+      "cancel": "Cancelar",
+      "creatingCashier": "Creando cajero... Espere por favor."
+    },
+    "editCashierModal": {
+      "title": "Editar cajero",
+      "code": "Código",
+      "name": "Nombre",
+      "update": "Actualizar cajero",
+      "cancel": "Cancelar",
+      "updatingCashier": "Actualizando cajero... Espere por favor.",
+      "cashierStatusUpdatedSuccessfully": "Estado del cajero actualizado correctamente",
+      "updatingCashierStatus": "Actualizando estado del cajero... Espere por favor."
+    }
+  },
+
   "cashRegisters": {
     "title": "Cajas",
     "errorLoadingCashRegisters": "Error al cargar las cajas"
@@ -173,6 +220,7 @@
       "deletingProduct": "Error al eliminar el producto"
     }
   },
+
   "drawer": {
     "options": {
       "home": "Inicio",

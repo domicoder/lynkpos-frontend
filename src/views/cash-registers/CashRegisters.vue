@@ -108,7 +108,10 @@
       </main>
     </section>
 
-    <!-- MODAL PARA CREAR / ABRIR / CERRAR CAJERO -->
+    <!-- MODAL REUTILIZABLE PARA CREAR CAJERO -->
+    <CashRegisterModal v-model="isCreateCashModalOpen" />
+
+    <!-- MODAL PARA ABRIR / CERRAR CAJERO -->
     <v-dialog
       v-model="isCashDialogOpen"
       max-width="520"
@@ -120,58 +123,10 @@
 
         <v-card-text>
           <form
-            @submit.prevent="
-              cashDialogMode === 'create'
-                ? onCreate()
-                : cashDialogMode === 'open'
-                  ? onOpen()
-                  : onClose()
-            "
+            @submit.prevent="cashDialogMode === 'open' ? onOpen() : onClose()"
           >
-            <!-- CREAR CAJERO -->
-            <template v-if="cashDialogMode === 'create'">
-              <v-text-field
-                v-model="createCodigo"
-                label="Código"
-                variant="outlined"
-                hide-details="auto"
-                class="mb-4"
-                required
-              />
-
-              <v-text-field
-                v-model="createNombre"
-                label="Nombre"
-                variant="outlined"
-                hide-details="auto"
-                class="mb-4"
-                required
-              />
-
-              <div class="d-flex align-center mb-2">
-                <v-switch
-                  v-model="createActivo"
-                  label="Activo"
-                  inset
-                />
-              </div>
-
-              <p
-                v-if="createMessage"
-                class="message mt-2"
-              >
-                {{ createMessage }}
-              </p>
-              <p
-                v-if="createError"
-                class="error mt-2"
-              >
-                {{ createError }}
-              </p>
-            </template>
-
             <!-- ABRIR CAJERO -->
-            <template v-else-if="cashDialogMode === 'open'">
+            <template v-if="cashDialogMode === 'open'">
               <v-text-field
                 v-model="cashId"
                 label="Id del cajero (GUID)"
@@ -242,21 +197,10 @@
                 type="submit"
                 variant="text"
                 color="primary"
-                :loading="
-                  cashDialogMode === 'create'
-                    ? isCreating
-                    : cashDialogMode === 'open'
-                      ? isOpening
-                      : isClosing
-                "
+                :loading="cashDialogMode === 'open' ? isOpening : isClosing"
               >
-                {{ ' ' }}
                 {{
-                  cashDialogMode === 'create'
-                    ? 'CREAR CAJERO'
-                    : cashDialogMode === 'open'
-                      ? 'ABRIR CAJERO'
-                      : 'CERRAR CAJERO'
+                  cashDialogMode === 'open' ? 'ABRIR CAJERO' : 'CERRAR CAJERO'
                 }}
               </v-btn>
             </v-card-actions>
@@ -270,24 +214,22 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import {
-    createCashRegister,
     openCashRegister,
     deactiveCashRegister,
   } from '@/services/cash-register/api';
-  import type { CreateCashRegisterInputShape } from '@/services/cash-register/models';
+  import CashRegisterModal from '@/components/shared/modals/CashRegisterModal.vue';
 
   type CurrentCash = {
     id: string;
     name?: string;
   };
 
-  /** Modo actual del diálogo */
-  type CashDialogMode = 'create' | 'open' | 'close' | null;
+  type CashDialogMode = 'open' | 'close' | null;
 
-  // Estado del cajero actual (solo memoria)
   const currentCash = ref<CurrentCash | null>(null);
 
-  // Estado del modal
+  const isCreateCashModalOpen = ref(false);
+
   const cashDialogMode = ref<CashDialogMode>(null);
 
   const isCashDialogOpen = computed({
@@ -299,8 +241,6 @@
 
   const cashDialogTitle = computed(() => {
     switch (cashDialogMode.value) {
-      case 'create':
-        return 'Crear cajero';
       case 'open':
         return 'Abrir cajero';
       case 'close':
@@ -310,64 +250,6 @@
     }
   });
 
-  const openCashDialog = (mode: CashDialogMode) => {
-    cashDialogMode.value = mode;
-
-    // limpiar mensajes cada vez que se abre
-    createMessage.value = '';
-    createError.value = '';
-    openMessage.value = '';
-    openError.value = '';
-    closeMessage.value = '';
-    closeError.value = '';
-
-    // si es cerrar y hay cajero activo, prellenar el id
-    if (mode === 'close' && currentCash.value) {
-      closeId.value = currentCash.value.id;
-    }
-  };
-
-  const closeCashDialog = () => {
-    cashDialogMode.value = null;
-  };
-
-  /**
-   * CREAR CAJERO
-   */
-  const createCodigo = ref('');
-  const createNombre = ref('');
-  const createActivo = ref(true);
-  const createMessage = ref('');
-  const createError = ref('');
-  const isCreating = ref(false);
-
-  const onCreate = async () => {
-    createMessage.value = '';
-    createError.value = '';
-
-    try {
-      isCreating.value = true;
-
-      const payload: CreateCashRegisterInputShape = {
-        codigo: createCodigo.value,
-        nombre: createNombre.value,
-        activo: createActivo.value,
-      };
-
-      const response = await createCashRegister(payload);
-
-      createMessage.value = `Cajero creado correctamente. ID: ${response.data.id}`;
-
-      createCodigo.value = '';
-      createNombre.value = '';
-      createActivo.value = true;
-    } catch (_err: unknown) {
-      createError.value = 'Error al crear el cajero.';
-    } finally {
-      isCreating.value = false;
-    }
-  };
-
   /**
    * ABRIR CAJERO
    */
@@ -376,6 +258,43 @@
   const isOpening = ref(false);
   const openMessage = ref('');
   const openError = ref('');
+
+  /**
+   * CERRAR CAJERO
+   */
+  const closeId = ref('');
+  const isClosing = ref(false);
+  const closeMessage = ref('');
+  const closeError = ref('');
+
+  /**
+   * Abre el modal correcto según el modo:
+   * - 'create' → abre CreateCashRegisterModal
+   * - 'open' / 'close' → usa el dialog genérico
+   */
+  const openCashDialog = (mode: 'create' | 'open' | 'close') => {
+    // reset de mensajes de abrir/cerrar
+    openMessage.value = '';
+    openError.value = '';
+    closeMessage.value = '';
+    closeError.value = '';
+
+    if (mode === 'create') {
+      isCreateCashModalOpen.value = true;
+
+      return;
+    }
+
+    cashDialogMode.value = mode;
+
+    if (mode === 'close' && currentCash.value) {
+      closeId.value = currentCash.value.id;
+    }
+  };
+
+  const closeCashDialog = () => {
+    cashDialogMode.value = null;
+  };
 
   const onOpen = async () => {
     openMessage.value = '';
@@ -405,14 +324,6 @@
       isOpening.value = false;
     }
   };
-
-  /**
-   * CERRAR CAJERO
-   */
-  const closeId = ref('');
-  const isClosing = ref(false);
-  const closeMessage = ref('');
-  const closeError = ref('');
 
   const onClose = async () => {
     closeMessage.value = '';

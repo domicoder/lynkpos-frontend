@@ -1,3 +1,149 @@
+<script setup lang="ts">
+  import { ref, computed } from 'vue';
+  import {
+    openCashRegister,
+    deactiveCashRegister,
+  } from '@/services/cash-register/api';
+  import CashRegisterModal from '@/components/shared/modals/CashRegisterModal.vue';
+
+  type CurrentCash = {
+    id: string;
+    name?: string;
+  };
+
+  type CashDialogMode = 'open' | 'close' | null;
+
+  const currentCash = ref<CurrentCash | null>(null);
+
+  const isCreateCashModalOpen = ref(false);
+
+  const cashDialogMode = ref<CashDialogMode>(null);
+
+  const isCashDialogOpen = computed({
+    get: () => cashDialogMode.value !== null,
+    set: (value) => {
+      if (!value) cashDialogMode.value = null;
+    },
+  });
+
+  const cashDialogTitle = computed(() => {
+    switch (cashDialogMode.value) {
+      case 'open':
+        return 'Abrir cajero';
+      case 'close':
+        return 'Cerrar cajero';
+      default:
+        return '';
+    }
+  });
+
+  /**
+   * ABRIR CAJERO
+   */
+  const cashId = ref('');
+  const userId = ref('');
+  const isOpening = ref(false);
+  const openMessage = ref('');
+  const openError = ref('');
+
+  /**
+   * CERRAR CAJERO
+   */
+  const closeId = ref('');
+  const isClosing = ref(false);
+  const closeMessage = ref('');
+  const closeError = ref('');
+
+  /**
+   * Abre el modal correcto según el modo:
+   * - 'create' → abre CashRegisterModal
+   * - 'open' / 'close' → usa el dialog genérico
+   */
+  const openCashDialog = (mode: 'create' | 'open' | 'close') => {
+    openMessage.value = '';
+    openError.value = '';
+    closeMessage.value = '';
+    closeError.value = '';
+
+    if (mode === 'create') {
+      isCreateCashModalOpen.value = true;
+
+      return;
+    }
+
+    cashDialogMode.value = mode;
+
+    if (mode === 'close' && currentCash.value) {
+      closeId.value = currentCash.value.id;
+    }
+  };
+
+  const closeCashDialog = () => {
+    cashDialogMode.value = null;
+  };
+
+  const onOpen = async () => {
+    openMessage.value = '';
+    openError.value = '';
+
+    try {
+      isOpening.value = true;
+
+      const response = await openCashRegister({
+        id: cashId.value,
+        usuarioId: userId.value,
+      });
+
+      if (response.ok) {
+        openMessage.value = 'Cajero abierto correctamente';
+        currentCash.value = {
+          id: cashId.value,
+          name: 'Cajero principal',
+        };
+      } else {
+        openError.value = 'El backend respondió pero no confirmó la apertura';
+      }
+    } catch (_err: unknown) {
+      openError.value =
+        'Error al abrir el cajero (verifica que no esté ya abierto)';
+    } finally {
+      isOpening.value = false;
+    }
+  };
+
+  const onClose = async () => {
+    closeMessage.value = '';
+    closeError.value = '';
+
+    try {
+      isClosing.value = true;
+
+      const idToClose = closeId.value || currentCash.value?.id;
+
+      if (!idToClose) {
+        return;
+      }
+
+      await deactiveCashRegister({ id: idToClose });
+
+      closeMessage.value = 'Cajero cerrado correctamente';
+      currentCash.value = null;
+      closeId.value = '';
+    } catch (_err: unknown) {
+      closeError.value = 'Error al cerrar el cajero';
+    } finally {
+      isClosing.value = false;
+    }
+  };
+
+  /** Abrir diálogo de cierre para el cajero actual */
+  const openCloseForCurrent = () => {
+    if (!currentCash.value) return;
+    closeId.value = currentCash.value.id;
+    openCashDialog('close');
+  };
+</script>
+
 <template>
   <div class="page">
     <h1 class="page__title">Cajeros</h1>
@@ -210,153 +356,6 @@
     </v-dialog>
   </div>
 </template>
-
-<script setup lang="ts">
-  import { ref, computed } from 'vue';
-  import {
-    openCashRegister,
-    deactiveCashRegister,
-  } from '@/services/cash-register/api';
-  import CashRegisterModal from '@/components/shared/modals/CashRegisterModal.vue';
-
-  type CurrentCash = {
-    id: string;
-    name?: string;
-  };
-
-  type CashDialogMode = 'open' | 'close' | null;
-
-  const currentCash = ref<CurrentCash | null>(null);
-
-  const isCreateCashModalOpen = ref(false);
-
-  const cashDialogMode = ref<CashDialogMode>(null);
-
-  const isCashDialogOpen = computed({
-    get: () => cashDialogMode.value !== null,
-    set: (value) => {
-      if (!value) cashDialogMode.value = null;
-    },
-  });
-
-  const cashDialogTitle = computed(() => {
-    switch (cashDialogMode.value) {
-      case 'open':
-        return 'Abrir cajero';
-      case 'close':
-        return 'Cerrar cajero';
-      default:
-        return '';
-    }
-  });
-
-  /**
-   * ABRIR CAJERO
-   */
-  const cashId = ref('');
-  const userId = ref('');
-  const isOpening = ref(false);
-  const openMessage = ref('');
-  const openError = ref('');
-
-  /**
-   * CERRAR CAJERO
-   */
-  const closeId = ref('');
-  const isClosing = ref(false);
-  const closeMessage = ref('');
-  const closeError = ref('');
-
-  /**
-   * Abre el modal correcto según el modo:
-   * - 'create' → abre CreateCashRegisterModal
-   * - 'open' / 'close' → usa el dialog genérico
-   */
-  const openCashDialog = (mode: 'create' | 'open' | 'close') => {
-    // reset de mensajes de abrir/cerrar
-    openMessage.value = '';
-    openError.value = '';
-    closeMessage.value = '';
-    closeError.value = '';
-
-    if (mode === 'create') {
-      isCreateCashModalOpen.value = true;
-
-      return;
-    }
-
-    cashDialogMode.value = mode;
-
-    if (mode === 'close' && currentCash.value) {
-      closeId.value = currentCash.value.id;
-    }
-  };
-
-  const closeCashDialog = () => {
-    cashDialogMode.value = null;
-  };
-
-  const onOpen = async () => {
-    openMessage.value = '';
-    openError.value = '';
-
-    try {
-      isOpening.value = true;
-
-      const response = await openCashRegister({
-        id: cashId.value,
-        usuarioId: userId.value,
-      });
-
-      if (response.data.ok) {
-        openMessage.value = 'Cajero abierto correctamente';
-        currentCash.value = {
-          id: cashId.value,
-          name: 'Cajero principal',
-        };
-      } else {
-        openError.value = 'El backend respondió pero no confirmó la apertura';
-      }
-    } catch (_err: unknown) {
-      openError.value =
-        'Error al abrir el cajero (verifica que no esté ya abierto)';
-    } finally {
-      isOpening.value = false;
-    }
-  };
-
-  const onClose = async () => {
-    closeMessage.value = '';
-    closeError.value = '';
-
-    try {
-      isClosing.value = true;
-
-      const idToClose = closeId.value || currentCash.value?.id;
-
-      if (!idToClose) {
-        return;
-      }
-
-      await deactiveCashRegister({ id: idToClose });
-
-      closeMessage.value = 'Cajero cerrado correctamente';
-      currentCash.value = null;
-      closeId.value = '';
-    } catch (_err: unknown) {
-      closeError.value = 'Error al cerrar el cajero';
-    } finally {
-      isClosing.value = false;
-    }
-  };
-
-  /** Abrir diálogo de cierre para el cajero actual */
-  const openCloseForCurrent = () => {
-    if (!currentCash.value) return;
-    closeId.value = currentCash.value.id;
-    openCashDialog('close');
-  };
-</script>
 
 <style scoped>
   .page {

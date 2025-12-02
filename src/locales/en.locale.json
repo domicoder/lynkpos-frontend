@@ -87,23 +87,38 @@
     }
   },
   "cashRegisters": {
-    "title": "[Cash Registers View]"
+    "title": "[Vista de Cajas]"
   },
-  "drawer": {
-    "options": {
-      "home": "Home",
-      "users": "Users",
-      "cashRegisters": "Cash Registers",
-      "logout": "Logout"
+
+  "cashRegister": {
+    "create": {
+      "title": "Crear cajero",
+      "submit": "Crear cajero"
+    },
+    "fields": {
+      "code": "Código",
+      "name": "Nombre",
+      "active": "Activo"
     }
   },
-  "about": {
-    "title": "[About View]",
-    "description": "{appName} is an opinionated Vue 3 starter template made by {owner} for mocking apps quickly. It uses Vue 3 with Vite, Pinia, Typescript, file-based routing, i18n, webfont self-hosting, TailwindCSS for styling, custom icons."
+
+  "drawer": {
+    "options": {
+      "home": "Inicio",
+      "users": "Usuarios",
+      "cashRegisters": "Cajas",
+      "logout": "Cerrar sesión"
+    }
   },
+
+  "about": {
+    "title": "[Vista de Acerca de]",
+    "description": "{appName} es una plantilla inicial para Vue 3 creada por {owner} para crear aplicaciones rápidamente. Utiliza Vue 3 con Vite, Pinia, Typescript, enrutamiento basado en archivos, i18n, webfont self-hosting, TailwindCSS para estilos e íconos personalizados."
+  },
+
   "theme": {
-    "light": "Light mode (current)",
-    "dark": "Dark mode (current)",
-    "changeTheme": "Change theme"
+    "light": "Modo Claro (actual)",
+    "dark": "Modo Oscuro (actual)",
+    "changeTheme": "Cambiar tema"
   }
 }

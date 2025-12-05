@@ -23,7 +23,7 @@
     amount: number;
     dueDate: string;
     daysOverdue: number | null;
-    status: 'Vigente' | 'Vencida';
+    status: 'Current' | 'Overdue';
   }
 
   interface EarningsItem {
@@ -56,7 +56,7 @@
       amount: 979.98,
       dueDate: '2024-01-25',
       daysOverdue: null,
-      status: 'Vigente',
+      status: 'Current',
     },
     {
       invoiceNumber: '#1003',
@@ -64,7 +64,7 @@
       amount: 729.98,
       dueDate: '2024-01-20',
       daysOverdue: null,
-      status: 'Vigente',
+      status: 'Current',
     },
     {
       invoiceNumber: '#998',
@@ -72,7 +72,7 @@
       amount: 450.5,
       dueDate: '2024-01-10',
       daysOverdue: 5,
-      status: 'Vencida',
+      status: 'Overdue',
     },
   ];
 

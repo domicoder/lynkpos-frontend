@@ -37,7 +37,7 @@
   };
 
   const getStatusColor = (status: 'Current' | 'Overdue') => {
-    return status === 'Vencida' ? 'red' : 'green';
+    return status === 'Overdue' ? 'red' : 'green';
   };
 </script>
 

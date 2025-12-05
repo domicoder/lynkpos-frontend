@@ -9,6 +9,7 @@
     HOME_VIEW,
     LOGIN_VIEW,
     USERS_VIEW,
+    REPORTS_VIEW,
   } from '@/router/paths';
   import { useRouter } from 'vue-router';
   import { computed } from 'vue';
@@ -39,6 +40,9 @@
   const isUsersRoute = computed(() => currentRoute.value === USERS_VIEW.name);
   const isCashRegistersRoute = computed(
     () => currentRoute.value === CASH_REGISTERS_VIEW.name,
+  );
+  const isReportsRoute = computed(
+    () => currentRoute.value === REPORTS_VIEW.name,
   );
 </script>
 
@@ -93,6 +97,14 @@
         :title="$t('drawer.options.cashRegisters')"
         value="cashRegisters"
         @click="router.push({ name: CASH_REGISTERS_VIEW.name })"
+      />
+      <v-list-item
+        :active="isReportsRoute"
+        active-class="active-link"
+        prepend-icon="mdi-chart-bar"
+        :title="$t('drawer.options.reports')"
+        value="reports"
+        @click="router.push({ name: REPORTS_VIEW.name })"
       />
       <v-list-item
         prepend-icon="mdi-logout"

@@ -23,6 +23,11 @@ export const CASH_REGISTERS_VIEW = {
   path: '/cash-registers',
 };
 
+export const REPORTS_VIEW = {
+  name: 'ReportsCxc',
+  path: '/reports',
+};
+
 export const PAGE_NOT_FOUND = {
   name: 'PageNotFound',
   path: '/:pathMatch(.*)*',

@@ -2,8 +2,24 @@ import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 
+// Plugin to handle CSS imports in tests
+const cssMockPlugin = () => ({
+  name: 'css-mock',
+  enforce: 'pre' as const,
+  load(id: string) {
+    if (id.endsWith('.css')) {
+      return 'export default {}';
+    }
+  },
+  resolveId(id: string) {
+    if (id.endsWith('.css')) {
+      return id;
+    }
+  },
+});
+
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), cssMockPlugin()],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -29,6 +45,18 @@ export default defineConfig({
         'tests/**/*',
         'tests-examples/**/*',
       ],
+    },
+    css: {
+      // Mock CSS imports during testing to avoid "Unknown file extension .css" errors
+      mock: true,
+      modules: {
+        classNameStrategy: 'non-scoped',
+      },
+    },
+    server: {
+      deps: {
+        inline: ['vuetify'],
+      },
     },
   },
   resolve: {

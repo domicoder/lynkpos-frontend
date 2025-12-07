@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import EnhancedApiClient from '@/services/api/EnhancedApiClient';
 
@@ -70,19 +71,38 @@ describe('EnhancedApiClient', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    Object.defineProperty(window, 'location', {
-      value: {
-        protocol: 'https:',
+    // jsdom provides window.location, but we need to ensure it's properly configured
+    // Since jsdom's location properties are not configurable, we use deleteLocation workaround
+    if (typeof window !== 'undefined') {
+      // Delete the existing location and create a new one
+      delete (window as any).location;
+      (window as any).location = {
+        href: 'http://localhost:3000',
+        origin: 'http://localhost:3000',
+        protocol: 'http:',
         host: 'localhost:3000',
-      },
-      writable: true,
-    });
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/',
+        search: '',
+        hash: '',
+        assign: vi.fn(),
+        replace: vi.fn(),
+        reload: vi.fn(),
+      } as unknown as Location;
+    }
+
+    // Reset the singleton instance by accessing the private property
+    // We need to clear the instance to test singleton behavior properly
+    (EnhancedApiClient as any).instance = undefined;
 
     apiClient = EnhancedApiClient.getInstance();
   });
 
   afterEach(async () => {
     vi.restoreAllMocks();
+    // Clear the singleton instance after each test
+    (EnhancedApiClient as any).instance = undefined;
     // Ensure all async operations complete
     await new Promise((resolve) => setTimeout(resolve, 0));
   });

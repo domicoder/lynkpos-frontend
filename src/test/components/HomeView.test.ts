@@ -57,7 +57,7 @@ describe('HomeView', () => {
     });
 
     expect(wrapper.find('.home').exists()).toBe(true);
-    expect(wrapper.text()).toContain('home.products');
+    expect(wrapper.text()).toContain('general.appNameOnly');
   });
 
   it('displays logout button', () => {

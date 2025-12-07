@@ -4,7 +4,9 @@ import type {
   CreateCashRegisterOutputShape,
   DeactiveCashRegisterInputShape,
   DeactiveCashRegisterOutputShape,
+  GetCashierListOutputShape,
 } from '@/services/cash-register/models';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 async function createCashRegister(
   input: CreateCashRegisterInputShape,
@@ -28,4 +30,12 @@ async function deactiveCashRegister(
   >(url, input);
 }
 
-export { createCashRegister, deactiveCashRegister };
+async function getCashierList(
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<GetCashierListOutputShape>> {
+  const url = '/Caja/GetList';
+
+  return ApiClient.get<GetCashierListOutputShape>(url, config);
+}
+
+export { createCashRegister, deactiveCashRegister, getCashierList };

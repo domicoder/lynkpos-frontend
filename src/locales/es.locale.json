@@ -9,6 +9,7 @@
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "close": "Cerrar",
+    "print": "Imprimir",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "backHome": "Ir a Inicio",
@@ -30,15 +31,10 @@
       "messageError": "Ha ocurrido un error al iniciar sesión"
     }
   },
-  "home": {
-    "title": "[Vista de Inicio]",
-    "products": "ULTIMOS PRODUCTOS"
-  },
   "loading": {
     "loading": "Cargando...",
     "generalMessageLoading": "Solicitud en proceso... Espere por favor."
   },
-
   "users": {
     "title": "[Vista de Usuarios]",
     "noUsersAvailable": "No hay usuarios disponibles",
@@ -87,21 +83,107 @@
       "updatingUserStatus": "Actualizando estado del usuario... Espere por favor."
     }
   },
-
   "cashRegisters": {
-    "title": "[Vista de Cajas]"
+    "title": "Cajas",
+    "errorLoadingCashRegisters": "Error al cargar las cajas"
+  },
+  "invoices": {
+    "title": "Facturas",
+    "errorLoadingInvoices": "Error al cargar las facturas",
+    "table": {
+      "type": "Tipo",
+      "state": "Estado",
+      "cashRegister": "Caja",
+      "user": "Usuario",
+      "emissionDate": "Fecha de emisión",
+      "total": "Total",
+      "taxes": "Impuestos",
+      "subtotal": "Subtotal"
+    }
+  },
+  "products": {
+    "title": "ULTIMOS PRODUCTOS",
+    "noProductsAvailable": "No hay productos disponibles",
+    "errorLoadingProduct": "Error al cargar el producto",
+    "inStock": "En stock",
+    "outOfStock": "Sin stock",
+    "table": {
+      "id": "ID",
+      "name": "Nombre",
+      "price": "Precio",
+      "tax": "Impuesto",
+      "stock": "Stock",
+      "actions": "Acciones"
+    },
+    "addProduct": "Agregar Producto",
+    "refreshProducts": "Actualizar Productos",
+    "productsUpdatedSuccessfully": "Productos actualizados correctamente",
+    "productCreatedSuccessfully": "Producto creado correctamente",
+    "productUpdatedSuccessfully": "Producto actualizado correctamente",
+    "deleteProductModal": {
+      "title": "Eliminar producto",
+      "message": "Este producto se eliminará permanentemente. ¿Está seguro de querer continuar?",
+      "confirm": "Si, eliminar",
+      "cancel": "Cancelar",
+      "deletingProduct": "Eliminando producto... Espere por favor.",
+      "productDeletedSuccessfully": "Producto eliminado correctamente"
+    },
+    "addProductModal": {
+      "title": "Crear producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "stock": "Stock",
+      "create": "Crear producto",
+      "cancel": "Cancelar",
+      "creatingProduct": "Creando producto... Espere por favor."
+    },
+    "editProductModal": {
+      "title": "Editar producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "stock": "Stock",
+      "update": "Actualizar producto",
+      "cancel": "Cancelar",
+      "updatingProduct": "Actualizando producto... Espere por favor."
+    }
+  },
+  "salesDashboard": {
+    "title": "Facturar Venta",
+    "salesCompletedSuccessfully": "Venta completada correctamente",
+    "errorGeneratingSale": "Error al generar la venta",
+    "invoicePreview": "Vista Previa de Factura",
+    "totalSelection": "Total selección",
+    "searchPlaceholder": "Buscar producto para facturar",
+    "noProductsSelected": "No hay productos seleccionados para facturar",
+    "productAdded": "Producto agregado correctamente",
+    "addInvoice": "Cobrar",
+    "cancelSale": "Cancelar venta",
+    "selectCashRegisterPlaceholder": "Seleccionar caja",
+    "selectCashRegister": "Seleccionar caja para facturar",
+    "amountReceived": "Cantidad recibida",
+    "changeToGive": "Cambio a dar",
+    "amountReceivedPlaceholder": "0.00",
+    "warning": {
+      "title": "Eliminar producto",
+      "deleteProduct": "¿Está seguro de querer eliminar este producto de la venta?",
+      "warningTitle": "Advertencia",
+      "warningClosingInvoicePreview": "ADVERTENCIA: Asegúrese de que la factura se ha impreso correctamente antes de cerrar la vista previa."
+    },
+    "error": {
+      "deletingProduct": "Error al eliminar el producto"
+    }
   },
   "drawer": {
     "options": {
       "home": "Inicio",
       "users": "Usuarios",
       "cashRegisters": "Cajas",
+      "sales": "Ventas",
+      "makeSales": "Realizar venta",
+      "billing": "Facturación",
+      "seeInvoices": "Ver facturas",
       "logout": "Cerrar sesión"
     }
-  },
-  "about": {
-    "title": "[Vista de Acerca de]",
-    "description": "{appName} es una plantilla inicial para Vue 3 creada por {owner} para crer aplicaciones rápidamente. Utiliza Vue 3 con Vite, Pinia, Typescript, enrutamiento basado en archivos, i18n, autohospedaje de fuentes web, TailwindCSS, iconos personalizados."
   },
   "theme": {
     "light": "Modo Claro (actual)",

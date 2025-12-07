@@ -9,6 +9,7 @@
     "accept": "Accept",
     "cancel": "Cancel",
     "close": "Close",
+    "print": "Print",
     "login": "Log In",
     "logout": "Log Out",
     "backHome": "Back Home",
@@ -29,10 +30,6 @@
       "titleError": "Error",
       "messageError": "An error occurred while logging in"
     }
-  },
-  "home": {
-    "title": "[Home View]",
-    "products": "LAST PRODUCTS"
   },
   "loading": {
     "loading": "Loading...",
@@ -87,19 +84,106 @@
     }
   },
   "cashRegisters": {
-    "title": "[Cash Registers View]"
+    "title": "Cash Registers",
+    "errorLoadingCashRegisters": "Error loading cash registers"
+  },
+  "invoices": {
+    "title": "Invoices",
+    "errorLoadingInvoices": "Error loading invoices",
+    "table": {
+      "type": "Type",
+      "state": "State",
+      "cashRegister": "Cash register",
+      "user": "User",
+      "emissionDate": "Emission date",
+      "total": "Total",
+      "taxes": "Taxes",
+      "subtotal": "Subtotal"
+    }
+  },
+  "products": {
+    "title": "LAST PRODUCTS",
+    "noProductsAvailable": "No products available",
+    "errorLoadingProduct": "Error loading product",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "price": "Price",
+      "tax": "Tax",
+      "stock": "Stock",
+      "actions": "Actions"
+    },
+    "addProduct": "Add Product",
+    "refreshProducts": "Refresh Products",
+    "productsUpdatedSuccessfully": "Products updated successfully",
+    "productCreatedSuccessfully": "Product created successfully",
+    "productUpdatedSuccessfully": "Product updated successfully",
+    "deleteProductModal": {
+      "title": "Delete product",
+      "message": "This product will be deleted permanently. Are you sure you want to continue?",
+      "confirm": "Yes, delete",
+      "cancel": "Cancel",
+      "deletingProduct": "Deleting product... Please wait.",
+      "productDeletedSuccessfully": "Product deleted successfully"
+    },
+    "addProductModal": {
+      "title": "Create product",
+      "name": "Name",
+      "price": "Price",
+      "stock": "Stock",
+      "create": "Create product",
+      "cancel": "Cancel",
+      "creatingProduct": "Creating product... Please wait."
+    },
+    "editProductModal": {
+      "title": "Edit product",
+      "name": "Name",
+      "price": "Price",
+      "stock": "Stock",
+      "update": "Update product",
+      "cancel": "Cancel",
+      "updatingProduct": "Updating product... Please wait."
+    }
+  },
+  "salesDashboard": {
+    "title": "Billing Sale",
+    "salesCompletedSuccessfully": "Sale completed successfully",
+    "errorGeneratingSale": "Error generating sale",
+    "invoicePreview": "Invoice Preview",
+    "totalSelection": "Total selection",
+    "searchPlaceholder": "Search product to bill",
+    "noProductsSelected": "No products selected for billing",
+    "productAdded": "Product added successfully",
+    "addInvoice": "Bill",
+    "cancelSale": "Cancel sale",
+    "selectCashRegisterPlaceholder": "Select cash register",
+    "selectCashRegister": "Select cash register for billing",
+    "amountReceived": "Amount received",
+    "changeToGive": "Change to give",
+    "amountReceivedPlaceholder": "0.00",
+    "warning": {
+      "title": "Delete product",
+      "deleteProduct": "Are you sure you want to delete this product from the sale?",
+      "warningTitle": "Warning",
+      "warningClosingInvoicePreview": "WARNING: Ensure that the invoice has been printed correctly before closing the preview."
+    },
+    "error": {
+      "deletingProduct": "Error deleting product"
+    }
   },
   "drawer": {
     "options": {
       "home": "Home",
       "users": "Users",
       "cashRegisters": "Cash Registers",
+      "sales": "Sales",
+      "billing": "Billing",
+      "makeSales": "Make sales",
+      "seeInvoices": "See invoices",
       "logout": "Logout"
     }
-  },
-  "about": {
-    "title": "[About View]",
-    "description": "{appName} is an opinionated Vue 3 starter template made by {owner} for mocking apps quickly. It uses Vue 3 with Vite, Pinia, Typescript, file-based routing, i18n, webfont self-hosting, TailwindCSS for styling, custom icons."
   },
   "theme": {
     "light": "Light mode (current)",

@@ -6,7 +6,6 @@
   import { useResponsiveness } from '@/composables/useResponsiveness';
   import SelectLanguage from '@/components/profile/select-language/SelectLanguage.vue';
   import MobileAppBar from '@/components/profile/mobile-app-bar/MobileAppBar.vue';
-  import SearchBar from '@/components/search-bar/SearchBar.vue';
   import UserAvatar from '@/components/profile/user-avatar/UserAvatar.vue';
 
   const globalStore = useGlobalStore();
@@ -53,7 +52,7 @@
         v-show="!isMobile"
         class="flex items-center justify-center gap-2"
       >
-        <SearchBar />
+        <!-- <SearchBar /> -->
       </div>
       <div
         v-show="!isMobile"

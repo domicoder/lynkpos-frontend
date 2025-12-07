@@ -2,8 +2,10 @@ import {
   ABOUT_VIEW,
   CASH_REGISTERS_VIEW,
   HOME_VIEW,
+  INVOICES_VIEW,
   LOGIN_VIEW,
   PAGE_NOT_FOUND,
+  SALES_DASHBOARD_VIEW,
   USERS_VIEW,
 } from '@/router/paths';
 import { Role } from '@/domains/Role';
@@ -17,6 +19,8 @@ const UsersView = () => import('@/views/users/UsersView.vue');
 const CashRegistersView = () =>
   import('@/views/cash-registers/CashRegisters.vue');
 const PageNotFound = () => import('@/views/not-found/PageNotFound.vue');
+const SalesDashboardView = () => import('@/views/sales/SalesDashboardView.vue');
+const InvoicesView = () => import('@/views/invoices/InvoicesView.vue');
 
 const routes = [
   {
@@ -58,6 +62,24 @@ const routes = [
   {
     ...CASH_REGISTERS_VIEW,
     component: CashRegistersView,
+    beforeEnter: requireAuth,
+    meta: {
+      requiresAuth: true,
+      rolesRequired: [Role.Admin, Role.User],
+    },
+  },
+  {
+    ...SALES_DASHBOARD_VIEW,
+    component: SalesDashboardView,
+    beforeEnter: requireAuth,
+    meta: {
+      requiresAuth: true,
+      rolesRequired: [Role.Admin, Role.User],
+    },
+  },
+  {
+    ...INVOICES_VIEW,
+    component: InvoicesView,
     beforeEnter: requireAuth,
     meta: {
       requiresAuth: true,

@@ -6,9 +6,11 @@
   import useAuthStore from '@/stores/user/AuthStore';
   import {
     CASH_REGISTERS_VIEW,
+    SALES_DASHBOARD_VIEW,
     HOME_VIEW,
     LOGIN_VIEW,
     USERS_VIEW,
+    INVOICES_VIEW,
   } from '@/router/paths';
   import { useRouter } from 'vue-router';
   import { computed } from 'vue';
@@ -39,6 +41,12 @@
   const isUsersRoute = computed(() => currentRoute.value === USERS_VIEW.name);
   const isCashRegistersRoute = computed(
     () => currentRoute.value === CASH_REGISTERS_VIEW.name,
+  );
+  const isSalesDashboardRoute = computed(
+    () => currentRoute.value === SALES_DASHBOARD_VIEW.name,
+  );
+  const isInvoicesViewRoute = computed(
+    () => currentRoute.value === INVOICES_VIEW.name,
   );
 </script>
 
@@ -94,6 +102,38 @@
         value="cashRegisters"
         @click="router.push({ name: CASH_REGISTERS_VIEW.name })"
       />
+      <v-list-group
+        :active="isSalesDashboardRoute"
+        active-class="active-link"
+        prepend-icon="mdi-cart"
+      >
+        <template #activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            :title="$t('drawer.options.sales')"
+            value="sales"
+            @click="router.push({ name: SALES_DASHBOARD_VIEW.name })"
+          />
+        </template>
+
+        <v-list-item
+          v-bind="props"
+          :active="isSalesDashboardRoute"
+          active-class="active-link"
+          :title="$t('drawer.options.makeSales')"
+          value="sales"
+          @click="router.push({ name: SALES_DASHBOARD_VIEW.name })"
+        />
+
+        <v-list-item
+          v-bind="props"
+          :active="isInvoicesViewRoute"
+          active-class="active-link"
+          :title="$t('drawer.options.seeInvoices')"
+          value="invoices"
+          @click="router.push({ name: INVOICES_VIEW.name })"
+        />
+      </v-list-group>
       <v-list-item
         prepend-icon="mdi-logout"
         :title="$t('drawer.options.logout')"

@@ -7,6 +7,7 @@ export default {
         'primary-color': 'var(--primary)',
         'secondary-color': 'var(--text-secondary)',
         'primary-accent': 'var(--primary-accent)',
+        'primary-accent-invert': 'var(--primary-accent-invert)',
         'btn-primary-color': 'var(--btn-primary)',
         'btn-primary-bg': 'var(--btn-primary-bg)',
         'btn-primary-hover': 'var(--btn-primary-hover)',

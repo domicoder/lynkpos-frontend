@@ -23,6 +23,16 @@ export const CASH_REGISTERS_VIEW = {
   path: '/cash-registers',
 };
 
+export const SALES_DASHBOARD_VIEW = {
+  name: 'SalesDashboard',
+  path: '/sales-dashboard',
+};
+
+export const INVOICES_VIEW = {
+  name: 'Invoices',
+  path: '/invoices',
+};
+
 export const PAGE_NOT_FOUND = {
   name: 'PageNotFound',
   path: '/:pathMatch(.*)*',

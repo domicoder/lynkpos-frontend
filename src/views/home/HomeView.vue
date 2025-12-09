@@ -43,13 +43,15 @@
 
 <template>
   <main class="home">
+    <div class="mb-6">
+      <h1 class="text-h4 font-weight-bold">
+        {{ t('products.title').toUpperCase() }}
+      </h1>
+    </div>
     <div>
       <div class="flex flex-col">
         <div class="flex flex-col gap-6 h-full">
           <div class="flex flex-col gap-6">
-            <div class="flex flex-col gap-6 justify-center font-semibold">
-              <span class="text-2xl">{{ $t('products.title') }}</span>
-            </div>
             <v-sheet
               border
               rounded

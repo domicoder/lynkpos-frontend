@@ -32,6 +32,12 @@
 
 <template>
   <div>
+    <div class="mb-6">
+      <h1 class="text-h4 font-weight-bold">
+        {{ t('users.title').toUpperCase() }}
+      </h1>
+    </div>
+
     <div class="mt-2 mb-4 d-flex gap-2">
       <v-btn
         :disabled="loading"
@@ -39,7 +45,8 @@
         prepend-icon="mdi-refresh"
         rounded="lg"
         :text="t('users.refreshUsers')"
-        variant="text"
+        color="info"
+        size="large"
         border
         @click="refreshUsers"
       />
@@ -49,7 +56,8 @@
         prepend-icon="mdi-account-plus"
         rounded="lg"
         :text="t('users.addUser')"
-        variant="text"
+        color="success"
+        size="large"
         border
         @click="showAddUserModal"
       />
@@ -75,7 +83,11 @@
             size="small"
             variant="flat"
           >
-            {{ item.activo ? t('users.active') : t('users.inactive') }}
+            {{
+              item.activo
+                ? t('users.status.active')
+                : t('users.status.inactive')
+            }}
           </v-chip>
         </template>
 

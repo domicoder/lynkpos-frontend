@@ -11,6 +11,8 @@ import type { AddInvoiceInputShape } from '@/services/billing/models';
 import { printInvoice, getInvoicePreviewHtml } from '@/services/printing/api';
 import type { InvoiceDetail } from '@/domains/billing/Invoice';
 import type { CashRegisterInvoice } from '@/domains/billing/Invoice';
+import { getBadMessage } from '@/utils/api-helpers';
+import type { ApiError } from '@/domains/Error/ApiError';
 
 // Singleton refs for invoice preview modal (shared across all useSales calls)
 const showModal = ref(false);
@@ -232,34 +234,44 @@ const useSales = () => {
       return;
     }
 
-    const input: AddInvoiceInputShape = {
-      tipoId: 1,
-      cajaId: cashRegisterId.value?.id || '',
-      productos: products.value.map((product) => ({
-        productoId: product.productoId,
-        cantidad: product.stock,
-      })),
-    };
-    const invoiceResult = await addInvoice(input);
+    try {
+      const input: AddInvoiceInputShape = {
+        tipoId: 1,
+        cajaId: cashRegisterId.value?.id || '',
+        productos: products.value.map((product) => ({
+          productoId: product.productoId,
+          cantidad: product.stock,
+        })),
+      };
+      const invoiceResult = await addInvoice(input);
 
-    // Get invoice by id to print
-    const invoiceDetailById = await getInvoiceById(invoiceResult.data.id);
+      // Get invoice by id to print
+      const invoiceDetailById = await getInvoiceById(invoiceResult.data.id);
 
-    if (invoiceDetailById.data.ok) {
-      // Print invoice
-      invoiceDetail.value = invoiceDetailById.data.data;
-      try {
-        await runPrintInvoice();
-      } catch (error) {
-        showSnackbar(t('salesDashboard.errorGeneratingSale'), 'error');
+      if (invoiceDetailById.data.ok) {
+        // Print invoice
+        invoiceDetail.value = invoiceDetailById.data.data;
+        try {
+          await runPrintInvoice();
+        } catch (error) {
+          showSnackbar(t('salesDashboard.errorGeneratingSale'), 'error');
+        }
+
+        // Show invoice preview
+        await showInvoicePreview(invoiceDetail.value);
+
+        showSnackbar(t('salesDashboard.salesCompletedSuccessfully'), 'success');
       }
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      const errorMessage = getBadMessage(
+        apiError.response?.data,
+        t('salesDashboard.errorGeneratingSale'),
+      );
 
-      // Show invoice preview
-      await showInvoicePreview(invoiceDetail.value);
+      showSnackbar(errorMessage, 'error');
 
-      showSnackbar(t('salesDashboard.salesCompletedSuccessfully'), 'success');
-    } else {
-      showSnackbar(t('salesDashboard.errorGeneratingSale'), 'error');
+      return;
     }
   };
 
@@ -295,7 +307,7 @@ const useSales = () => {
   };
 
   const fetchCashRegisterList = async () => {
-    const result = await pointOfSaleStore.fetchCashRegisterList();
+    const result = await pointOfSaleStore.fetchCashRegisterList(true);
 
     if (!result.success && result.message !== 'Already loading') {
       showSnackbar(t('cashRegisters.errorLoadingCashRegisters'), 'error');

@@ -68,7 +68,7 @@ describe('HomeView', () => {
     // Check that the component renders
     expect(wrapper.exists()).toBe(true);
     // Check that the products title is displayed
-    expect(wrapper.text()).toContain('products.title');
+    expect(wrapper.text()).toContain('PRODUCTS.TITLE');
   });
 
   it('displays copyright information', () => {

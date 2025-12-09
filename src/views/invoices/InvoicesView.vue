@@ -12,8 +12,10 @@
 
 <template>
   <div class="flex flex-col gap-6">
-    <div class="flex flex-col gap-6 justify-center font-semibold">
-      <span class="text-2xl">{{ $t('invoices.title').toUpperCase() }}</span>
+    <div class="mb-6">
+      <h1 class="text-h4 font-weight-bold">
+        {{ $t('invoices.title').toUpperCase() }}
+      </h1>
     </div>
     <v-sheet
       border
@@ -38,10 +40,10 @@
             <v-icon
               size="64"
               color="grey-lighten-1"
-              icon="mdi-account-off-outline"
+              icon="mdi-invoice-text-multiple-outline"
             />
             <p class="text-h6 text-grey mt-4">
-              {{ $t('users.noUsersAvailable') }}
+              {{ $t('invoices.noInvoicesAvailable') }}
             </p>
           </div>
         </template>

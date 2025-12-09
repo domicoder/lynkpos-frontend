@@ -39,10 +39,12 @@
   },
 
   "users": {
-    "title": "[Users View]",
+    "title": "Users Management",
     "noUsersAvailable": "No users available",
-    "active": "Active",
-    "inactive": "Inactive",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
     "table": {
       "name": "Name",
       "username": "Username",
@@ -97,6 +99,7 @@
   "invoices": {
     "title": "Invoices",
     "errorLoadingInvoices": "Error loading invoices",
+    "noInvoicesAvailable": "No invoices available",
     "table": {
       "type": "Type",
       "state": "State",
@@ -182,28 +185,29 @@
   },
 
   "cashiers": {
-    "title": "[Cashiers View]",
-
+    "title": "Cashiers Management",
+    "noCashiersAvailable": "No cashiers available",
     "table": {
       "code": "Code",
       "name": "Name",
       "active": "Active",
+      "status": "Status",
       "actions": "Actions"
     },
-
     "status": {
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "closed": "CLOSED",
+      "open": "OPEN",
+      "yes": "Yes",
+      "no": "No"
     },
-
     "addCashier": "Add Cashier",
     "refreshCashiers": "Refresh Cashiers",
-
     "cashierCreatedSuccessfully": "Cashier created successfully",
     "cashierUpdatedSuccessfully": "Cashier updated successfully",
     "cashierStatusUpdatedSuccessfully": "Cashier status updated successfully",
     "cashierDeletedSuccessfully": "Cashier deleted successfully",
-
     "editCashierModal": {
       "title": "Edit cashier",
       "code": "Code",
@@ -211,9 +215,15 @@
       "active": "Active",
       "update": "Update cashier",
       "cancel": "Cancel",
-      "updatingCashier": "Updating cashier... Please wait."
+      "updatingCashier": "Updating cashier... Please wait.",
+      "openCashier": "Open cashier",
+      "openCashierMessage": "Are you sure you want to open this cashier?",
+      "closeCashier": "Close cashier",
+      "closeCashierMessage": "Are you sure you want to close this cashier?",
+      "cashierAlreadyOpen": "Cashier already open",
+      "errorOpeningCashier": "Error opening cashier",
+      "errorClosingCashier": "Error closing cashier"
     },
-
     "addCashierModal": {
       "title": "Create cashier",
       "code": "Code",

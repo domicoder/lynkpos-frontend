@@ -165,12 +165,14 @@
 
           <!-- Estado -->
           <div>
-            <p class="text-caption mb-1">{{ t('cashiers.status') }}</p>
+            <p class="text-caption mb-1">{{ t('cashiers.status.active') }}</p>
 
             <v-switch
               v-model="form.activo"
               :label="
-                form.activo ? t('cashiers.active') : t('cashiers.inactive')
+                form.activo
+                  ? t('cashiers.status.active')
+                  : t('cashiers.status.inactive')
               "
               hide-details
               color="success"

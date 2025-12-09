@@ -40,6 +40,19 @@ export function getErrorMessage(error: any): string {
   return 'Error desconocido';
 }
 
+export function getBadMessage(error: unknown, defaultMessage: string): string {
+  if (
+    error &&
+    typeof error === 'object' &&
+    'badMessage' in error &&
+    typeof error.badMessage === 'string'
+  ) {
+    return error.badMessage;
+  }
+
+  return defaultMessage;
+}
+
 /**
  * Extrae los detalles de validación de un error
  */
@@ -291,6 +304,7 @@ export default {
   isValidationError,
   isAuthError,
   getErrorMessage,
+  getBadMessage,
   getValidationErrors,
   formatErrorForUser,
   createRetryDelay,

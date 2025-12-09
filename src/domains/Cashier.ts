@@ -1,3 +1,5 @@
+export type CashierStatus = 'CERRADO' | 'ABIERTO';
+
 export interface Cashier {
   id: string;
   codigo: string;
@@ -12,6 +14,7 @@ export interface CashierTable {
   codigo: string;
   nombre: string;
   activo: boolean;
+  estado: CashierStatus;
 }
 
 export interface NewCashierForm {
@@ -30,6 +33,7 @@ export interface CashierResponse {
   codigo: string;
   nombre: string;
   activo: boolean;
+  estado: CashierStatus;
 }
 
 export interface UpdateCashierPayload {

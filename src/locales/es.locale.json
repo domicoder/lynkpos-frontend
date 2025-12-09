@@ -38,10 +38,12 @@
     "generalMessageLoading": "Solicitud en proceso... Espere por favor."
   },
   "users": {
-    "title": "[Vista de Usuarios]",
+    "title": "Gestión de Usuarios",
     "noUsersAvailable": "No hay usuarios disponibles",
-    "active": "Activo",
-    "inactive": "Inactivo",
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
     "table": {
       "name": "Nombre",
       "username": "Usuario",
@@ -88,15 +90,22 @@
   "cashiers": {
     "title": "Gestión de Cajeros",
     "noCashiersAvailable": "No hay cajeros disponibles",
-    "active": "Activo",
-    "inactive": "Inactivo",
-    "status": "Estado",
     "table": {
       "code": "Código",
       "name": "Nombre",
-      "active": "Estado",
+      "active": "Activo",
+      "status": "Estado",
       "actions": "Acciones"
     },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "closed": "CERRADO",
+      "open": "ABIERTO",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "cashierStatusUpdatedSuccessfully": "Estado del cajero actualizado correctamente",
     "addCashier": "Agregar Cajero",
     "refreshCashiers": "Actualizar Cajeros",
     "cashiersUpdatedSuccessfully": "Cajeros actualizados correctamente",
@@ -125,8 +134,14 @@
       "update": "Actualizar cajero",
       "cancel": "Cancelar",
       "updatingCashier": "Actualizando cajero... Espere por favor.",
-      "cashierStatusUpdatedSuccessfully": "Estado del cajero actualizado correctamente",
-      "updatingCashierStatus": "Actualizando estado del cajero... Espere por favor."
+      "updatingCashierStatus": "Actualizando estado del cajero... Espere por favor.",
+      "openCashier": "Abrir cajero",
+      "openCashierMessage": "¿Está seguro de querer abrir este cajero?",
+      "closeCashier": "Cerrar cajero",
+      "closeCashierMessage": "¿Está seguro de querer cerrar este cajero?",
+      "cashierAlreadyOpen": "Cajero ya abierto",
+      "errorOpeningCashier": "Error al abrir cajero",
+      "errorClosingCashier": "Error al cerrar cajero"
     }
   },
 
@@ -137,6 +152,7 @@
   "invoices": {
     "title": "Facturas",
     "errorLoadingInvoices": "Error al cargar las facturas",
+    "noInvoicesAvailable": "No hay facturas disponibles",
     "table": {
       "type": "Tipo",
       "state": "Estado",

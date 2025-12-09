@@ -34,7 +34,7 @@ const useInvoices = () => {
   ]);
 
   const fetchInvoices = async () => {
-    const result = await pointOfSaleStore.fetchInvoices();
+    const result = await pointOfSaleStore.fetchInvoices(true);
 
     if (!result.success && result.message !== 'Already loading') {
       showSnackbar(

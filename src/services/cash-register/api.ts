@@ -11,6 +11,10 @@ import type {
   UpdateCashierOutputShape,
   DeleteCashierInputShape,
   DeleteCashierOutputShape,
+  CloseCashierInputShape,
+  CloseCashierOutputShape,
+  OpenCashierOutputShape,
+  OpenCashierInputShape,
 } from '@/services/cash-register/models';
 
 async function createCashRegister(
@@ -74,6 +78,32 @@ async function deleteCashier(
   >(url);
 }
 
+async function closeCashier(
+  input: CloseCashierInputShape,
+): Promise<AxiosResponse<CloseCashierOutputShape>> {
+  const url = `/Caja/Close?id=${input.id}`;
+
+  const { usuarioId } = input;
+
+  return ApiClient.post<
+    CloseCashierInputShape,
+    AxiosResponse<CloseCashierOutputShape>
+  >(url, { usuarioId });
+}
+
+async function openCashier(
+  input: OpenCashierInputShape,
+): Promise<AxiosResponse<OpenCashierOutputShape>> {
+  const url = `/Caja/Open?id=${input.id}`;
+
+  const { usuarioId } = input;
+
+  return ApiClient.post<
+    OpenCashierInputShape,
+    AxiosResponse<OpenCashierOutputShape>
+  >(url, { usuarioId });
+}
+
 export {
   createCashRegister,
   getCashiersList,
@@ -81,4 +111,6 @@ export {
   deactivateCashRegister,
   deleteCashier,
   getCashierList,
+  closeCashier,
+  openCashier,
 };

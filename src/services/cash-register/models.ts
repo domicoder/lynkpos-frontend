@@ -84,3 +84,23 @@ export type DeleteCashierOutputShape = {
   ok: boolean;
   badMessage?: string;
 };
+
+export type CloseCashierInputShape = {
+  id: string;
+  usuarioId: string;
+};
+
+export type CloseCashierOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};
+
+export type OpenCashierInputShape = {
+  id: string;
+  usuarioId: string;
+};
+
+export type OpenCashierOutputShape = {
+  ok: boolean;
+  badMessage?: string;
+};

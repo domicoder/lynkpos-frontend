@@ -18,11 +18,12 @@
     showEditCashierModal,
     handleCreateCashier,
     handleUpdateCashier,
-    showConfirmModal,
+    showDeleteCashierModal,
     handleCancelEdit,
     isAddCashierModalOpen,
     isEditCashierModalOpen,
     updateCashierStatus,
+    onOpenCashier,
   } = useCashiers();
 
   onMounted(() => {
@@ -34,7 +35,7 @@
   <div>
     <div class="mb-6">
       <h1 class="text-h4 font-weight-bold">
-        {{ t('cashiers.title') }}
+        {{ t('cashiers.title').toUpperCase() }}
       </h1>
     </div>
 
@@ -45,7 +46,8 @@
         prepend-icon="mdi-refresh"
         rounded="lg"
         :text="t('cashiers.refreshCashiers')"
-        variant="text"
+        color="info"
+        size="large"
         border
         @click="refreshCashiers"
       />
@@ -55,7 +57,8 @@
         prepend-icon="mdi-cash-register"
         rounded="lg"
         :text="t('cashiers.addCashier')"
-        variant="text"
+        color="success"
+        size="large"
         border
         @click="showAddCashierModal"
       />
@@ -81,7 +84,25 @@
             size="small"
             variant="flat"
           >
-            {{ item.activo ? t('cashiers.active') : t('cashiers.inactive') }}
+            {{
+              item.activo
+                ? t('cashiers.status.active')
+                : t('cashiers.status.inactive')
+            }}
+          </v-chip>
+        </template>
+
+        <template #item.estado="{ item }">
+          <v-chip
+            :color="item.estado == 'CERRADO' ? 'error' : 'success'"
+            size="small"
+            variant="flat"
+          >
+            {{
+              item.estado == 'CERRADO'
+                ? t('cashiers.status.closed')
+                : t('cashiers.status.open')
+            }}
           </v-chip>
         </template>
 
@@ -95,12 +116,20 @@
               @click="showEditCashierModal(item)"
             />
             <v-btn
+              :icon="
+                item.estado == 'CERRADO' ? 'mdi-lock' : 'mdi-lock-open-variant'
+              "
+              variant="text"
+              size="small"
+              @click="onOpenCashier(item)"
+            />
+            <v-btn
               icon="mdi-delete"
               color="error"
               variant="text"
               size="small"
               @click="
-                showConfirmModal(
+                showDeleteCashierModal(
                   t('cashiers.deleteCashierModal.title'),
                   t('cashiers.deleteCashierModal.message'),
                   item.id,

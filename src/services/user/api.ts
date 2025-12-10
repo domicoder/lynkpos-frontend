@@ -83,10 +83,12 @@ async function updateUser(
   input: UpdateUserInputShape,
 ): Promise<AxiosResponse<UpdateUserOutputShape>> {
   const url = `/Usuario/EditOne?id=${input.id}`;
-  const { ...dataToUpdate } = input;
+  // Remove id from data payload
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id, ...dataToUpdate } = input;
 
   return ApiClient.post<
-    UpdateUserInputShape,
+    Omit<UpdateUserInputShape, 'id'>,
     AxiosResponse<UpdateUserOutputShape>
   >(url, dataToUpdate);
 }

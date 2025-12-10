@@ -221,7 +221,11 @@
 
           <v-switch
             v-model="form.activo"
-            :label="form.activo ? $t('users.active') : $t('users.inactive')"
+            :label="
+              form.activo
+                ? $t('users.status.active')
+                : $t('users.status.inactive')
+            "
             color="success"
             hide-details
             @update:model-value="updateUserStatus"

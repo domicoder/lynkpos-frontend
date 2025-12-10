@@ -1,12 +1,7 @@
 import { useSnackbar } from '@/composables/useSnackbar';
 import type { NewUserPayload, UserTable } from '@/domains/User';
 import type { UpdateUserInputShape } from '@/services/user';
-import {
-  createUser,
-  deactivateUserById,
-  deleteUser,
-  updateUser,
-} from '@/services/user';
+import { createUser, deleteUser, updateUser } from '@/services/user';
 import useGlobalStore from '@/stores/GlobalStore';
 import useUserStore from '@/stores/user/UserStore';
 import { ref, computed } from 'vue';
@@ -165,8 +160,9 @@ const useUsers = () => {
     try {
       showGlobalLoading(t('users.editUserModal.updatingUserStatus'), true);
 
-      const response = await deactivateUserById({
+      const response = await updateUser({
         id: selectedUser.value?.id as string,
+        activo: !selectedUser.value?.activo,
       });
 
       hideSnackbar();
@@ -175,6 +171,7 @@ const useUsers = () => {
       await refreshUsers();
 
       if (response.status === 200) {
+        selectedUser.value!.activo = !selectedUser.value!.activo;
         showSnackbar(
           t('users.editUserModal.userStatusUpdatedSuccessfully'),
           'success',

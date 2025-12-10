@@ -167,12 +167,16 @@ const useCashiers = () => {
       } else {
         throw new Error('Error al eliminar cajero');
       }
-    } catch (err) {
-      hideSnackbar();
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al eliminar cajero';
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      const errorMessage = getBadMessage(
+        apiError.response?.data,
+        t('cashiers.deleteCashierModal.errorDeletingCashier'),
+      );
 
       showSnackbar(errorMessage, 'error');
+
+      return;
     } finally {
       handleCancelDelete();
     }

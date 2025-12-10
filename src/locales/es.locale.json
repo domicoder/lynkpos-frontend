@@ -117,7 +117,8 @@
       "confirm": "Sí, eliminar",
       "cancel": "Cancelar",
       "deletingCashier": "Eliminando cajero... Espere por favor.",
-      "cashierDeletedSuccessfully": "Cajero eliminado correctamente"
+      "cashierDeletedSuccessfully": "Cajero eliminado correctamente",
+      "errorDeletingCashier": "Error al eliminar cajero"
     },
     "addCashierModal": {
       "title": "Crear cajero",

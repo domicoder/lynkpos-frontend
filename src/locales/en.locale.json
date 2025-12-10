@@ -239,7 +239,9 @@
       "message": "This cashier will be permanently deleted. Are you sure you want to continue?",
       "confirm": "Yes, delete",
       "cancel": "Cancel",
-      "deletingCashier": "Deleting cashier... Please wait."
+      "deletingCashier": "Deleting cashier... Please wait.",
+      "cashierDeletedSuccessfully": "Cashier deleted successfully",
+      "errorDeletingCashier": "Error deleting cashier"
     }
   },
 

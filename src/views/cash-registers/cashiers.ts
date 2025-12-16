@@ -125,12 +125,16 @@ const useCashiers = () => {
       } else {
         throw new Error('Error al actualizar cajero');
       }
-    } catch (err) {
-      hideSnackbar();
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error al actualizar cajero';
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      const errorMessage = getBadMessage(
+        apiError.response?.data,
+        t('cashiers.editCashierModal.errorOpeningCashier'),
+      );
 
       showSnackbar(errorMessage, 'error');
+
+      return;
     }
   };
 

